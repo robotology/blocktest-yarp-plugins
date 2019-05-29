@@ -14,6 +14,8 @@
 
 #include "actionYarp.h"
 
+namespace YarpActions
+{
 class ActionGenerateTrajectory : public ActionYarp
 {
     public:
@@ -25,3 +27,4 @@ class ActionGenerateTrajectory : public ActionYarp
     ACTIONREGISTER_DEC_TYPE(ActionGenerateTrajectory)        
 };
 
+}

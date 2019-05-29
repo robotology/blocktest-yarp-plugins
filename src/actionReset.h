@@ -14,6 +14,9 @@
 
 #include "actionYarp.h"
 
+namespace YarpActions
+{
+
 /**
  * @class ActionReset
  * @brief ...
@@ -28,3 +31,4 @@ class ActionReset : public ActionYarp
     ACTIONREGISTER_DEC_TYPE(ActionReset)        
 };
 
+}

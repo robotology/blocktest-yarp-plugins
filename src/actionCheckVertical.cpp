@@ -21,8 +21,10 @@
 #include <yarp/dev/PolyDriver.h>
 #include <yarp/dev/ControlBoardInterfaces.h>
 
-ACTIONREGISTER_DEF_TYPE(ActionCheckVertical,"yarpcheckrobotisvertical");
+ACTIONREGISTER_DEF_TYPE(YarpActions::ActionCheckVertical,"yarpcheckrobotisvertical");
 
+namespace YarpActions
+{
 ActionCheckVertical::ActionCheckVertical(const CommandAttributes& commandAttributes,const std::string& testCode):ActionYarp(commandAttributes,testCode)
 {}
 
@@ -84,4 +86,5 @@ bool ActionCheckVertical::execute(unsigned int testrepetition)
     imuPort.interrupt();
     imuPort.close();
     return true;
+}
 }

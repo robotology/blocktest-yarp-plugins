@@ -15,7 +15,10 @@
 #include "logger.h"
 #include "report.h"
 
-ACTIONREGISTER_DEF_TYPE(ActionStartWalking,"startwalking");
+ACTIONREGISTER_DEF_TYPE(YarpActions::ActionStartWalking,"startwalking");
+
+namespace YarpActions
+{
 
 ActionStartWalking::ActionStartWalking(const CommandAttributes& commandAttributes,const std::string& testCode):ActionYarp(commandAttributes,testCode)
 {}     
@@ -34,4 +37,6 @@ bool ActionStartWalking::execute(unsigned int testrepetition)
     }
 
     closeWalking(rpcPortWalking);
+}
+
 }

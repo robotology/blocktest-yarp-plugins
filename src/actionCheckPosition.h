@@ -14,6 +14,9 @@
 
 #include "actionYarp.h"
 
+namespace YarpActions
+{
+
 class ActionCheckPosition : public ActionYarp
 {
     public:
@@ -28,3 +31,4 @@ class ActionCheckPosition : public ActionYarp
     ACTIONREGISTER_DEC_TYPE(ActionCheckPosition)        
 };
 
+}

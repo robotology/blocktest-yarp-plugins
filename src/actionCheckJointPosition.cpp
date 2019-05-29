@@ -21,7 +21,11 @@
 #include <yarp/dev/IFrameTransform.h>
 
 
-ACTIONREGISTER_DEF_TYPE(ActionCheckJointPosition,"yarpcheckjointposition");
+ACTIONREGISTER_DEF_TYPE(YarpActions::ActionCheckJointPosition,"yarpcheckjointposition");
+
+
+namespace YarpActions
+{
 
 ActionCheckJointPosition::ActionCheckJointPosition(const CommandAttributes& commandAttributes,const std::string& testCode):ActionYarp(commandAttributes,testCode)
 {
@@ -80,4 +84,6 @@ bool ActionCheckJointPosition::execute(unsigned int testrepetition)
         TXLOG(Severity::debug)<<"Joint position check value ok:"<<ref<<" expected:" <<expectedValue_<<" tolerance:"<<tolerance_ <<" name:"<<jointname_<<std::endl;   
     }
     return true;
+}
+
 }

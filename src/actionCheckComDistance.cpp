@@ -20,7 +20,10 @@
 #include <yarp/dev/ControlBoardInterfaces.h>
 
 
-ACTIONREGISTER_DEF_TYPE(ActionCheckComDistance,"checkcomdistance");
+ACTIONREGISTER_DEF_TYPE(YarpActions::ActionCheckComDistance,"checkcomdistance");
+
+namespace YarpActions
+{
 
 ActionCheckComDistance::ActionCheckComDistance(const CommandAttributes& commandAttributes,const std::string& testCode):ActionYarp(commandAttributes,testCode)
 {
@@ -48,4 +51,6 @@ bool ActionCheckComDistance::execute(unsigned int testrepetition)
         addProblem(testrepetition,Severity::error);
 */
     return false;
+}
+
 }

@@ -14,6 +14,9 @@
 
 #include "actionYarp.h"
 
+namespace YarpActions
+{
+
 /**
  * @class ActionSendPwm
  * @brief ...
@@ -37,3 +40,4 @@ class ActionSendPwm : public ActionYarp
     ACTIONREGISTER_DEC_TYPE(ActionSendPwm)        
 };
 
+}

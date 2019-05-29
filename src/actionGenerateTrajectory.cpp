@@ -18,8 +18,10 @@
 #include "logger.h"
 #include "report.h"
 
-ACTIONREGISTER_DEF_TYPE(ActionGenerateTrajectory,"generatetrajectory");
+ACTIONREGISTER_DEF_TYPE(YarpActions::ActionGenerateTrajectory,"generatetrajectory");
 
+namespace YarpActions
+{
 ActionGenerateTrajectory::ActionGenerateTrajectory(const CommandAttributes& commandAttributes,const std::string& testCode):ActionYarp(commandAttributes,testCode)
 {
     getCommandAttribute(commandAttributes,"lenght",lenght_);    
@@ -40,4 +42,5 @@ bool ActionGenerateTrajectory::execute(unsigned int testrepetition)
 
     closeWalking(rpcPortWalking);
     return true;
+}
 }

@@ -14,6 +14,9 @@
 
 #include "actionYarp.h"
 
+namespace YarpActions
+{
+
 /**
  * @class ActionResetWalking
  * @brief ...
@@ -28,3 +31,4 @@ class ActionResetWalking : public ActionYarp
     ACTIONREGISTER_DEC_TYPE(ActionResetWalking)        
 };
 
+}

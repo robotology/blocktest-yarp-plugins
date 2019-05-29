@@ -14,6 +14,10 @@
 
 #include "actionYarp.h"
 
+
+
+namespace YarpActions
+{
 class ActionCheckComDistance : public ActionYarp
 {
     public:
@@ -27,3 +31,4 @@ class ActionCheckComDistance : public ActionYarp
     ACTIONREGISTER_DEC_TYPE(ActionCheckComDistance)        
 };
 
+}

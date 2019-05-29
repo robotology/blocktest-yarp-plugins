@@ -20,7 +20,10 @@
 #include "logger.h"
 #include "report.h"
 
-ACTIONREGISTER_DEF_TYPE(ActionResetWalking,"resetwalking");
+ACTIONREGISTER_DEF_TYPE(YarpActions::ActionResetWalking,"resetwalking");
+
+namespace YarpActions
+{
 
 ActionResetWalking::ActionResetWalking(const CommandAttributes& commandAttributes,const std::string& testCode):ActionYarp(commandAttributes,testCode)
 {}     
@@ -40,4 +43,6 @@ bool ActionResetWalking::execute(unsigned int testrepetition)
 
     closeWalking(rpcPortWalking);       
     return true;
+}
+
 }

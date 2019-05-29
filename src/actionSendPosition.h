@@ -23,6 +23,9 @@ using namespace yarp::os;
 using namespace yarp::sig;
 using namespace yarp::dev;
 
+namespace YarpActions
+{
+
 /**
  * @class ActionSendPosition
  * @brief ...
@@ -48,3 +51,4 @@ class ActionSendPosition : public ActionYarp
 
 };
 
+}

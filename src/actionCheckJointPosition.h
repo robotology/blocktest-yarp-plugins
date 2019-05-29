@@ -14,6 +14,8 @@
 
 #include "actionYarp.h"
 
+namespace YarpActions
+{
 /**
  * @class ActionCheckJointPosition
  * @brief ...
@@ -33,3 +35,4 @@ class ActionCheckJointPosition : public ActionYarp
 
     ACTIONREGISTER_DEC_TYPE(ActionCheckJointPosition)        
 };
+}

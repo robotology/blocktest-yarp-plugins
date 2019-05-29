@@ -26,7 +26,10 @@ using namespace yarp::os;
 using namespace yarp::sig;
 using namespace yarp::dev;
 
-ACTIONREGISTER_DEF_TYPE(ActionSendDirectPosition,"yarpsenddirectpos");
+ACTIONREGISTER_DEF_TYPE(YarpActions::ActionSendDirectPosition,"yarpsenddirectpos");
+
+namespace YarpActions
+{
 
 ActionSendDirectPosition::ActionSendDirectPosition(const CommandAttributes& commandAttributes,const std::string& testCode):ActionYarp(commandAttributes,testCode)
 {
@@ -98,4 +101,6 @@ bool ActionSendDirectPosition::execute(unsigned int testrepetition)
     ipos->setPositions(jointToMove_.size(),desiredJoint.data(),desiredJointPosInDegrees.data());
 
     return true;
+}
+
 }

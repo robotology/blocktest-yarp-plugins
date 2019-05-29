@@ -17,7 +17,10 @@
 #include "report.h"
 #include "yarpActionDepotStart.h"
 
-ACTIONREGISTER_DEF_TYPE(ActionSendPosition,"yarpsendpos");
+ACTIONREGISTER_DEF_TYPE(YarpActions::ActionSendPosition,"yarpsendpos");
+
+namespace YarpActions
+{
 
 ActionSendPosition::ActionSendPosition(const CommandAttributes& commandAttributes,const std::string& testCode):ActionYarp(commandAttributes,testCode)
 {    
@@ -102,5 +105,7 @@ bool ActionSendPosition::execute(unsigned int testrepetition)
 
     ipos->positionMove(jointToMove_.size(),desiredJoint.data(),desiredJointPosInDegrees.data());
     return true;
+}
+
 }
 

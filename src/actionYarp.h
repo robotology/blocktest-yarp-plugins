@@ -19,6 +19,11 @@
 
 #include <yarp/dev/PolyDriver.h>    
 
+using namespace BlockTestCore;
+
+namespace YarpActions
+{
+
 class WalkingCommands;
 /**
  * @class ActionYarp
@@ -37,3 +42,5 @@ class ActionYarp: public Action
         void closeWalking(yarp::os::Port &rpcPortWalking); 
         
 };
+
+}

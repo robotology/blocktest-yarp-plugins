@@ -9,6 +9,9 @@
 
 using namespace yarp::os;
 
+namespace YarpActions
+{
+
 ActionYarp::ActionYarp(const CommandAttributes& commandAttributes,const std::string& testCode):Action(commandAttributes,testCode)
 {
 }
@@ -78,4 +81,5 @@ void ActionYarp::getJointNames(yarp::dev::PolyDriver& drive,std::map<std::string
         }
         jointNames.insert(std::make_pair(yarpString,index));
     }
+}
 }

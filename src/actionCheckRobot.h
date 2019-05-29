@@ -14,6 +14,9 @@
 
 #include "actionYarp.h"
 
+namespace YarpActions
+{
+
 class ActionCheckRobot : public ActionYarp
 {
     public:
@@ -25,3 +28,4 @@ class ActionCheckRobot : public ActionYarp
     ACTIONREGISTER_DEC_TYPE(ActionCheckRobot)        
 };
 
+}

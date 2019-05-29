@@ -14,6 +14,8 @@
 
 #include "actionYarp.h"
 
+namespace YarpActions
+{
 /**
  * @class ActionPrepareStraightWalking
  * @brief ...
@@ -28,3 +30,4 @@ class ActionPrepareStraightWalking : public ActionYarp
     ACTIONREGISTER_DEC_TYPE(ActionPrepareStraightWalking)        
 };
 
+}

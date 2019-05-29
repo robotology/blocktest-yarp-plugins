@@ -14,6 +14,8 @@
 
 #include "actionYarp.h"
 
+namespace YarpActions
+{
 /**
  * @class ActionApplyForce
  * @brief ...
@@ -31,3 +33,4 @@ class ActionApplyForce : public ActionYarp
     ACTIONREGISTER_DEC_TYPE(ActionApplyForce)        
 };
 
+}

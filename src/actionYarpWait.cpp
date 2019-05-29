@@ -13,7 +13,10 @@
 
 #include "actionYarpWait.h"
 
-ACTIONREGISTER_DEF_TYPE(ActionYarpWait,"yarpwait");
+ACTIONREGISTER_DEF_TYPE(YarpActions::ActionYarpWait,"yarpwait");
+
+namespace YarpActions
+{
 
 ActionYarpWait::ActionYarpWait(const CommandAttributes& commandAttributes,const std::string& testCode):ActionYarp(commandAttributes,testCode)
 {
@@ -26,4 +29,6 @@ bool ActionYarpWait::execute(unsigned int testrepetition)
     //TXLOG(Severity::debug)<<"Using clock type config:"<<yarp::os::Time::clockTypeToString(clockType)<<" Wait value:"<<seconds_<<std::endl;
     yarp::os::Time::delay(seconds_);  
     return true;
+}
+
 }

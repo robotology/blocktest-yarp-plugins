@@ -14,6 +14,8 @@
 
 #include "actionYarp.h"
 
+namespace YarpActions
+{
 /**
  * @class ActionYarpWait
  * @brief ...
@@ -30,4 +32,6 @@ class ActionYarpWait : public ActionYarp
 
     ACTIONREGISTER_DEC_TYPE(ActionYarpWait)        
 };
+
+}
 

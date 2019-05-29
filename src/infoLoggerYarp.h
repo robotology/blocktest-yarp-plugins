@@ -1,3 +1,5 @@
+#pragma once
+
 /******************************************************************************
  *                                                                            *
  * Copyright (C) 2019 Fondazione Istituto Italiano di Tecnologia (IIT)        *
@@ -19,8 +21,11 @@
 #include <yarp/dev/PolyDriver.h>
 #include <yarp/dev/ControlBoardInterfaces.h>
 
-#pragma once
 
+using namespace BlockTestCore;
+
+namespace YarpActions
+{
 class InfoLoggerYarp: public InfoLogger
 {
     public:
@@ -34,3 +39,4 @@ class InfoLoggerYarp: public InfoLogger
 
     LOGGERREGISTER_DEC_TYPE(InfoLoggerYarp)        
 };
+}

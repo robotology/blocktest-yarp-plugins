@@ -21,7 +21,10 @@
 #include "logger.h"
 #include "report.h"
 
-ACTIONREGISTER_DEF_TYPE(ActionResetPose,"yarpresetpose");
+ACTIONREGISTER_DEF_TYPE(YarpActions::ActionResetPose,"yarpresetpose");
+
+namespace YarpActions
+{
 
 ActionResetPose::ActionResetPose(const CommandAttributes& commandAttributes,const std::string& testCode):ActionYarp(commandAttributes,testCode)
 {}     
@@ -51,4 +54,6 @@ bool ActionResetPose::execute(unsigned int testrepetition)
     systemClock.delay(1.0);
     clockClientPort.close();
     return true;
+}
+
 }

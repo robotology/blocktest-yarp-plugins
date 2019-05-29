@@ -19,7 +19,10 @@
 #include <yarp/dev/IFrameTransform.h>
 #include <yarp/dev/ControlBoardInterfaces.h>
 
-ACTIONREGISTER_DEF_TYPE(ActionCheckPosition,"checkposition");
+ACTIONREGISTER_DEF_TYPE(YarpActions::ActionCheckPosition,"checkposition");
+
+namespace YarpActions
+{
 
 ActionCheckPosition::ActionCheckPosition(const CommandAttributes& commandAttributes,const std::string& testCode):ActionYarp(commandAttributes,testCode)
 {
@@ -83,4 +86,6 @@ bool ActionCheckPosition::execute(unsigned int testrepetition)
     fbePort.interrupt();
     fbePort.close();  
     return true;
+}
+
 }

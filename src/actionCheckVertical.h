@@ -14,6 +14,8 @@
 
 #include "actionYarp.h"
 
+namespace YarpActions
+{
 /**
  * @class ActionCheckVertical
  * @brief ...
@@ -27,3 +29,4 @@ class ActionCheckVertical : public ActionYarp
 
     ACTIONREGISTER_DEC_TYPE(ActionCheckVertical)        
 };
+}

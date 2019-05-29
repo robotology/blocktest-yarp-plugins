@@ -14,6 +14,8 @@
 
 #include "actionYarp.h"
 
+namespace YarpActions
+{
 /**
  * @class ActionSetVelocity
  * @brief ...
@@ -32,3 +34,4 @@ class ActionSetVelocity : public ActionYarp
     ACTIONREGISTER_DEC_TYPE(ActionSetVelocity)        
 };
 
+}

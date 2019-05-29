@@ -20,7 +20,10 @@
 #include <yarp/dev/IFrameTransform.h>
 #include <yarp/dev/ControlBoardInterfaces.h>
 
-ACTIONREGISTER_DEF_TYPE(ActionCheckRobot,"checkrobot");
+ACTIONREGISTER_DEF_TYPE(YarpActions::ActionCheckRobot,"checkrobot");
+
+namespace YarpActions
+{
 
 ActionCheckRobot::ActionCheckRobot(const CommandAttributes& commandAttributes,const std::string& testCode):ActionYarp(commandAttributes,testCode)
 {
@@ -43,4 +46,6 @@ bool ActionCheckRobot::execute(unsigned int testrepetition)
         addProblem(testrepetition,Severity::critical,"getAxes failed");
     }        
     return true;
+}
+
 }

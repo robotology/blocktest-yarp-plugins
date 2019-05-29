@@ -18,6 +18,9 @@
 #include <yarp/os/Network.h>
 #include "pugixml.hpp"
 
+namespace YarpActions
+{
+
 static YarpActionDepotStart start;
 std::string YarpActionDepotStart::robotName_{""};
 std::map<std::string,PolyDriver_sptr> YarpActionDepotStart::polyDriverDepot_;
@@ -102,3 +105,4 @@ void Stop(char* data,char* name)
     YarpActionDepotStart::polyDriverDepot_.clear();
 }
 
+}

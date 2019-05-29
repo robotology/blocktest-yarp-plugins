@@ -27,7 +27,10 @@ using namespace yarp::os;
 using namespace yarp::sig;
 using namespace yarp::dev;
 
-ACTIONREGISTER_DEF_TYPE(ActionSendPwm,"yarpsendpwm");
+ACTIONREGISTER_DEF_TYPE(YarpActions::ActionSendPwm,"yarpsendpwm");
+
+namespace YarpActions
+{
 
 ActionSendPwm::ActionSendPwm(const CommandAttributes& commandAttributes,const std::string& testCode):ActionYarp(commandAttributes,testCode)
 {
@@ -137,4 +140,6 @@ int ActionSendPwm::sign(double value)
     if (value > 0) return 1;
     if (value < 0) return -1;
     return 0;
+}
+
 }

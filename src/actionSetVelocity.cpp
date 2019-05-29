@@ -16,7 +16,10 @@
 #include "logger.h"
 #include "report.h"
 
-ACTIONREGISTER_DEF_TYPE(ActionSetVelocity,"setvelocity");
+ACTIONREGISTER_DEF_TYPE(YarpActions::ActionSetVelocity,"setvelocity");
+
+namespace YarpActions
+{
 
 ActionSetVelocity::ActionSetVelocity(const CommandAttributes& commandAttributes,const std::string& testCode):ActionYarp(commandAttributes,testCode)
 {
@@ -40,4 +43,5 @@ bool ActionSetVelocity::execute(unsigned int testrepetition)
 
     closeWalking(rpcPortWalking);    
     return true;
+}
 }

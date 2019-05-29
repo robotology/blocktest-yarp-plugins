@@ -16,7 +16,7 @@
 #include "logger.h"
 #include "report.h"
 
-ACTIONREGISTER_DEF_TYPE(ActionPrepareStraightWalking,"preparestraightwalking");
+ACTIONREGISTER_DEF_TYPE(YarpActions::ActionPrepareStraightWalking,"preparestraightwalking");
 
 ActionPrepareStraightWalking::ActionPrepareStraightWalking(const CommandAttributes& commandAttributes,const std::string& testCode):ActionYarp(commandAttributes,testCode)
 {}     

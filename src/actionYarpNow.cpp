@@ -12,7 +12,10 @@
 
 #include "actionYarpNow.h"
 
-ACTIONREGISTER_DEF_TYPE(ActionYarpNow,"yarpnow");
+ACTIONREGISTER_DEF_TYPE(YarpActions::ActionYarpNow,"yarpnow");
+
+namespace YarpActions
+{
 
 ActionYarpNow::ActionYarpNow(const CommandAttributes& commandAttributes,const std::string& testCode):ActionYarp(commandAttributes,testCode)
 {
@@ -27,3 +30,5 @@ double ActionYarpNow::getDouble()
 {
     return yarp::os::Time::now();
 }    
+
+}

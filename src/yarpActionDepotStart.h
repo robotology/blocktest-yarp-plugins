@@ -23,6 +23,11 @@ extern "C"{
 
 using PolyDriver_sptr=std::shared_ptr<yarp::dev::PolyDriver>;
 
+using namespace BlockTestCore;
+
+namespace YarpActions
+{
+
 /**
  * @class YarpActionDepotStart
  * @brief ...
@@ -40,3 +45,4 @@ class YarpActionDepotStart :public ActionDepotStart
         static std::string robotName_;
 };
 
+}

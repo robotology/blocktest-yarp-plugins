@@ -26,7 +26,10 @@ using namespace yarp::os;
 using namespace yarp::sig;
 using namespace yarp::dev;
 
-ACTIONREGISTER_DEF_TYPE(ActionSendPwmTrain,"yarpsendpwmtrain");
+ACTIONREGISTER_DEF_TYPE(YarpActions::ActionSendPwmTrain,"yarpsendpwmtrain");
+
+namespace YarpActions
+{
 
 ActionSendPwmTrain::ActionSendPwmTrain(const CommandAttributes& commandAttributes,const std::string& testCode):ActionYarp(commandAttributes,testCode)
 {
@@ -128,4 +131,6 @@ double ActionSendPwmTrain::getPosition(int jointNumber,yarp::dev::IEncoders* ien
     iencs->getEncoders(position.data());
 
     return position[jointNumber];   
+}
+
 }

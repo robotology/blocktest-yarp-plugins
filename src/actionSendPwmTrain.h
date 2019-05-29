@@ -22,6 +22,9 @@ namespace yarp
     }
 }
 
+namespace YarpActions
+{
+
 class ActionSendPwmTrain : public ActionYarp
 {
     public:
@@ -43,3 +46,4 @@ class ActionSendPwmTrain : public ActionYarp
     ACTIONREGISTER_DEC_TYPE(ActionSendPwmTrain)        
 };
 
+}

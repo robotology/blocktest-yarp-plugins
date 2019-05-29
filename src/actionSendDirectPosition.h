@@ -14,6 +14,9 @@
 
 #include "actionSendPosition.h"
 
+namespace YarpActions
+{
+
 class ActionSendDirectPosition : public ActionYarp
 {
     public:
@@ -28,3 +31,4 @@ class ActionSendDirectPosition : public ActionYarp
     ACTIONREGISTER_DEC_TYPE(ActionSendDirectPosition)        
 };
 
+}

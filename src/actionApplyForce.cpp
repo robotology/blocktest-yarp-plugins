@@ -22,8 +22,10 @@
 #include "logger.h"
 #include "report.h"
 
-ACTIONREGISTER_DEF_TYPE(ActionApplyForce,"applyforce");
+ACTIONREGISTER_DEF_TYPE(YarpActions::ActionApplyForce,"applyforce");
 
+namespace YarpActions
+{
 ActionApplyForce::ActionApplyForce(const CommandAttributes& commandAttributes,const std::string& testCode):ActionYarp(commandAttributes,testCode)
 {
     getCommandAttribute(commandAttributes,"force",force_);
@@ -76,4 +78,5 @@ bool ActionApplyForce::execute(unsigned int testrepetition)
     extWrenchPort.interrupt();
     extWrenchPort.close();    
     return true;
+}
 }

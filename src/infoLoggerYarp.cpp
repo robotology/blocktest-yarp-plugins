@@ -14,7 +14,10 @@
 #include "actionYarp.h"
 #include "yarpActionDepotStart.h"
 
-LOGGERREGISTER_DEF_TYPE(InfoLoggerYarp, "infologgeryarp");
+LOGGERREGISTER_DEF_TYPE(YarpActions::InfoLoggerYarp, "infologgeryarp");
+
+namespace YarpActions
+{
 
 InfoLoggerYarp::InfoLoggerYarp(const std::string &toLog, double loggingTime, const std::string &wrapperName, const std::string &testCode, int repetition) : InfoLogger(toLog, loggingTime, wrapperName, testCode, repetition)
 {
@@ -87,4 +90,6 @@ InfoLoggerYarp::~InfoLoggerYarp()
     working_ = false;
     work_->join();
     TXLOG(Severity::trace) << "Logging position joint now exit test code:" <<testCode_<<" repetition:"<<repetition_<< std::endl;
+}
+
 }
