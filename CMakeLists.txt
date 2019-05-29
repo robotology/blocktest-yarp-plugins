@@ -7,9 +7,17 @@
 
 # @author Luca Tricerri <luca.tricerri@iit.it>  
 
+cmake_minimum_required(VERSION 3.5)
 #Module creation
 set(PROJECT_NAME blocktestyarpplugins)
 project(${PROJECT_NAME})
+
+project(blocktestyarpplugins
+        LANGUAGES C CXX
+        VERSION 0.1)
+
+set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 #Thrift for clock
 set(YARP_MINIMUM_REQUIRED_VERSION 3.0.102)
@@ -45,8 +53,9 @@ file(GLOB allSrc "src/*.h" "src/*.cpp")
 list(REMOVE_ITEM allSrc "${CMAKE_CURRENT_SOURCE_DIR}/src/actionGenerateTrajectory.cpp" "${CMAKE_CURRENT_SOURCE_DIR}/src/actionPrepareStraightWalking.cpp" "${CMAKE_CURRENT_SOURCE_DIR}/src/actionResetWalking.cpp"
         "${CMAKE_CURRENT_SOURCE_DIR}/src/actionSetVelocity.cpp" "${CMAKE_CURRENT_SOURCE_DIR}/src/actionStartWalking.cpp")
 
-add_compile_definitions(PUGIXML_HEADER_ONLY)
+
 add_library(${PROJECT_NAME} MODULE ${allSrc})
+target_compile_definitions(${PROJECT_NAME} PRIVATE PUGIXML_HEADER_ONLY)
 #set_target_properties(${PROJECT_NAME} PROPERTIES PREFIX "")
 
 target_include_directories(${PROJECT_NAME} PRIVATE ${YARP_HELPERS_INCLUDE_DIR} ${PROJECT_SOURCE_DIR}/src ${blocktestcore_INCLUDE_DIRS})
