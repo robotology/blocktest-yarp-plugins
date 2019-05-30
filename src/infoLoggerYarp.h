@@ -31,11 +31,18 @@ class InfoLoggerYarp: public InfoLogger
     public:
         InfoLoggerYarp(const std::string& toLog,double loggingTime,const std::string& wrapperName,const std::string& testCode,int repetition);
         ~InfoLoggerYarp();
-        void Start() override;
-        void Stop() override;
+        void start() override;
+        void stop() override;
+
+        std::shared_ptr<std::thread> work_;
 
     private:
         std::map<std::string, int> jointNames_;
+
+        void working();
+
+        //std::shared_ptr<std::thread> work_;
+        std::atomic_bool working_{true};
 
     LOGGERREGISTER_DEC_TYPE(InfoLoggerYarp)        
 };

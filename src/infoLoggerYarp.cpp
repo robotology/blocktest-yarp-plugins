@@ -21,11 +21,16 @@ namespace YarpActions
 
 InfoLoggerYarp::InfoLoggerYarp(const std::string &toLog, double loggingTime, const std::string &wrapperName, const std::string &testCode, int repetition) : InfoLogger(toLog, loggingTime, wrapperName, testCode, repetition)
 {
-    work_ = std::make_unique<std::thread>(&InfoLoggerYarp::Start,this);
 }
 
-void InfoLoggerYarp::Start()
+void InfoLoggerYarp::start()
 {
+    work_ = std::make_shared<std::thread>(&InfoLoggerYarp::working,this);
+}
+
+void InfoLoggerYarp::working()
+{
+    std::this_thread::sleep_for(std::chrono::milliseconds((int)(1000)));
     working_ = true;
 
     if (loggingJoints_.empty())
@@ -33,10 +38,10 @@ void InfoLoggerYarp::Start()
         //TXLOG(Severity::debug)<<"Logging joint is empty"<<std::endl;
         return;
     }
-
+ 
     ActionYarp::getJointNames(*YarpActionDepotStart::polyDriverDepot_[wrapperName_], jointNames_);
 
-    TXLOG(Severity::debug) << "Logging joint start test code:" <<testCode_<<" repetition:"<<repetition_<< std::endl;
+    TXLOG(Severity::debug) << "Logging Yarp position joint start test code:" <<testCode_<<" repetition:"<<repetition_<< std::endl;
 
     std::map<std::string, std::shared_ptr<DataLogger>> loggers;
 
@@ -64,8 +69,8 @@ void InfoLoggerYarp::Start()
 
     while (working_)
     {
-        ClockFacility::Instance().wait(loggingTime_);
-        //std::this_thread::sleep_for(std::chrono::milliseconds((int)(loggingTime_*1000)));
+        //ClockFacility::Instance().wait(loggingTime_);
+        std::this_thread::sleep_for(std::chrono::milliseconds((int)(100)));
         for (std::string current : loggingJoints_)
         {
             double ref{0};
@@ -81,15 +86,16 @@ void InfoLoggerYarp::Start()
     }
 }
 
-void InfoLoggerYarp::Stop()
+void InfoLoggerYarp::stop()
 {
 }
 
 InfoLoggerYarp::~InfoLoggerYarp()
 {
     working_ = false;
-    work_->join();
-    TXLOG(Severity::trace) << "Logging position joint now exit test code:" <<testCode_<<" repetition:"<<repetition_<< std::endl;
+    if(work_)
+        work_->join();
+    TXLOG(Severity::trace) << "Logging Yarp position joint now exit test code:" <<testCode_<<" repetition:"<<repetition_<< std::endl;
 }
 
 }
