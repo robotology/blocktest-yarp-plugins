@@ -26,7 +26,7 @@ class ActionReset : public ActionYarp
 {
     public:
         ActionReset(const CommandAttributes& commandAttributes,const std::string& testCode);
-        bool execute(unsigned int testrepetition) override;
+        execution execute(unsigned int testrepetition) override;
 
     ACTIONREGISTER_DEC_TYPE(ActionReset)        
 };

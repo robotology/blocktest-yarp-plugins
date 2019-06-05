@@ -43,7 +43,7 @@ ActionSendPwmTrain::ActionSendPwmTrain(const CommandAttributes& commandAttribute
     getCommandAttribute(commandAttributes,"wrappername",wrapperPrefix_);        
 }     
 
-bool ActionSendPwmTrain::execute(unsigned int testrepetition)
+execution ActionSendPwmTrain::execute(unsigned int testrepetition)
 {
 
     yarp::dev::IPWMControl *ipwm=nullptr;
@@ -67,14 +67,14 @@ bool ActionSendPwmTrain::execute(unsigned int testrepetition)
     {
         TXLOG(Severity::error)<<"Unable to view IEncoder interface"<<std::endl;
         addProblem(testrepetition,Severity::error,"Unable to view IEncoder interface");
-        return false;
+        return execution::stopexecution;;
     }
 
     if(!iencs->getAxes(&nj))
     {
         TXLOG(Severity::error)<<"getAxes failed"<<std::endl;
         addProblem(testrepetition,Severity::error,"getAxes failed");
-        return false;
+        return execution::stopexecution;;
     }    
 
     std::map<std::string,int> jointNames;
@@ -84,7 +84,7 @@ bool ActionSendPwmTrain::execute(unsigned int testrepetition)
     {
         TXLOG(Severity::error)<<"Error joint not found:"<<jointname_<<std::endl;
         addProblem(testrepetition,Severity::critical,"Error joint not found");
-        return false;
+        return execution::stopexecution;;
     }
     
 
@@ -121,7 +121,7 @@ bool ActionSendPwmTrain::execute(unsigned int testrepetition)
     }
 
     ipwm->setRefDutyCycle(it->second, 0);
-    return true;
+    return execution::continueexecution;;
 }
 
 

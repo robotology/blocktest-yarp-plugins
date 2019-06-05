@@ -25,7 +25,7 @@ class ActionApplyForce : public ActionYarp
 {
     public:
         ActionApplyForce(const CommandAttributes& commandAttributes,const std::string& testCode);
-        bool execute(unsigned int testrepetition) override;
+        execution execute(unsigned int testrepetition) override;
 
     private:
         std::string force_;

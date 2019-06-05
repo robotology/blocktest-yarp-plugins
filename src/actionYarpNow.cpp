@@ -21,9 +21,9 @@ ActionYarpNow::ActionYarpNow(const CommandAttributes& commandAttributes,const st
 {
 }     
 
-bool ActionYarpNow::execute(unsigned int testrepetition)
+execution ActionYarpNow::execute(unsigned int testrepetition)
 {
-    return true;
+    return execution::continueexecution;;
 }
 
 double ActionYarpNow::getDouble()

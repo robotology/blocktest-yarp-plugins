@@ -29,7 +29,7 @@ namespace YarpActions
 ActionResetPose::ActionResetPose(const CommandAttributes& commandAttributes,const std::string& testCode):ActionYarp(commandAttributes,testCode)
 {}     
 
-bool ActionResetPose::execute(unsigned int testrepetition)
+execution ActionResetPose::execute(unsigned int testrepetition)
 {
     GazeboYarpPlugins::ClockServer clockServer;
     yarp::os::Port clockClientPort;
@@ -53,7 +53,7 @@ bool ActionResetPose::execute(unsigned int testrepetition)
     yarp::os::SystemClock systemClock;
     systemClock.delay(1.0);
     clockClientPort.close();
-    return true;
+    return execution::continueexecution;;
 }
 
 }

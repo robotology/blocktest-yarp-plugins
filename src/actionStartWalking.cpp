@@ -23,7 +23,7 @@ namespace YarpActions
 ActionStartWalking::ActionStartWalking(const CommandAttributes& commandAttributes,const std::string& testCode):ActionYarp(commandAttributes,testCode)
 {}     
 
-bool ActionStartWalking::execute(unsigned int testrepetition)
+execution ActionStartWalking::execute(unsigned int testrepetition)
 {
     yarp::os::Port rpcPortWalking;
     WalkingCommands walkingCommands;

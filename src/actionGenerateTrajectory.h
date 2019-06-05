@@ -20,7 +20,7 @@ class ActionGenerateTrajectory : public ActionYarp
 {
     public:
         ActionGenerateTrajectory(const CommandAttributes& commandAttributes,const std::string& testCode);
-        bool execute(unsigned int testrepetition) override;
+        execution execute(unsigned int testrepetition) override;
     private:
         double lenght_{0};
 

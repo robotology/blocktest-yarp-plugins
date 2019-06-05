@@ -31,7 +31,7 @@ ActionCheckPosition::ActionCheckPosition(const CommandAttributes& commandAttribu
     getCommandAttribute(commandAttributes,"zminposition",zminposition_);            
 }     
 
-bool ActionCheckPosition::execute(unsigned int testrepetition)
+execution ActionCheckPosition::execute(unsigned int testrepetition)
 {
     yarp::os::Port fbePort;
     std::string localfbePort  = "/myrobot/odometry:i";
@@ -58,34 +58,34 @@ bool ActionCheckPosition::execute(unsigned int testrepetition)
         addProblem(testrepetition,Severity::critical,"FBE readings should have 6 elements");
         fbePort.interrupt();
         fbePort.close();  
-        return false;
+        return execution::stopexecution;;
     }   
 
     TXLOG(Severity::debug)<<"FBE x:"<<coordList->get(0).asDouble()<<" y:"<<coordList->get(1).asDouble()<<" z:"<<coordList->get(2).asDouble()<<std::endl;
     
-    bool error=false;
+    execution error=execution::stopexecution;;
     if(xminposition_&& std::abs(xminposition_)>std::abs(coordList->get(0).asDouble()))
     {
         TXLOG(Severity::error)<<"FBE x not enough:"<<coordList->get(0).asDouble()<<" desidered at least:"<<xminposition_<<std::endl;
-        error=true;
+        error=execution::continueexecution;;
     }
     if(yminposition_ &&  std::abs(yminposition_)>std::abs(coordList->get(1).asDouble()))
     {
         TXLOG(Severity::error)<<"FBE y not enough:"<<coordList->get(1).asDouble()<<" desidered at least:"<<yminposition_<<std::endl;
-        error=true;        
+        error=execution::continueexecution;;        
     }
     if(zminposition_ &&  std::abs(zminposition_)>std::abs(coordList->get(2).asDouble()))
     {
         TXLOG(Severity::error)<<"FBE z not enough:"<<coordList->get(2).asDouble()<<" desidered at least:"<<zminposition_<<std::endl;
-        error=true;        
+        error=execution::continueexecution;;        
     }
 
-    if(error)
+    if(error==execution::stopexecution)
         addProblem(testrepetition,Severity::error,"FBE not enough");
     
     fbePort.interrupt();
     fbePort.close();  
-    return true;
+    return execution::continueexecution;;
 }
 
 }

@@ -23,12 +23,12 @@ ActionYarpWait::ActionYarpWait(const CommandAttributes& commandAttributes,const 
     getCommandAttribute(commandAttributes,"seconds",seconds_);   
 }     
 
-bool ActionYarpWait::execute(unsigned int testrepetition)
+execution ActionYarpWait::execute(unsigned int testrepetition)
 {
     yarp::os::yarpClockType clockType=yarp::os::Time::getClockType();
     //TXLOG(Severity::debug)<<"Using clock type config:"<<yarp::os::Time::clockTypeToString(clockType)<<" Wait value:"<<seconds_<<std::endl;
     yarp::os::Time::delay(seconds_);  
-    return true;
+    return execution::continueexecution;
 }
 
 }

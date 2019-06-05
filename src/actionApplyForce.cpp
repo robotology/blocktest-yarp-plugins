@@ -31,7 +31,7 @@ ActionApplyForce::ActionApplyForce(const CommandAttributes& commandAttributes,co
     getCommandAttribute(commandAttributes,"force",force_);
 }     
 
-bool ActionApplyForce::execute(unsigned int testrepetition)
+execution ActionApplyForce::execute(unsigned int testrepetition)
 {
     std::string localExtWrenchPort = "/myPortForExternalWrench:o";
     std::string remoteExtWrenchPort = "/icab/applyExternalWrench/rpc:i";
@@ -41,7 +41,7 @@ bool ActionApplyForce::execute(unsigned int testrepetition)
     {
         TXLOG(Severity::critical)<<"Unable to open ports applyforce"<<std::endl;        
         addProblem(testrepetition,Severity::critical,"Unable to open ports applyforce");
-        return false;
+        return execution::stopexecution;
     }
 
     yarp::os::Network::connect(localExtWrenchPort,remoteExtWrenchPort);
@@ -53,7 +53,7 @@ bool ActionApplyForce::execute(unsigned int testrepetition)
     {
         TXLOG(Severity::error)<<"Error in parameter number for applyForce"<<std::endl;
         addProblem(testrepetition,Severity::critical,"Error in parameter number for applyForce");
-        return false;
+        return execution::stopexecution;
     }
 
     yarp::os::Bottle cmd;
@@ -77,6 +77,6 @@ bool ActionApplyForce::execute(unsigned int testrepetition)
       
     extWrenchPort.interrupt();
     extWrenchPort.close();    
-    return true;
+    return execution::continueexecution;
 }
 }

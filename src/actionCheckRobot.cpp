@@ -30,7 +30,7 @@ ActionCheckRobot::ActionCheckRobot(const CommandAttributes& commandAttributes,co
     getCommandAttribute(commandAttributes,"wrappername",wrapperPrefix_);       
 }     
 
-bool ActionCheckRobot::execute(unsigned int testrepetition)
+execution ActionCheckRobot::execute(unsigned int testrepetition)
 {
     yarp::dev::IEncoders       *iencs;
     int nj;
@@ -45,7 +45,7 @@ bool ActionCheckRobot::execute(unsigned int testrepetition)
         TXLOG(Severity::critical)<<"getAxes failed"<<std::endl;
         addProblem(testrepetition,Severity::critical,"getAxes failed");
     }        
-    return true;
+    return execution::continueexecution;;
 }
 
 }

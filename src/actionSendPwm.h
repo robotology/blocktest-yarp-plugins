@@ -26,7 +26,7 @@ class ActionSendPwm : public ActionYarp
 {
     public:
         ActionSendPwm(const CommandAttributes& commandAttributes,const std::string& testCode);    
-        bool execute(unsigned int testrepetition) override;
+        execution execute(unsigned int testrepetition) override;
     
     private:
         std::string profile_;

@@ -31,7 +31,7 @@ ActionCheckComDistance::ActionCheckComDistance(const CommandAttributes& commandA
     getCommandAttribute(commandAttributes,"comdistancemin",commindistance_);
 }     
 
-bool ActionCheckComDistance::execute(unsigned int testrepetition)
+execution ActionCheckComDistance::execute(unsigned int testrepetition)
 {
    /* bool error{false};
     if(test_->comDistance_<commindistance_)
@@ -50,7 +50,7 @@ bool ActionCheckComDistance::execute(unsigned int testrepetition)
     if(error)
         addProblem(testrepetition,Severity::error);
 */
-    return false;
+    return execution::stopexecution;
 }
 
 }

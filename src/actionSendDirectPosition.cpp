@@ -44,7 +44,7 @@ ActionSendDirectPosition::ActionSendDirectPosition(const CommandAttributes& comm
     getCommandAttribute(commandAttributes,"wrappername",wrapperPrefix_);
 }     
 
-bool ActionSendDirectPosition::execute(unsigned int testrepetition)
+execution ActionSendDirectPosition::execute(unsigned int testrepetition)
 {
     //TO REMOVE
     std::ofstream out;
@@ -59,7 +59,7 @@ bool ActionSendDirectPosition::execute(unsigned int testrepetition)
     {
         TXLOG(Severity::error)<<"Joint info not cooerent"<<std::endl;
         addProblem(testrepetition,Severity::critical,"Joint info not cooerent");
-        return false;      
+        return execution::stopexecution;;      
     }
 
     yarp::dev::IPositionDirect *ipos=nullptr;
@@ -69,14 +69,14 @@ bool ActionSendDirectPosition::execute(unsigned int testrepetition)
     {
         TXLOG(Severity::error)<<"Unable to open pos mode interface"<<std::endl;
         addProblem(testrepetition,Severity::critical,"Unable to open pos mode interface");
-        return false;
+        return execution::stopexecution;;
     }
 
     if(!YarpActionDepotStart::polyDriverDepot_[wrapperPrefix_]->view(icmd))
     {
         TXLOG(Severity::error)<<"Unable to open control mode interface"<<std::endl;
         addProblem(testrepetition,Severity::critical,"Unable to open control mode interface");      
-        return false;
+        return execution::stopexecution;;
     }
 
     std::map<std::string,int> jointNames;
@@ -91,7 +91,7 @@ bool ActionSendDirectPosition::execute(unsigned int testrepetition)
         {
             TXLOG(Severity::error)<<"Error joint not found:"<<jointToMove_[index]<<std::endl;
             addProblem(testrepetition,Severity::critical,"Error joint not found");
-            return false;
+            return execution::stopexecution;;
         }
         
         desiredJoint.push_back(it->second);
@@ -100,7 +100,7 @@ bool ActionSendDirectPosition::execute(unsigned int testrepetition)
     }
     ipos->setPositions(jointToMove_.size(),desiredJoint.data(),desiredJointPosInDegrees.data());
 
-    return true;
+    return execution::continueexecution;;
 }
 
 }

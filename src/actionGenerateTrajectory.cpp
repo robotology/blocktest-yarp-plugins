@@ -27,7 +27,7 @@ ActionGenerateTrajectory::ActionGenerateTrajectory(const CommandAttributes& comm
     getCommandAttribute(commandAttributes,"lenght",lenght_);    
 }     
 
-bool ActionGenerateTrajectory::execute(unsigned int testrepetition)
+execution ActionGenerateTrajectory::execute(unsigned int testrepetition)
 {
     yarp::os::Port rpcPortWalking;
     WalkingCommands walkingCommands;
@@ -41,6 +41,6 @@ bool ActionGenerateTrajectory::execute(unsigned int testrepetition)
     }
 
     closeWalking(rpcPortWalking);
-    return true;
+    return execution::continueexecution;;
 }
 }

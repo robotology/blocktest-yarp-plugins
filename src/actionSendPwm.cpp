@@ -42,7 +42,7 @@ ActionSendPwm::ActionSendPwm(const CommandAttributes& commandAttributes,const st
     getCommandAttribute(commandAttributes,"wrappername",wrapperPrefix_);
 }     
 
-bool ActionSendPwm::execute(unsigned int testrepetition)
+execution ActionSendPwm::execute(unsigned int testrepetition)
 {
     if(!profile_.empty())
     {
@@ -71,7 +71,7 @@ bool ActionSendPwm::execute(unsigned int testrepetition)
     {
         TXLOG(Severity::error)<<"Error joint not found:"<<jointname_<<std::endl;
         addProblem(testrepetition,Severity::critical,"Error joint not found");
-        return false;
+        return  execution::stopexecution;
     }
 
     icmd->setControlMode(it->second, VOCAB_CM_PWM);
@@ -132,7 +132,7 @@ bool ActionSendPwm::execute(unsigned int testrepetition)
 
     ipwm->setRefDutyCycle(it->second, 0);
     yarp::os::Time::delay(time_);
-    return true;
+    return execution::continueexecution;
 }
 
 int ActionSendPwm::sign(double value)

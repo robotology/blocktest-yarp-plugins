@@ -35,7 +35,7 @@ ActionCheckJointPosition::ActionCheckJointPosition(const CommandAttributes& comm
     getCommandAttribute(commandAttributes,"tolerance",tolerance_);
 }     
 
-bool ActionCheckJointPosition::execute(unsigned int testrepetition)
+execution ActionCheckJointPosition::execute(unsigned int testrepetition)
 {
     yarp::dev::IEncoders *iencoders=nullptr;
     
@@ -43,7 +43,7 @@ bool ActionCheckJointPosition::execute(unsigned int testrepetition)
     {
         TXLOG(Severity::error)<<"Unable to open encoder control mode interface 2"<<std::endl;
         addProblem(testrepetition,Severity::critical,"Unable to open encoder control mode interface 2");        
-        return false;
+        return execution::stopexecution;
     }
 
     int nj{0};
@@ -51,7 +51,7 @@ bool ActionCheckJointPosition::execute(unsigned int testrepetition)
     {
         TXLOG(Severity::error)<<"Unable to open encoder control mode interface 3"<<std::endl;
         addProblem(testrepetition,Severity::critical,"Unable to open encoder control mode interface 3");
-        return false;    
+        return execution::stopexecution;;    
     }       
          
     std::map<std::string, int> jointNames;
@@ -62,7 +62,7 @@ bool ActionCheckJointPosition::execute(unsigned int testrepetition)
     {
         TXLOG(Severity::error)<<"Joint not found:"<<jointname_<<std::endl;   
         addProblem(testrepetition,Severity::critical,"Joint not found:");
-        return false;
+        return execution::stopexecution;;
     }
 
     std::this_thread::sleep_for(std::chrono::milliseconds(100)); 
@@ -83,7 +83,7 @@ bool ActionCheckJointPosition::execute(unsigned int testrepetition)
     {
         TXLOG(Severity::debug)<<"Joint position check value ok:"<<ref<<" expected:" <<expectedValue_<<" tolerance:"<<tolerance_ <<" name:"<<jointname_<<std::endl;   
     }
-    return true;
+    return execution::continueexecution;;
 }
 
 }

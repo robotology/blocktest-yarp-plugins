@@ -21,7 +21,7 @@ class ActionSendDirectPosition : public ActionYarp
 {
     public:
         ActionSendDirectPosition(const CommandAttributes& commandAttributes,const std::string& testCode);    
-        bool execute(unsigned int testrepetition) override;
+        execution execute(unsigned int testrepetition) override;
     
     private:
         std::vector<double> degree_; 

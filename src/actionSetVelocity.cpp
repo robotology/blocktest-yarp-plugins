@@ -27,7 +27,7 @@ ActionSetVelocity::ActionSetVelocity(const CommandAttributes& commandAttributes,
     getCommandAttribute(commandAttributes,"yvelocity",yVelocity_);      
 }     
 
-bool ActionSetVelocity::execute(unsigned int testrepetition)
+execution ActionSetVelocity::execute(unsigned int testrepetition)
 {
     yarp::os::Port rpcPortWalking;
     WalkingCommands walkingCommands;
@@ -42,6 +42,6 @@ bool ActionSetVelocity::execute(unsigned int testrepetition)
     }
 
     closeWalking(rpcPortWalking);    
-    return true;
+    return execution::continueexecution;;
 }
 }

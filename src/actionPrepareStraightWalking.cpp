@@ -21,7 +21,7 @@ ACTIONREGISTER_DEF_TYPE(YarpActions::ActionPrepareStraightWalking,"preparestraig
 ActionPrepareStraightWalking::ActionPrepareStraightWalking(const CommandAttributes& commandAttributes,const std::string& testCode):ActionYarp(commandAttributes,testCode)
 {}     
 
-bool ActionPrepareStraightWalking::execute(unsigned int testrepetition)
+execution ActionPrepareStraightWalking::execute(unsigned int testrepetition)
 {
     yarp::os::Port rpcPortWalking;
     WalkingCommands walkingCommands;
@@ -35,5 +35,5 @@ bool ActionPrepareStraightWalking::execute(unsigned int testrepetition)
     }
     closeWalking(rpcPortWalking);
     TXLOG(Severity::info)<<"Prepare straight walking OK"<<std::endl;
-    return true;
+    return execution::continueexecution;;
 }

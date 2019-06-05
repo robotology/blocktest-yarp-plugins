@@ -28,7 +28,7 @@ namespace YarpActions
 ActionResetWalking::ActionResetWalking(const CommandAttributes& commandAttributes,const std::string& testCode):ActionYarp(commandAttributes,testCode)
 {}     
 
-bool ActionResetWalking::execute(unsigned int testrepetition)
+execution ActionResetWalking::execute(unsigned int testrepetition)
 {
     yarp::os::Port rpcPortWalking;
     WalkingCommands walkingCommands;
@@ -42,7 +42,7 @@ bool ActionResetWalking::execute(unsigned int testrepetition)
     }    
 
     closeWalking(rpcPortWalking);       
-    return true;
+    return execution::continueexecution;;
 }
 
 }
