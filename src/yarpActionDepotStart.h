@@ -22,6 +22,7 @@ extern "C"{
 }
 
 using PolyDriver_sptr=std::shared_ptr<yarp::dev::PolyDriver>;
+using Port_sptr = std::shared_ptr<yarp::os::Port>;
 
 using namespace BlockTestCore;
 
@@ -42,6 +43,7 @@ class YarpActionDepotStart :public ActionDepotStart
         void configure(const std::string& path,const std::string& name) override;
 
         static std::map<std::string,PolyDriver_sptr> polyDriverDepot_;//PolyDrive collection for each wrappers
+        static std::map<std::string,Port_sptr> portDepot_;
         static std::string robotName_;
 };
 

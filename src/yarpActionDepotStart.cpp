@@ -97,8 +97,14 @@ void Start(char* data,char* name)
 void Stop(char* data,char* name)
 {
     TXLOG(Severity::info)<<"Library stop called:"<<std::endl;
-    
+
+    // Close all polydrivers
     for(auto& current:YarpActions::YarpActionDepotStart::polyDriverDepot_)
+    {
+        current.second->close();
+    }
+    // Close all ports
+    for(auto& current:YarpActions::YarpActionDepotStart::portDepot_)
     {
         current.second->close();
     }
