@@ -1,0 +1,96 @@
+<wrappername 
+    short="wrapper name" 
+    full="name of the wrapper for this joint" 
+    values=""  
+    uom="" 
+    type="string" 
+/>
+
+<jointname 
+    short="joint name" 
+    full="joint name for this command, can be a list" 
+    values=""  
+    uom="" 
+    type="string" 
+/>
+
+<degree 
+    short="degree" 
+    full="movment extension" 
+    values=""  
+    uom="degree" 
+    type="double" 
+/>
+
+<velocity 
+    short="used velocity" 
+    full="used velocity for this command" 
+    values=""  
+    uom="degree/second"  
+    type="double" 
+/>
+
+
+<profile 
+    short="pwm profile" 
+    full="profile used for this command" 
+    values="const sin"  
+    uom="voltage" 
+    type="double" 
+/>
+
+<frequency 
+    short="command frequency" 
+    full="frequency used for this command" 
+    values=""  
+    uom="hertz" 
+    type="double" 
+/>
+
+<dutycycle 
+    short="pwm dutycycle" 
+    full="pwm dutycycle for this command" 
+    values=""  
+    uom="" 
+    type="double" 
+/>
+
+<time 
+    short="cycles numbers" 
+    full="cycles executions number" 
+    values=""  
+    uom="" 
+    type="integer" 
+/>
+
+<portname 
+    short="port name" 
+    full="port name" 
+    values=""  
+    uom="" 
+    type="string" 
+/>
+
+<source
+    short="source port name" 
+    full="source port name" 
+    values=""  
+    uom="" 
+    type="string" 
+/>
+
+<destination
+    short="destination port name" 
+    full="destination port name" 
+    values=""  
+    uom="" 
+    type="string" 
+/>
+
+<carrier
+    short="carrier name" 
+    full="carrier used for the connection" 
+    values="http name_ser local tcp fast_tcp mcast udp text text_ack bayer human portmonitor priority rossrv shmem tcpros xmlrp"  
+    uom="" 
+    type="string" 
+/>
