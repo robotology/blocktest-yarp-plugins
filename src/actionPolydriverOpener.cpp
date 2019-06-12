@@ -24,7 +24,7 @@ namespace YarpAction
     {
     public:
         ActionPolydriverOpener(const CommandAttributes& parameters, const std::string& testCode);
-        execution execute(unsigned int testrepetition) override { return true; };
+        execution execute(unsigned int testrepetition) override { return execution::continueexecution; };
 
     private:
         bool        opened_{false};
