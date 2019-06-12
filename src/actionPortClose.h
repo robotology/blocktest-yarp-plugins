@@ -29,7 +29,7 @@ public:
 	execution execute(unsigned int testrepetition) override;
 
 protected:
-	std::string name_{""};
+	std::string portname_{""};
 
 	ACTIONREGISTER_DEC_TYPE(ActionPortClose)
 };

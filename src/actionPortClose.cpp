@@ -28,7 +28,7 @@ ACTIONREGISTER_DEF_TYPE(YarpActions::ActionPortClose, "yarpportclose");
 ActionPortClose::ActionPortClose(const CommandAttributes& commandAttributes,
                                  const std::string& testCode) : ActionYarp(commandAttributes, testCode)
 {
-	getCommandAttribute(commandAttributes, "name",   name_);
+	getCommandAttribute(commandAttributes, "portname",   portname_);
 }
 
 execution ActionPortClose::execute(unsigned int testrepetition)
@@ -36,11 +36,11 @@ execution ActionPortClose::execute(unsigned int testrepetition)
     auto exists {true};
     stringstream logStream;
 
-    auto portIt = YarpActionDepotStart::portDepot_.find(name_);
+    auto portIt = YarpActionDepotStart::portDepot_.find(portname_);
 
     if (portIt == YarpActionDepotStart::portDepot_.end())
     {
-        logStream << "Unable to find " << name_<<" in the port depot";
+        logStream << "Unable to find " << portname_<<" in the port depot";
         TXLOG(Severity::error) << logStream.str() << std::endl;
         addProblem(testrepetition, Severity::error, logStream.str());
         return execution::continueexecution;
@@ -49,15 +49,15 @@ execution ActionPortClose::execute(unsigned int testrepetition)
 
     port_ptr->close();
 
-    YarpActionDepotStart::portDepot_.erase(name_);
+    YarpActionDepotStart::portDepot_.erase(portname_);
 
     yarp::os::Time::delay(0.2);
 
-    exists &= Network::exists(name_);
+    exists &= Network::exists(portname_);
 
     if (exists)
     {
-        logStream << "Unable to close " << name_;
+        logStream << "Unable to close " << portname_;
         TXLOG(Severity::error) << logStream.str() << std::endl;
         addProblem(testrepetition, Severity::error, logStream.str());
     }
