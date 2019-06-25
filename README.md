@@ -2,13 +2,13 @@
 
 
 - [1. blocktest-yarp-plugins](#1-blocktest-yarp-plugins)
-- [4. Installation](#4-installation)
-  - [4.1. Prerequisite Linux](#41-prerequisite-linux)
-  - [4.2. Prerequisite Windows](#42-prerequisite-windows)
-  - [4.3. Installation and compilation](#43-installation-and-compilation)
-- [2. Available commands](#2-available-commands)
-  - [1.0.2. Yarp commands](#102-yarp-commands)
-  - [1.0.2. Yarp walking commands (not tested)](#102-yarp-walking-commands-not-tested)
+- [4. Installation](#4-Installation)
+  - [4.1. Prerequisite Linux](#41-Prerequisite-Linux)
+  - [4.2. Prerequisite Windows](#42-Prerequisite-Windows)
+  - [4.3. Installation and compilation](#43-Installation-and-compilation)
+- [2. Available commands](#2-Available-commands)
+  - [1.0.2. Yarp commands](#102-Yarp-commands)
+  - [1.0.2. Yarp walking commands (not tested)](#102-Yarp-walking-commands-not-tested)
 
 
 Repository containing the yarp plugins for blocktest.
@@ -23,7 +23,7 @@ Boost library version must be >1.64.
 ## 4.1. Prerequisite Linux
 
 ```bash
-sudo apt-get install -y cmake libboost-all-dev libpugixml-dev
+sudo apt-get install -y cmake libboost-all-dev
 ```
 YARP see https://github.com/robotology/yarp
 
@@ -31,9 +31,13 @@ YARP see https://github.com/robotology/yarp
 
 ```bash
 vcpkg install boost:x86-windows
-vcpkg install pugixml
 ```
 YARP see https://github.com/robotology/yarp
+
+In bash:
+```bash
+export blocktest_DIR=<path to your blocktest build dir>
+```
 
 ## 4.3. Installation and compilation
 
@@ -44,8 +48,14 @@ git clone https://github.com/robotology/blocktest-yarp-plugins
 cd blocktest-yarp-plugins
 mkdir build
 cd build
-cmake ..
+ccmake ..
+```
+Make sure your CMAKE_INSTALL_PREFIX in ccmake is \<path to your blocktest build dir\>
+Then:
+
+```bash
 make -j 4
+make install
 ```
 
 # 2. Available commands
