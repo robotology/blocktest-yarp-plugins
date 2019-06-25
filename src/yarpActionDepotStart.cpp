@@ -16,7 +16,6 @@
 
 #include "yarpActionDepotStart.h"
 #include <yarp/os/Network.h>
-#include "pugixml.hpp"
 
 namespace YarpActions
 {
@@ -24,6 +23,7 @@ namespace YarpActions
 static YarpActionDepotStart start;
 std::string YarpActionDepotStart::robotName_{""};
 std::map<std::string,PolyDriver_sptr> YarpActionDepotStart::polyDriverDepot_;
+std::map<std::string,Port_sptr> YarpActionDepotStart::portDepot_;
 
 YarpActionDepotStart::YarpActionDepotStart()
 {
@@ -31,15 +31,17 @@ YarpActionDepotStart::YarpActionDepotStart()
     TXLOG(Severity::info)<<"Library setup"<<std::endl;
 }     
 
-void YarpActionDepotStart::configure(const std::string& path, const std::string& name)
+void YarpActionDepotStart::configure(const std::map<std::string,std::string>& conf)
 {
-    pugi::xml_document doc;
-    pugi::xml_parse_result result=doc.load_file(path.c_str());
-    pugi::xpath_node settings = doc.select_node("//settings");
-    bool useSimClock =settings.node().attribute("netclock").as_bool();
-    robotName_ =settings.node().attribute("robotname").value();
-    if(useSimClock)
+    bool useNetClock;
+    getLibraryAttribute(conf,"netclock",useNetClock);
+    getLibraryAttribute(conf,"robotname",robotName_);
+    std::string wrapperNames;
+    getLibraryAttribute(conf,"wrappername",wrapperNames);
+
+    if(useNetClock)
     {
+        ClockFacility::Instance().useNetClock_=true;
         TXLOG(Severity::info)<<"Use netclock"<<std::endl;
         yarp::os::Time::useNetworkClock("/clock");
     }
@@ -48,20 +50,8 @@ void YarpActionDepotStart::configure(const std::string& path, const std::string&
         TXLOG(Severity::info)<<"Use systemclock"<<std::endl;
         yarp::os::Time::useSystemClock(); 
     }
-
     yarp::os::yarpClockType clockType=yarp::os::Time::getClockType();
     TXLOG(Severity::info)<<"Really using clock type:"<<yarp::os::Time::clockTypeToString(clockType)<<std::endl;
-
-    std::string wrapperNames;
-    pugi::xpath_node_set settingsNode = doc.select_nodes("//librarysettings");
-    for (pugi::xpath_node current :settingsNode)
-    {
-        if(current.node().attribute("name").value()==name)
-        {
-            wrapperNames=current.node().attribute("wrappername").value();
-            break;
-        }
-    }
 
     std::vector<std::string> out;
     Action::tokenize<std::string>(wrapperNames,out);
@@ -78,21 +68,16 @@ void YarpActionDepotStart::configure(const std::string& path, const std::string&
             continue;  
         }
         polyDriverDepot_[current]=toAdd;
-    }
+    }    
 }
 
 YarpActionDepotStart::~YarpActionDepotStart()
 {
 }
 }
-void Start(char* data,char* name)
+
+extern "C"
 {
-    if(data)
-    {
-        TXLOG(Severity::info)<<"Library start:"<<data<<std::endl;
-        YarpActions::start.configure(data,name);
-    }
-}
 
 void Stop(char* data,char* name)
 {
@@ -110,4 +95,17 @@ void Stop(char* data,char* name)
     }
     YarpActions::YarpActionDepotStart::polyDriverDepot_.clear();
 }
+
+void Configure(const std::map<std::string,std::string>& conf)
+{
+    YarpActions::start.configure(conf);
+    //TXLOG(Severity::info)<<"Library stop called:"<<std::endl;
+}
+
+}
+
+
+
+
+
 

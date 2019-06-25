@@ -12,10 +12,10 @@
 
 #pragma once
 
-#include "type.h"
 #include "general.h"
 #include "logger.h"
 #include "action.h"
+#include "type.h"
 
 #include <yarp/dev/PolyDriver.h>    
 

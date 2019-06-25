@@ -16,11 +16,6 @@
 
 #include <yarp/dev/PolyDriver.h>
 
-extern "C"{
-    void Start(char* data,char* name);  
-    void Stop(char* data,char* name);  
-}
-
 using PolyDriver_sptr=std::shared_ptr<yarp::dev::PolyDriver>;
 using Port_sptr = std::shared_ptr<yarp::os::Port>;
 
@@ -40,7 +35,7 @@ class YarpActionDepotStart :public ActionDepotStart
         YarpActionDepotStart(); 
         virtual ~YarpActionDepotStart(); 
 
-        void configure(const std::string& path,const std::string& name) override;
+        void configure(const std::map<std::string,std::string>&) override;
 
         static std::map<std::string,PolyDriver_sptr> polyDriverDepot_;//PolyDrive collection for each wrappers
         static std::map<std::string,Port_sptr> portDepot_;
