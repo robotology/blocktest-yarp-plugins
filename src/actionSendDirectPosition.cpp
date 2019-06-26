@@ -50,6 +50,12 @@ execution ActionSendDirectPosition::execute(unsigned int testrepetition)
     std::ofstream out;
     out.open("log/targetdirect.log", std::fstream::in | std::fstream::out | std::fstream::app);
 
+    if(degree_.empty()) {
+        TXLOG(Severity::error)<<"Missing degree information"<<std::endl;
+        addProblem(testrepetition,Severity::critical,"Missing degree information");
+        return execution::stopexecution;
+    }
+
     if(degree_[0])
         out<<ClockFacility::Instance().now()<<","<<0<<std::endl; 
     out<<ClockFacility::Instance().now()<<","<<degree_[0]<<std::endl; 
@@ -59,7 +65,7 @@ execution ActionSendDirectPosition::execute(unsigned int testrepetition)
     {
         TXLOG(Severity::error)<<"Joint info not cooerent"<<std::endl;
         addProblem(testrepetition,Severity::critical,"Joint info not cooerent");
-        return execution::stopexecution;;      
+        return execution::stopexecution;
     }
 
     yarp::dev::IPositionDirect *ipos=nullptr;
@@ -69,14 +75,14 @@ execution ActionSendDirectPosition::execute(unsigned int testrepetition)
     {
         TXLOG(Severity::error)<<"Unable to open pos mode interface"<<std::endl;
         addProblem(testrepetition,Severity::critical,"Unable to open pos mode interface");
-        return execution::stopexecution;;
+        return execution::stopexecution;
     }
 
     if(!YarpActionDepotStart::polyDriverDepot_[wrapperPrefix_]->view(icmd))
     {
         TXLOG(Severity::error)<<"Unable to open control mode interface"<<std::endl;
         addProblem(testrepetition,Severity::critical,"Unable to open control mode interface");      
-        return execution::stopexecution;;
+        return execution::stopexecution;
     }
 
     std::map<std::string,int> jointNames;
@@ -91,7 +97,7 @@ execution ActionSendDirectPosition::execute(unsigned int testrepetition)
         {
             TXLOG(Severity::error)<<"Error joint not found:"<<jointToMove_[index]<<std::endl;
             addProblem(testrepetition,Severity::critical,"Error joint not found");
-            return execution::stopexecution;;
+            return execution::stopexecution;
         }
         
         desiredJoint.push_back(it->second);
@@ -100,7 +106,7 @@ execution ActionSendDirectPosition::execute(unsigned int testrepetition)
     }
     ipos->setPositions(jointToMove_.size(),desiredJoint.data(),desiredJointPosInDegrees.data());
 
-    return execution::continueexecution;;
+    return execution::continueexecution;
 }
 
 }
