@@ -38,7 +38,7 @@ ActionSendDirectPosition::ActionSendDirectPosition(const CommandAttributes& comm
     std::string jointnameStr;
     getCommandAttribute(commandAttributes,"jointname",jointnameStr);
     
-    Action::tokenize<double>(degreeStr,degree_);
+    Action::tokenize<std::string>(degreeStr,degree_);
     Action::tokenize<std::string>(jointnameStr,jointToMove_);
 
     getCommandAttribute(commandAttributes,"wrappername",wrapperPrefix_);
@@ -47,6 +47,7 @@ ActionSendDirectPosition::ActionSendDirectPosition(const CommandAttributes& comm
 execution ActionSendDirectPosition::execute(unsigned int testrepetition)
 {
     //TO REMOVE
+
     std::ofstream out;
     out.open("log/targetdirect.log", std::fstream::in | std::fstream::out | std::fstream::app);
 
@@ -56,8 +57,8 @@ execution ActionSendDirectPosition::execute(unsigned int testrepetition)
         return execution::stopexecution;
     }
 
-    if(degree_[0])
-        out<<ClockFacility::Instance().now()<<","<<0<<std::endl; 
+
+    out<<ClockFacility::Instance().now()<<","<<0<<std::endl;
     out<<ClockFacility::Instance().now()<<","<<degree_[0]<<std::endl; 
     //TO REMOVE
 
@@ -90,7 +91,7 @@ execution ActionSendDirectPosition::execute(unsigned int testrepetition)
 
     std::vector<int> desiredJoint;
     std::vector<double> desiredJointPosInDegrees;    
-    for(int index=0;index<jointToMove_.size();++index)
+    for(unsigned int index=0;index<jointToMove_.size();++index)
     {
         auto it=jointNames.find(jointToMove_[index]);
         if(it==jointNames.end())
@@ -101,10 +102,19 @@ execution ActionSendDirectPosition::execute(unsigned int testrepetition)
         }
         
         desiredJoint.push_back(it->second);
-        desiredJointPosInDegrees.push_back(degree_[index]);
-        icmd->setControlMode(it->second, VOCAB_CM_POSITION_DIRECT);
+        double currentDegree=0;
+        currentDegree=normalizeDouble(degree_[index],false);
+        desiredJointPosInDegrees.push_back(currentDegree);
+        static bool flag{true};
+        if(flag)
+        {
+            icmd->setControlMode(it->second, VOCAB_CM_POSITION_DIRECT);
+            flag=false;
+        }
     }
+
     ipos->setPositions(jointToMove_.size(),desiredJoint.data(),desiredJointPosInDegrees.data());
+    TXLOG(Severity::error)<<"---------:"<<desiredJointPosInDegrees[0]<<std::endl;
 
     return execution::continueexecution;
 }

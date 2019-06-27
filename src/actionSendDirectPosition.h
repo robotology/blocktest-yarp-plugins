@@ -24,7 +24,7 @@ class ActionSendDirectPosition : public ActionYarp
         execution execute(unsigned int testrepetition) override;
     
     private:
-        std::vector<double> degree_; 
+        std::vector<std::string> degree_;
         std::vector<std::string> jointToMove_;
         std::string wrapperPrefix_;
 
