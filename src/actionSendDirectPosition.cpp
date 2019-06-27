@@ -104,7 +104,7 @@ execution ActionSendDirectPosition::execute(unsigned int testrepetition)
         desiredJoint.push_back(it->second);
         double currentDegree=0;
         currentDegree=normalizeDouble(degree_[index],false);
-        if (currentDegree == NAN)
+        if (std::isnan(currentDegree))
         {
             TXLOG(Severity::error)<<"Empty number from table"<<std::endl;
             return execution::continueexecution;
