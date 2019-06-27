@@ -104,10 +104,10 @@ execution ActionSendDirectPosition::execute(unsigned int testrepetition)
         desiredJoint.push_back(it->second);
         double currentDegree=0;
         currentDegree=normalizeDouble(degree_[index],false);
-        if(currentDegree)==NAN)
+        if (currentDegree == NAN)
         {
-        TXLOG(Severity::error)<<"Empty number from table"<<std::endl;
-        return execution::continueexecution;
+            TXLOG(Severity::error)<<"Empty number from table"<<std::endl;
+            return execution::continueexecution;
         }
 
         desiredJointPosInDegrees.push_back(currentDegree);
