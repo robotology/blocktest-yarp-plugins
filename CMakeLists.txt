@@ -55,9 +55,6 @@ list(REMOVE_ITEM allSrc "${CMAKE_CURRENT_SOURCE_DIR}/src/actionGenerateTrajector
         "${CMAKE_CURRENT_SOURCE_DIR}/src/actionSetVelocity.cpp" "${CMAKE_CURRENT_SOURCE_DIR}/src/actionStartWalking.cpp")
 
 add_library(${PROJECT_NAME} MODULE ${allSrc})
-target_compile_definitions(${PROJECT_NAME} PRIVATE PUGIXML_HEADER_ONLY)
-#set_target_properties(${PROJECT_NAME} PROPERTIES PREFIX "")
-
 target_include_directories(${PROJECT_NAME} PRIVATE ${YARP_HELPERS_INCLUDE_DIR} ${PROJECT_SOURCE_DIR}/src ${blocktestcore_INCLUDE_DIRS})
 target_link_libraries(${PROJECT_NAME} PRIVATE ${blocktestcore_LIBRARIES} YARP::YARP_OS YARP::YARP_init YARP::YARP_dev YARP::YARP_conf YARP::YARP_sig YARP::YARP_math YARP::YARP_rosmsg ClockRpc)
 
