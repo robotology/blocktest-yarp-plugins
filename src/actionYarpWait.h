@@ -26,6 +26,7 @@ class ActionYarpWait : public ActionYarp
     public:
         ActionYarpWait(const CommandAttributes& commandAttributes,const std::string& testCode);    
         execution execute(unsigned int testrepetition) override;
+        void beforeExecute() override;        
 
     private:        
         double seconds_{0};

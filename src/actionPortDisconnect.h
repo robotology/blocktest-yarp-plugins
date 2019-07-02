@@ -27,6 +27,7 @@ class ActionPortDisconnect: public ActionYarp
 public:
 	ActionPortDisconnect(const CommandAttributes& commandAttributes, const std::string& testCode);
 	execution execute(unsigned int testrepetition) override;
+    void beforeExecute() override;	
 
 protected:
 	std::string src_{""};

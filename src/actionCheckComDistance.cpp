@@ -27,11 +27,16 @@ namespace YarpActions
 
 ActionCheckComDistance::ActionCheckComDistance(const CommandAttributes& commandAttributes,const std::string& testCode):ActionYarp(commandAttributes,testCode)
 {
-    getCommandAttribute(commandAttributes,"comdistancemax",commaxdistance_);
-    getCommandAttribute(commandAttributes,"comdistancemin",commindistance_);
 }     
 
-execution ActionCheckComDistance::execute(unsigned int testrepetition)
+void ActionCheckComDistance::beforeExecute()
+{
+    getCommandAttribute("comdistancemax",commaxdistance_);
+    getCommandAttribute("comdistancemin",commindistance_);    
+}
+
+
+execution ActionCheckComDistance::execute(unsigned int)
 {
    /* bool error{false};
     if(test_->comDistance_<commindistance_)

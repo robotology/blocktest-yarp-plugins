@@ -23,6 +23,7 @@ class ActionCheckComDistance : public ActionYarp
     public:
         ActionCheckComDistance(const CommandAttributes& commandAttributes,const std::string& testCode);
         execution execute(unsigned int testrepetition) override;
+        void beforeExecute() override;
     
     private:
         double commaxdistance_{0};

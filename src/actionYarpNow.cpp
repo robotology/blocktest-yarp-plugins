@@ -21,7 +21,11 @@ ActionYarpNow::ActionYarpNow(const CommandAttributes& commandAttributes,const st
 {
 }     
 
-execution ActionYarpNow::execute(unsigned int testrepetition)
+void ActionYarpNow::beforeExecute()
+{
+}
+
+execution ActionYarpNow::execute(unsigned int)
 {
     return execution::continueexecution;;
 }

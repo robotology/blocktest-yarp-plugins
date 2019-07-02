@@ -28,7 +28,11 @@ ACTIONREGISTER_DEF_TYPE(YarpActions::ActionPortClose, "yarpportclose");
 ActionPortClose::ActionPortClose(const CommandAttributes& commandAttributes,
                                  const std::string& testCode) : ActionYarp(commandAttributes, testCode)
 {
-	getCommandAttribute(commandAttributes, "portname",   portname_);
+}
+
+void ActionPortClose::beforeExecute()
+{
+	getCommandAttribute("portname",   portname_);    
 }
 
 execution ActionPortClose::execute(unsigned int testrepetition)

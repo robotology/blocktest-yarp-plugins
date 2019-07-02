@@ -32,16 +32,20 @@ namespace YarpActions
 {
 
 ActionSendPwmTrain::ActionSendPwmTrain(const CommandAttributes& commandAttributes,const std::string& testCode):ActionYarp(commandAttributes,testCode)
-{
-    getCommandAttribute(commandAttributes,"cycletime",cycleTime_);
-    getCommandAttribute(commandAttributes,"cyclesleep",cycleSleep_);
-    getCommandAttribute(commandAttributes,"maxposition",maxAngle_);
-    getCommandAttribute(commandAttributes,"minposition",minAngle_);
-    getCommandAttribute(commandAttributes,"dutycycle",dutycycle_);
-    getCommandAttribute(commandAttributes,"jointname",jointname_);
-    getCommandAttribute(commandAttributes,"direction",direction_);    
-    getCommandAttribute(commandAttributes,"wrappername",wrapperPrefix_);        
+{   
 }     
+
+void ActionSendPwmTrain::beforeExecute()
+{
+    getCommandAttribute("cycletime",cycleTime_);
+    getCommandAttribute("cyclesleep",cycleSleep_);
+    getCommandAttribute("maxposition",maxAngle_);
+    getCommandAttribute("minposition",minAngle_);
+    getCommandAttribute("dutycycle",dutycycle_);
+    getCommandAttribute("jointname",jointname_);
+    getCommandAttribute("direction",direction_);    
+    getCommandAttribute("wrappername",wrapperPrefix_);        
+}
 
 execution ActionSendPwmTrain::execute(unsigned int testrepetition)
 {
@@ -93,7 +97,7 @@ execution ActionSendPwmTrain::execute(unsigned int testrepetition)
     ipwm->setRefDutyCycle(it->second, dutycycle_);
     double currentDutyCycle=dutycycle_;
 
-    for(int index=0;index<cycleTime_;++index)
+    for(unsigned int index=0;index<cycleTime_;++index)
     {
         double pos=getPosition(jointPos,iencs,nj);
         

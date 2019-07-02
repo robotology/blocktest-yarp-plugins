@@ -22,6 +22,7 @@ class ActionCheckPosition : public ActionYarp
     public:
         ActionCheckPosition(const CommandAttributes& commandAttributes,const std::string& testCode);
         execution execute(unsigned int testrepetition) override;
+        void beforeExecute() override;        
     
     private:
         double xminposition_{0};

@@ -33,16 +33,20 @@ namespace YarpActions
 
 ActionSendDirectPosition::ActionSendDirectPosition(const CommandAttributes& commandAttributes,const std::string& testCode):ActionYarp(commandAttributes,testCode)
 {
+}     
+
+void ActionSendDirectPosition::beforeExecute()
+{
     std::string degreeStr;
-    getCommandAttribute(commandAttributes,"degree",degreeStr);
+    getCommandAttribute("degree",degreeStr);
     std::string jointnameStr;
-    getCommandAttribute(commandAttributes,"jointname",jointnameStr);
+    getCommandAttribute("jointname",jointnameStr);
     
-    Action::tokenize<std::string>(degreeStr,degree_);
+    Action::tokenize<double>(degreeStr,degree_);
     Action::tokenize<std::string>(jointnameStr,jointToMove_);
 
-    getCommandAttribute(commandAttributes,"wrappername",wrapperPrefix_);
-}     
+    getCommandAttribute("wrappername",wrapperPrefix_);
+}
 
 execution ActionSendDirectPosition::execute(unsigned int testrepetition)
 {
@@ -103,7 +107,7 @@ execution ActionSendDirectPosition::execute(unsigned int testrepetition)
         
         desiredJoint.push_back(it->second);
         double currentDegree=0;
-        currentDegree=normalizeDouble(degree_[index],false);
+        currentDegree=degree_[index];
         if (std::isnan(currentDegree))
         {
             TXLOG(Severity::error)<<"Empty number from table"<<std::endl;

@@ -27,8 +27,13 @@ namespace YarpActions
 
 ActionCheckRobot::ActionCheckRobot(const CommandAttributes& commandAttributes,const std::string& testCode):ActionYarp(commandAttributes,testCode)
 {
-    getCommandAttribute(commandAttributes,"wrappername",wrapperPrefix_);       
+     
 }     
+
+void ActionCheckRobot::beforeExecute()
+{
+    getCommandAttribute("wrappername",wrapperPrefix_);  
+}
 
 execution ActionCheckRobot::execute(unsigned int testrepetition)
 {

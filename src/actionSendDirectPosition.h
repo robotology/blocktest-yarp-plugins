@@ -22,9 +22,10 @@ class ActionSendDirectPosition : public ActionYarp
     public:
         ActionSendDirectPosition(const CommandAttributes& commandAttributes,const std::string& testCode);    
         execution execute(unsigned int testrepetition) override;
+        void beforeExecute() override;
     
     private:
-        std::vector<std::string> degree_;
+        std::vector<double> degree_;
         std::vector<std::string> jointToMove_;
         std::string wrapperPrefix_;
 

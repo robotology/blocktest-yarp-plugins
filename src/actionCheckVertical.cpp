@@ -28,6 +28,10 @@ namespace YarpActions
 ActionCheckVertical::ActionCheckVertical(const CommandAttributes& commandAttributes,const std::string& testCode):ActionYarp(commandAttributes,testCode)
 {}
 
+void ActionCheckVertical::beforeExecute()
+{
+}
+
 execution ActionCheckVertical::execute(unsigned int testrepetition)
 {
     yarp::os::BufferedPort<yarp::sig::Vector> imuPort;

@@ -27,6 +27,7 @@ class ActionPortConnect : public ActionPortDisconnect
 public:
 	ActionPortConnect(const CommandAttributes& commandAttributes, const std::string& testCode);
 	execution execute(unsigned int testrepetition) override;
+  void beforeExecute() override;  
 
 private:
 	std::string crr_;

@@ -29,6 +29,10 @@ namespace YarpActions
 ActionResetPose::ActionResetPose(const CommandAttributes& commandAttributes,const std::string& testCode):ActionYarp(commandAttributes,testCode)
 {}     
 
+void ActionResetPose::beforeExecute()
+{
+}
+
 execution ActionResetPose::execute(unsigned int testrepetition)
 {
     GazeboYarpPlugins::ClockServer clockServer;

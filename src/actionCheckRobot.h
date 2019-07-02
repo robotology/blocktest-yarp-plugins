@@ -22,6 +22,7 @@ class ActionCheckRobot : public ActionYarp
     public:
         ActionCheckRobot(const CommandAttributes& commandAttributes,const std::string& testCode);
         execution execute(unsigned int testrepetition) override;
+        void beforeExecute() override;        
 
     private:
         std::string wrapperPrefix_;

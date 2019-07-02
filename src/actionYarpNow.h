@@ -26,6 +26,7 @@ class ActionYarpNow : public ActionYarp
     public:
         ActionYarpNow(const CommandAttributes& commandAttributes,const std::string& testCode);    
         execution execute(unsigned int testrepetition) override;
+        void beforeExecute() override;        
         double getDouble() override;    
     private:        
         double seconds_{0};

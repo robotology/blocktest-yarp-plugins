@@ -24,21 +24,25 @@ namespace YarpActions
 
 ActionSendPosition::ActionSendPosition(const CommandAttributes& commandAttributes,const std::string& testCode):ActionYarp(commandAttributes,testCode)
 {    
+}     
+
+void ActionSendPosition::beforeExecute()
+{
     std::string degreeStr;
-    getCommandAttribute(commandAttributes,"degree",degreeStr);
+    getCommandAttribute("degree",degreeStr);
 
     std::string velocityStr;
-    getCommandAttribute(commandAttributes,"velocity",velocityStr);      
+    getCommandAttribute("velocity",velocityStr);      
 
     std::string jointnameStr;
-    getCommandAttribute(commandAttributes,"jointname",jointnameStr);          
+    getCommandAttribute("jointname",jointnameStr);          
     
     Action::tokenize<double>(degreeStr,degree_);
     Action::tokenize<int>(velocityStr,velocity_);
     Action::tokenize<std::string>(jointnameStr,jointToMove_);
 
-    getCommandAttribute(commandAttributes,"wrappername",wrapperPrefix_);
-}     
+    getCommandAttribute("wrappername",wrapperPrefix_);    
+}
 
 execution ActionSendPosition::execute(unsigned int testrepetition)
 {
@@ -88,7 +92,7 @@ execution ActionSendPosition::execute(unsigned int testrepetition)
 
     std::vector<int> desiredJoint;
     std::vector<double> desiredJointPosInDegrees;   
-    for(int index=0;index<jointToMove_.size();++index)
+    for(unsigned int index=0;index<jointToMove_.size();++index)
     {
         auto it=jointNames.find(jointToMove_[index]);
         if(it==jointNames.end())

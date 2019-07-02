@@ -23,9 +23,13 @@ namespace YarpActions
 
 ActionSetVelocity::ActionSetVelocity(const CommandAttributes& commandAttributes,const std::string& testCode):ActionYarp(commandAttributes,testCode)
 {
-    getCommandAttribute(commandAttributes,"xvelocity",xVelocity_);    
-    getCommandAttribute(commandAttributes,"yvelocity",yVelocity_);      
 }     
+
+void ActionSetVelocity::beforeExecute()
+{
+    getCommandAttribute("xvelocity",xVelocity_);    
+    getCommandAttribute("yvelocity",yVelocity_);          
+}
 
 execution ActionSetVelocity::execute(unsigned int testrepetition)
 {

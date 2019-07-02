@@ -34,8 +34,7 @@ class ActionYarp: public Action
 {
     public:
         ActionYarp(const CommandAttributes& commandAttributes,const std::string& testCode);
-        ~ActionYarp() override {};
-
+        
         static void getJointNames(yarp::dev::PolyDriver& drive,std::map<std::string,int> &jointNames); 
     protected:
         void openWalking(yarp::os::Port &rpcPortWalking,WalkingCommands &walkingCommands);   

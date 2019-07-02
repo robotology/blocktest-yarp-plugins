@@ -27,6 +27,7 @@ class ActionStartWalking : public ActionYarp
     public:
         ActionStartWalking(const CommandAttributes& commandAttributes,const std::string& testCode);        
         execution execute(unsigned int testrepetition) override;
+        void beforeExecute() override;        
 
     ACTIONREGISTER_DEC_TYPE(ActionStartWalking)        
 };

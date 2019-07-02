@@ -24,6 +24,10 @@ ActionPortOpen::ActionPortOpen(const CommandAttributes& commandAttributes,
                                const std::string& testCode) : ActionPortClose(commandAttributes, testCode)
 {}
 
+void ActionPortOpen::beforeExecute()
+{
+}
+
 execution ActionPortOpen::execute(unsigned int testrepetition)
 {
     auto port_ptr = std::make_shared<Port>();

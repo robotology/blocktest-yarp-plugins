@@ -29,11 +29,15 @@ namespace YarpActions
 
 ActionCheckJointPosition::ActionCheckJointPosition(const CommandAttributes& commandAttributes,const std::string& testCode):ActionYarp(commandAttributes,testCode)
 {
-    getCommandAttribute(commandAttributes,"wrappername",wrapperPrefix_);
-    getCommandAttribute(commandAttributes,"jointname",jointname_);
-    getCommandAttribute(commandAttributes,"expectedvalue",expectedValue_);
-    getCommandAttribute(commandAttributes,"tolerance",tolerance_);
 }     
+
+void ActionCheckJointPosition::beforeExecute()
+{
+    getCommandAttribute("wrappername",wrapperPrefix_);
+    getCommandAttribute("jointname",jointname_);
+    getCommandAttribute("expectedvalue",expectedValue_);
+    getCommandAttribute("tolerance",tolerance_);    
+}
 
 execution ActionCheckJointPosition::execute(unsigned int testrepetition)
 {

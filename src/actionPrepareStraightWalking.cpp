@@ -21,6 +21,10 @@ ACTIONREGISTER_DEF_TYPE(YarpActions::ActionPrepareStraightWalking,"preparestraig
 ActionPrepareStraightWalking::ActionPrepareStraightWalking(const CommandAttributes& commandAttributes,const std::string& testCode):ActionYarp(commandAttributes,testCode)
 {}     
 
+void ActionPrepareStraightWalking::beforeExecute()
+{
+}
+
 execution ActionPrepareStraightWalking::execute(unsigned int testrepetition)
 {
     yarp::os::Port rpcPortWalking;

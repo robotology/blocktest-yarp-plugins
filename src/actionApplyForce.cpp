@@ -28,8 +28,12 @@ namespace YarpActions
 {
 ActionApplyForce::ActionApplyForce(const CommandAttributes& commandAttributes,const std::string& testCode):ActionYarp(commandAttributes,testCode)
 {
-    getCommandAttribute(commandAttributes,"force",force_);
 }     
+
+void ActionApplyForce::beforeExecute()
+{
+    getCommandAttribute("force",force_);    
+}
 
 execution ActionApplyForce::execute(unsigned int testrepetition)
 {

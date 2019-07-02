@@ -10,25 +10,29 @@
  * @author Luca Tricerri <luca.tricerri@iit.it>
  */
 
-
 #include "actionYarpWait.h"
 
-ACTIONREGISTER_DEF_TYPE(YarpActions::ActionYarpWait,"yarpwait");
+ACTIONREGISTER_DEF_TYPE(YarpActions::ActionYarpWait, "yarpwait");
 
 namespace YarpActions
 {
 
-ActionYarpWait::ActionYarpWait(const CommandAttributes& commandAttributes,const std::string& testCode):ActionYarp(commandAttributes,testCode)
+ActionYarpWait::ActionYarpWait(const CommandAttributes &commandAttributes, const std::string &testCode) : ActionYarp(commandAttributes, testCode)
 {
-    getCommandAttribute(commandAttributes,"seconds",seconds_);   
-}     
+    getCommandAttribute("seconds", seconds_);    
+}
 
-execution ActionYarpWait::execute(unsigned int testrepetition)
+void ActionYarpWait::beforeExecute()
 {
-    yarp::os::yarpClockType clockType=yarp::os::Time::getClockType();
+    getCommandAttribute("seconds", seconds_);
+}
+
+execution ActionYarpWait::execute(unsigned int)
+{
+    //yarp::os::yarpClockType clockType=yarp::os::Time::getClockType();
     //TXLOG(Severity::debug)<<"Using clock type config:"<<yarp::os::Time::clockTypeToString(clockType)<<" Wait value:"<<seconds_<<std::endl;
-    yarp::os::Time::delay(seconds_);  
+    yarp::os::Time::delay(seconds_);
     return execution::continueexecution;
 }
 
-}
+} // namespace YarpActions

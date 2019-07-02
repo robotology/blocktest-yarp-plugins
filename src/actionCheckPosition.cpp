@@ -25,11 +25,16 @@ namespace YarpActions
 {
 
 ActionCheckPosition::ActionCheckPosition(const CommandAttributes& commandAttributes,const std::string& testCode):ActionYarp(commandAttributes,testCode)
-{
-    getCommandAttribute(commandAttributes,"xminposition",xminposition_);
-    getCommandAttribute(commandAttributes,"yminposition",yminposition_);
-    getCommandAttribute(commandAttributes,"zminposition",zminposition_);            
+{          
 }     
+
+void ActionCheckPosition::beforeExecute()
+{
+    getCommandAttribute("xminposition",xminposition_);
+    getCommandAttribute("yminposition",yminposition_);
+    getCommandAttribute("zminposition",zminposition_);     
+}
+
 
 execution ActionCheckPosition::execute(unsigned int testrepetition)
 {

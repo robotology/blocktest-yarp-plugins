@@ -36,10 +36,7 @@ class ActionSendPosition : public ActionYarp
     public:
         ActionSendPosition(const CommandAttributes& commandAttributes,const std::string& testCode);    
         execution execute(unsigned int testrepetition) override;
-        ~ActionSendPosition() override
-        {
-            TXLOG(Severity::error)<<"End action"<<std::endl;
-        }
+        void beforeExecute() override;
 
     private:
         std::vector<double> degree_; 

@@ -23,9 +23,14 @@ ACTIONREGISTER_DEF_TYPE(YarpActions::ActionGenerateTrajectory,"generatetrajector
 namespace YarpActions
 {
 ActionGenerateTrajectory::ActionGenerateTrajectory(const CommandAttributes& commandAttributes,const std::string& testCode):ActionYarp(commandAttributes,testCode)
-{
-    getCommandAttribute(commandAttributes,"lenght",lenght_);    
+{    
 }     
+
+void ActionGenerateTrajectory::beforeExecute()
+{
+    getCommandAttribute("lenght",lenght_);    
+}
+
 
 execution ActionGenerateTrajectory::execute(unsigned int testrepetition)
 {

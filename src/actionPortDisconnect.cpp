@@ -22,8 +22,12 @@ ACTIONREGISTER_DEF_TYPE(YarpActions::ActionPortDisconnect, "yarpdisconnect");
 
 ActionPortDisconnect::ActionPortDisconnect(const CommandAttributes& commandAttributes, const std::string& testCode) : ActionYarp(commandAttributes, testCode)
 {
-	getCommandAttribute(commandAttributes, "source",      src_);
-	getCommandAttribute(commandAttributes, "destination", dst_);
+}
+
+void ActionPortDisconnect::beforeExecute()
+{
+	getCommandAttribute( "source",      src_);
+	getCommandAttribute("destination", dst_);	
 }
 
 execution ActionPortDisconnect::execute(unsigned int testrepetition)

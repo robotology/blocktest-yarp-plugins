@@ -34,13 +34,17 @@ namespace YarpActions
 
 ActionSendPwm::ActionSendPwm(const CommandAttributes& commandAttributes,const std::string& testCode):ActionYarp(commandAttributes,testCode)
 {
-    getCommandAttribute(commandAttributes,"profile",profile_);
-    getCommandAttribute(commandAttributes,"dutycycle",dutycycle_);
-    getCommandAttribute(commandAttributes,"time",time_);
-    getCommandAttribute(commandAttributes,"jointname",jointname_);
-    getCommandAttribute(commandAttributes,"frequency",frequency_);
-    getCommandAttribute(commandAttributes,"wrappername",wrapperPrefix_);
 }     
+
+void ActionSendPwm::beforeExecute()
+{
+    getCommandAttribute("profile",profile_);
+    getCommandAttribute("dutycycle",dutycycle_);
+    getCommandAttribute("time",time_);
+    getCommandAttribute("jointname",jointname_);
+    getCommandAttribute("frequency",frequency_);
+    getCommandAttribute("wrappername",wrapperPrefix_);    
+}
 
 execution ActionSendPwm::execute(unsigned int testrepetition)
 {

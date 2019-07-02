@@ -21,7 +21,11 @@ ACTIONREGISTER_DEF_TYPE(YarpActions::ActionPortConnect, "yarpconnect");
 
 ActionPortConnect::ActionPortConnect(const CommandAttributes& commandAttributes, const std::string& testCode) : ActionPortDisconnect(commandAttributes, testCode)
 {
-	getCommandAttribute(commandAttributes, "carrier", crr_);
+}
+
+void ActionPortConnect::beforeExecute()
+{
+	getCommandAttribute("carrier", crr_);	
 }
 
 execution ActionPortConnect::execute(unsigned int testrepetition)

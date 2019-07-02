@@ -28,6 +28,10 @@ namespace YarpActions
 ActionResetWalking::ActionResetWalking(const CommandAttributes& commandAttributes,const std::string& testCode):ActionYarp(commandAttributes,testCode)
 {}     
 
+void ActionResetWalking::beforeExecute()
+{
+}
+
 execution ActionResetWalking::execute(unsigned int testrepetition)
 {
     yarp::os::Port rpcPortWalking;

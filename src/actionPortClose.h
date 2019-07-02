@@ -26,7 +26,8 @@ class ActionPortClose: public ActionYarp
 {
 public:
     ActionPortClose(const CommandAttributes& commandAttributes, const std::string& testCode);
-	execution execute(unsigned int testrepetition) override;
+    execution execute(unsigned int testrepetition) override;
+    void beforeExecute() override;  
 
 protected:
 	std::string portname_{""};
