@@ -69,7 +69,7 @@ void InfoLoggerYarp::working()
 
     while (working_)
     {
-        ClockFacility::Instance().wait(loggingTime_);
+        ClockFacility::instance().wait(loggingTime_);
         for (std::string current : loggingJoints_)
         {
             double ref{0};
@@ -80,7 +80,7 @@ void InfoLoggerYarp::working()
                 TXLOG(Severity::critical) << "Unable to open logger:" << current << std::endl;
                 continue;
             }
-            it->second->add(ref, ClockFacility::Instance().now());
+            it->second->add(ref, ClockFacility::instance().now());
         }
     }
 }

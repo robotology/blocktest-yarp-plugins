@@ -47,8 +47,8 @@ execution ActionSendPosition::execute(unsigned int testrepetition)
     out.open("log/target.log", std::fstream::in | std::fstream::out | std::fstream::app);
 
     if(degree_[0])
-        out<<ClockFacility::Instance().now()<<","<<0<<std::endl; 
-    out<<ClockFacility::Instance().now()<<","<<degree_[0]<<std::endl; 
+        out<<ClockFacility::instance().now()<<","<<0<<std::endl; 
+    out<<ClockFacility::instance().now()<<","<<degree_[0]<<std::endl; 
     //TO REMOVE
 
     if(degree_.size()!=velocity_.size())

@@ -40,6 +40,7 @@ class YarpActionDepotStart :public ActionDepotStart
         static std::map<std::string,PolyDriver_sptr> polyDriverDepot_;//PolyDrive collection for each wrappers
         static std::map<std::string,Port_sptr> portDepot_;
         static std::string robotName_;
+        bool useNetClock_{false};
 };
 
 }

@@ -41,7 +41,7 @@ void YarpActionDepotStart::configure(const std::map<std::string,std::string>& co
 
     if(useNetClock)
     {
-        ClockFacility::Instance().useNetClock_=true;
+        useNetClock_=true;
         TXLOG(Severity::info)<<"Use netclock"<<std::endl;
         yarp::os::Time::useNetworkClock("/clock");
     }
@@ -79,7 +79,7 @@ YarpActionDepotStart::~YarpActionDepotStart()
 extern "C"
 {
 
-void Stop(char* data,char* name)
+void Stop(char* ,char* )
 {
     TXLOG(Severity::info)<<"Library stop called:"<<std::endl;
 

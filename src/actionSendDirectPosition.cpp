@@ -58,8 +58,8 @@ execution ActionSendDirectPosition::execute(unsigned int testrepetition)
     }
 
 
-    out<<ClockFacility::Instance().now()<<","<<0<<std::endl;
-    out<<ClockFacility::Instance().now()<<","<<degree_[0]<<std::endl; 
+    out<<ClockFacility::instance().now()<<","<<0<<std::endl;
+    out<<ClockFacility::instance().now()<<","<<degree_[0]<<std::endl; 
     //TO REMOVE
 
     if(degree_.size()!=jointToMove_.size())
@@ -120,7 +120,7 @@ execution ActionSendDirectPosition::execute(unsigned int testrepetition)
     }
 
     ipos->setPositions(jointToMove_.size(),desiredJoint.data(),desiredJointPosInDegrees.data());
-    TXLOG(Severity::error)<<"---------:"<<desiredJointPosInDegrees[0]<<std::endl;
+    //TXLOG(Severity::debug)<<"---------:"<<desiredJointPosInDegrees[0]<<std::endl;
 
     return execution::continueexecution;
 }
