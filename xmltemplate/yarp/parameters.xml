@@ -4,6 +4,8 @@
     values=""  
     uom="" 
     type="string" 
+    editable="true" 
+    emphasize="false"
 />
 
 <jointname 
@@ -12,6 +14,8 @@
     values=""  
     uom="" 
     type="string" 
+    editable="true" 
+    emphasize="false"    
 />
 
 <degree 
@@ -20,6 +24,8 @@
     values=""  
     uom="degree" 
     type="double" 
+    editable="true" 
+    emphasize="false"    
 />
 
 <velocity 
@@ -28,6 +34,8 @@
     values=""  
     uom="degree/second"  
     type="double" 
+    editable="true" 
+    emphasize="false"    
 />
 
 
@@ -37,6 +45,8 @@
     values="const sin"  
     uom="voltage" 
     type="double" 
+    editable="true" 
+    emphasize="false"    
 />
 
 <frequency 
@@ -45,6 +55,8 @@
     values=""  
     uom="hertz" 
     type="double" 
+    editable="true" 
+    emphasize="false"    
 />
 
 <dutycycle 
@@ -53,6 +65,8 @@
     values=""  
     uom="" 
     type="double" 
+    editable="true" 
+    emphasize="false"    
 />
 
 <time 
@@ -61,6 +75,8 @@
     values=""  
     uom="" 
     type="integer" 
+    editable="true" 
+    emphasize="false"    
 />
 
 <portname 
@@ -69,6 +85,8 @@
     values=""  
     uom="" 
     type="string" 
+    editable="true" 
+    emphasize="false"    
 />
 
 <source
@@ -77,6 +95,8 @@
     values=""  
     uom="" 
     type="string" 
+    editable="true" 
+    emphasize="false"    
 />
 
 <destination
@@ -85,6 +105,8 @@
     values=""  
     uom="" 
     type="string" 
+    editable="true" 
+    emphasize="false"    
 />
 
 <carrier
@@ -93,4 +115,6 @@
     values="http name_ser local tcp fast_tcp mcast udp text text_ack bayer human portmonitor priority rossrv shmem tcpros xmlrp"  
     uom="" 
     type="string" 
+    editable="true" 
+    emphasize="false"    
 />
