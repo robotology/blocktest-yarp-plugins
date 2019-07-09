@@ -12,6 +12,7 @@
   */
 
 #include <actionPortConnect.h>
+#include <yarpActionDepotStart.h>
 
 using namespace std;
 using namespace yarp::os;
@@ -25,12 +26,43 @@ ActionPortConnect::ActionPortConnect(const CommandAttributes& commandAttributes,
 
 void ActionPortConnect::beforeExecute()
 {
+	ActionPortDisconnect::beforeExecute();
 	getCommandAttribute("carrier", crr_);	
 }
 
 execution ActionPortConnect::execute(unsigned int testrepetition)
 {
 	auto ok{ true };
+	ok=Network::exists(src_);
+	if(!ok)
+	{
+		stringstream logStream;
+		logStream << "Port not exists " << src_;
+		TXLOG(Severity::error) << logStream.str() << std::endl;
+		addProblem(testrepetition, Severity::critical, logStream.str());
+		return execution::continueexecution;
+	}	
+	ok=Network::exists(dst_);
+	if(!ok)
+	{
+		stringstream logStream;
+		logStream << "Port not exists " << dst_;
+		TXLOG(Severity::error) << logStream.str() << std::endl;
+		addProblem(testrepetition, Severity::critical, logStream.str());
+		return execution::continueexecution;
+	}
+	
+	ok=Network::isValidPortName(src_);
+	ok&=Network::isValidPortName(dst_);
+	if(!ok)
+	{
+		stringstream logStream;
+		logStream << "Port not valid " << src_ << " -> " << dst_ << " with "<<crr_<<" carrier";
+		TXLOG(Severity::error) << logStream.str() << std::endl;
+		addProblem(testrepetition, Severity::critical, logStream.str());
+		return execution::continueexecution;
+	}
+
 	ok &= Network::connect(src_, dst_, crr_);
 	if(!ok)
 	{

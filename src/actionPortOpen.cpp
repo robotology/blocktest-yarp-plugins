@@ -26,15 +26,16 @@ ActionPortOpen::ActionPortOpen(const CommandAttributes& commandAttributes,
 
 void ActionPortOpen::beforeExecute()
 {
+    ActionPortClose::beforeExecute();
 }
 
 execution ActionPortOpen::execute(unsigned int testrepetition)
 {
-    auto port_ptr = std::make_shared<Port>();
-    bool opened_ = port_ptr->open(portname_);
+    auto port = std::make_shared<Port>();
+    bool opened_ = port->open(portname_);
 
     if (opened_)
-        YarpActionDepotStart::portDepot_[portname_] = port_ptr;
+        YarpActionDepotStart::portDepot_[portname_] = port;
     else
     {
         stringstream logStream;
@@ -42,5 +43,6 @@ execution ActionPortOpen::execute(unsigned int testrepetition)
         TXLOG(Severity::error) << logStream.str() << std::endl;
         addProblem(testrepetition, Severity::error, logStream.str());
     }
+
     return execution::continueexecution;
 }
