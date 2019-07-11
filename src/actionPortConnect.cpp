@@ -32,7 +32,7 @@ void ActionPortConnect::beforeExecute()
 
 execution ActionPortConnect::execute(unsigned int testrepetition)
 {
-	auto ok{ true };
+	bool ok{ true };
 	ok=Network::exists(src_);
 	if(!ok)
 	{
