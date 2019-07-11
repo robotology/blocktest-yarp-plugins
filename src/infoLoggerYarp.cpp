@@ -38,6 +38,13 @@ void InfoLoggerYarp::working()
         //TXLOG(Severity::debug)<<"Logging joint is empty"<<std::endl;
         return;
     }
+
+    auto polyDriveIt=YarpActionDepotStart::polyDriverDepot_.find(wrapperName_);
+    if(polyDriveIt==YarpActionDepotStart::polyDriverDepot_.end())
+    {
+        TXLOG(Severity::error) << "Can't log. Yarp polydrive doesn't exist:" <<wrapperName_<< std::endl;            
+        return;
+    }
  
     ActionYarp::getJointNames(*YarpActionDepotStart::polyDriverDepot_[wrapperName_], jointNames_);
 
