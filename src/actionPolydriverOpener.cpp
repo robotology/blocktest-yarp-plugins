@@ -24,7 +24,7 @@ namespace YarpAction
     {
     public:
         ActionPolydriverOpener(const CommandAttributes& parameters, const std::string& testCode);
-        execution execute(unsigned int) override { return execution::continueexecution; };
+        execution execute(const TestRepetitions&) override { return execution::continueexecution; };
         void beforeExecute() override{};        
 
     private:
@@ -58,7 +58,8 @@ namespace YarpAction
             YarpActionDepotStart::polyDriverDepot_[tag_] = pdr;
         else
         {
-            addProblem(0, Severity::critical, "Polydriver failed to open");
+            TestRepetitions rep{0,0};
+            addProblem(rep, Severity::critical, "Polydriver failed to open");
             TXLOG(Severity::error) << "polydriver failed to open" << std::endl;
         }
     };

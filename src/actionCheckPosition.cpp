@@ -36,7 +36,7 @@ void ActionCheckPosition::beforeExecute()
 }
 
 
-execution ActionCheckPosition::execute(unsigned int testrepetition)
+execution ActionCheckPosition::execute(const TestRepetitions& testrepetition)
 {
     yarp::os::Port fbePort;
     std::string localfbePort  = "/myrobot/odometry:i";

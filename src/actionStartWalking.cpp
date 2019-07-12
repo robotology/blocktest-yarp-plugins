@@ -28,7 +28,7 @@ void ActionStartWalking::beforeExecute()
 {
 }
 
-execution ActionStartWalking::execute(unsigned int testrepetition)
+execution ActionStartWalking::execute(const TestRepetitions& testrepetition)
 {
     yarp::os::Port rpcPortWalking;
     WalkingCommands walkingCommands;

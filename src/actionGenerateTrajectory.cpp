@@ -32,7 +32,7 @@ void ActionGenerateTrajectory::beforeExecute()
 }
 
 
-execution ActionGenerateTrajectory::execute(unsigned int testrepetition)
+execution ActionGenerateTrajectory::execute(const TestRepetitions& testrepetition)
 {
     yarp::os::Port rpcPortWalking;
     WalkingCommands walkingCommands;

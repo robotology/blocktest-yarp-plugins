@@ -44,7 +44,7 @@ void ActionSendPosition::beforeExecute()
     getCommandAttribute("wrappername",wrapperPrefix_);    
 }
 
-execution ActionSendPosition::execute(unsigned int testrepetition)
+execution ActionSendPosition::execute(const TestRepetitions& testrepetition)
 {
     //TO REMOVE
     std::ofstream out;

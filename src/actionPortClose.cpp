@@ -35,7 +35,7 @@ void ActionPortClose::beforeExecute()
 	getCommandAttribute("portname",   portname_);    
 }
 
-execution ActionPortClose::execute(unsigned int testrepetition)
+execution ActionPortClose::execute(const TestRepetitions& testrepetition)
 {
     auto exists {true};
     stringstream logStream;

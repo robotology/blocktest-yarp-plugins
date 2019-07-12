@@ -32,7 +32,7 @@ void ActionCheckVertical::beforeExecute()
 {
 }
 
-execution ActionCheckVertical::execute(unsigned int testrepetition)
+execution ActionCheckVertical::execute(const TestRepetitions& testrepetition)
 {
     yarp::os::BufferedPort<yarp::sig::Vector> imuPort;
     std::string localImuPort  = "/myrobot/imu:i";

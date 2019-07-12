@@ -35,7 +35,7 @@ void ActionCheckRobot::beforeExecute()
     getCommandAttribute("wrappername",wrapperPrefix_);  
 }
 
-execution ActionCheckRobot::execute(unsigned int testrepetition)
+execution ActionCheckRobot::execute(const TestRepetitions& testrepetition)
 {
     yarp::dev::IEncoders       *iencs;
     int nj;

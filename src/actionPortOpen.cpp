@@ -29,7 +29,7 @@ void ActionPortOpen::beforeExecute()
     ActionPortClose::beforeExecute();
 }
 
-execution ActionPortOpen::execute(unsigned int testrepetition)
+execution ActionPortOpen::execute(const TestRepetitions& testrepetition)
 {
     auto port = std::make_shared<Port>();
     bool opened_ = port->open(portname_);

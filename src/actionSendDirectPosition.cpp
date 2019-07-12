@@ -48,7 +48,7 @@ void ActionSendDirectPosition::beforeExecute()
     getCommandAttribute("wrappername",wrapperPrefix_);
 }
 
-execution ActionSendDirectPosition::execute(unsigned int testrepetition)
+execution ActionSendDirectPosition::execute(const TestRepetitions& testrepetition)
 {
     //TO REMOVE
 

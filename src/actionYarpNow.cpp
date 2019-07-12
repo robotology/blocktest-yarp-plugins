@@ -25,7 +25,7 @@ void ActionYarpNow::beforeExecute()
 {
 }
 
-execution ActionYarpNow::execute(unsigned int)
+execution ActionYarpNow::execute(const TestRepetitions&)
 {
     return execution::continueexecution;;
 }

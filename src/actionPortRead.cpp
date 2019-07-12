@@ -29,7 +29,7 @@ void ActionPortRead::beforeExecute()
     getCommandAttribute("value",   value_);
 }
 
-execution ActionPortRead::execute(unsigned int testrepetition)
+execution ActionPortRead::execute(const TestRepetitions& testrepetition)
 {
 
     auto it=YarpActionDepotStart::portDepot_.find(portname_);

@@ -33,7 +33,7 @@ void ActionReset::beforeExecute()
 {
 }
 
-execution ActionReset::execute(unsigned int testrepetition)
+execution ActionReset::execute(const TestRepetitions& testrepetition)
 {
     GazeboYarpPlugins::ClockServer clockServer;
     yarp::os::Port clockClientPort;

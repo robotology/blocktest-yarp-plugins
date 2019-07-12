@@ -25,7 +25,7 @@ void ActionPrepareStraightWalking::beforeExecute()
 {
 }
 
-execution ActionPrepareStraightWalking::execute(unsigned int testrepetition)
+execution ActionPrepareStraightWalking::execute(const TestRepetitions& testrepetition)
 {
     yarp::os::Port rpcPortWalking;
     WalkingCommands walkingCommands;
