@@ -17,10 +17,8 @@
 #include "yarpActionDepotStart.h"
 #include <yarp/os/Network.h>
 
-namespace YarpActions
-{
+ACTIONDEPOTSTART(YarpActionDepotStart)
 
-static YarpActionDepotStart start;
 std::string YarpActionDepotStart::robotName_{""};
 std::map<std::string,PolyDriver_sptr> YarpActionDepotStart::polyDriverDepot_;
 std::map<std::string,Port_sptr> YarpActionDepotStart::portDepot_;
@@ -33,6 +31,8 @@ YarpActionDepotStart::YarpActionDepotStart()
 
 void YarpActionDepotStart::configure(const std::map<std::string,std::string>& conf)
 {
+    TXLOG(Severity::info)<<"Library config called:"<<std::endl;
+
     bool useNetClock;
     getLibraryAttribute(conf,"netclock",useNetClock);
     getLibraryAttribute(conf,"robotname",robotName_);
@@ -71,41 +71,19 @@ void YarpActionDepotStart::configure(const std::map<std::string,std::string>& co
     }    
 }
 
-YarpActionDepotStart::~YarpActionDepotStart()
-{
-}
-}
-
-extern "C"
-{
-
-void Stop(char* ,char* )
+void YarpActionDepotStart::stop()
 {
     TXLOG(Severity::info)<<"Library stop called:"<<std::endl;
 
     // Close all polydrivers
-    for(auto& current:YarpActions::YarpActionDepotStart::polyDriverDepot_)
+    for(auto& current:polyDriverDepot_)
     {
         current.second->close();
     }
     // Close all ports
-    for(auto& current:YarpActions::YarpActionDepotStart::portDepot_)
+    for(auto& current:portDepot_)
     {
         current.second->close();
     }
-    YarpActions::YarpActionDepotStart::polyDriverDepot_.clear();
+    polyDriverDepot_.clear();
 }
-
-void Configure(const std::map<std::string,std::string>& conf)
-{
-    YarpActions::start.configure(conf);
-    //TXLOG(Severity::info)<<"Library stop called:"<<std::endl;
-}
-
-}
-
-
-
-
-
-
