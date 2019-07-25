@@ -87,3 +87,11 @@ void YarpActionDepotStart::stop()
     }
     polyDriverDepot_.clear();
 }
+
+YarpActionDepotStart::~YarpActionDepotStart()
+{
+    std::cout<<"Before yarp::os::Network::fini"<<std::endl;
+    //yarp::os::Network::fini();
+    std::cout<<"After yarp::os::Network::fini"<<std::endl;
+}
+    

@@ -30,6 +30,7 @@ class YarpActionDepotStart :public ActionDepotStart
 {
     public:
         YarpActionDepotStart(); 
+        ~YarpActionDepotStart() override;
 
         void configure(const std::map<std::string,std::string>&) override;
         void stop() override;
