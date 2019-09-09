@@ -40,15 +40,13 @@ execution ActionCheckVertical::execute(const TestRepetitions& testrepetition)
     bool ok=imuPort.open(localImuPort);
     if(!ok)
     {
-        TXLOG(Severity::critical)<<"Unable to open ports checkvertical"<<std::endl;
-        addProblem(testrepetition,Severity::critical,"Unable to open ports checkvertical");
+        addProblem(testrepetition,Severity::critical,"Unable to open ports checkvertical",true);
         return execution::stopexecution;;
     }
     ok=yarp::os::Network::connect(remoteImuPort.c_str(), localImuPort.c_str());
     if(!ok)
     {
-        TXLOG(Severity::critical)<<"Unable to connect to imu port"<<std::endl;
-        addProblem(testrepetition,Severity::critical,"Unable to connect to imu port");
+        addProblem(testrepetition,Severity::critical,"Unable to connect to imu port",true);
         return execution::stopexecution;;
     }
 
@@ -57,14 +55,13 @@ execution ActionCheckVertical::execute(const TestRepetitions& testrepetition)
     yarp::sig::Vector* imuReadings = imuPort.read();
     if(!imuReadings)
     {
-        TXLOG(Severity::critical)<<"Impossible to read accelerometer measurements"<<std::endl;
-        addProblem(testrepetition,Severity::critical,"Impossible to read accelerometer measurements");
+        addProblem(testrepetition,Severity::critical,"Impossible to read accelerometer measurements",true);
         return execution::stopexecution;;
     }
     if(imuReadings->size()<12)
     {
         TXLOG(Severity::critical)<<"IMU readings should have at least 12 elements current:"<<imuReadings->size()<<std::endl;
-        addProblem(testrepetition,Severity::critical,"IMU readings should have at least 12 elements");
+        addProblem(testrepetition,Severity::critical,"IMU readings should have at least 12 elements",false);
         return execution::stopexecution;;        
     }
 
@@ -85,7 +82,7 @@ execution ActionCheckVertical::execute(const TestRepetitions& testrepetition)
     }
 
     if(error==execution::stopexecution)
-        addProblem(testrepetition,Severity::error,"Absolute gravity");
+        addProblem(testrepetition,Severity::error,"Absolute gravity",true);
 
     imuPort.interrupt();
     imuPort.close();

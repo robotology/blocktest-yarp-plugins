@@ -41,8 +41,7 @@ execution ActionGenerateTrajectory::execute(const TestRepetitions& testrepetitio
     bool ok=walkingCommands.generateTrajectories(lenght_);
     if(!ok)
     {
-        TXLOG(Severity::error)<<"Generate trajectory failed"<<std::endl;
-        addProblem(testrepetition,Severity::error,"Generate trajectory failed");
+        addProblem(testrepetition,Severity::error,"Generate trajectory failed",true);
     }
 
     closeWalking(rpcPortWalking);

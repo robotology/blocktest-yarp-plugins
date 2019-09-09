@@ -58,14 +58,12 @@ execution ActionSendPwm::execute(const TestRepetitions& testrepetition)
 
     if(!YarpActionDepotStart::polyDriverDepot_[wrapperPrefix_]->view(ipwm))
     {
-        TXLOG(Severity::critical)<<"Unable to open pwm mode interface"<<std::endl;
-        addProblem(testrepetition,Severity::critical,"Unable to open pwm mode interface");
+        addProblem(testrepetition,Severity::critical,"Unable to open pwm mode interface",true);
     }
 
     if(!YarpActionDepotStart::polyDriverDepot_[wrapperPrefix_]->view(icmd))
     {
-        TXLOG(Severity::critical)<<"Unable to open control mode interface"<<std::endl;
-        addProblem(testrepetition,Severity::critical,"Unable to open control mode interface");
+        addProblem(testrepetition,Severity::critical,"Unable to open control mode interface",true);
     }    
 
     std::map<std::string,int> jointNames;
@@ -74,7 +72,7 @@ execution ActionSendPwm::execute(const TestRepetitions& testrepetition)
     if(it==jointNames.end())
     {
         TXLOG(Severity::error)<<"Error joint not found:"<<jointname_<<std::endl;
-        addProblem(testrepetition,Severity::critical,"Error joint not found");
+        addProblem(testrepetition,Severity::critical,"Error joint not found",false);
         return  execution::stopexecution;
     }
 

@@ -57,27 +57,23 @@ execution ActionSendPwmTrain::execute(const TestRepetitions& testrepetition)
 
     if(!YarpActionDepotStart::polyDriverDepot_[wrapperPrefix_]->view(ipwm))
     {
-        TXLOG(Severity::critical)<<"Unable to open pwm mode interface"<<std::endl;
-        addProblem(testrepetition,Severity::critical,"Unable to open pwm mode interface");
+        addProblem(testrepetition,Severity::critical,"Unable to open pwm mode interface",true);
     }
 
     if(!YarpActionDepotStart::polyDriverDepot_[wrapperPrefix_]->view(icmd))
     {
-        TXLOG(Severity::critical)<<"Unable to open control mode interface"<<std::endl;
-        addProblem(testrepetition,Severity::critical,"Unable to open control mode interface");
+        addProblem(testrepetition,Severity::critical,"Unable to open control mode interface",true);
     }    
 
     if(!YarpActionDepotStart::polyDriverDepot_[wrapperPrefix_]->view(iencs))
     {
-        TXLOG(Severity::error)<<"Unable to view IEncoder interface"<<std::endl;
-        addProblem(testrepetition,Severity::error,"Unable to view IEncoder interface");
+        addProblem(testrepetition,Severity::error,"Unable to view IEncoder interface",true);
         return execution::stopexecution;;
     }
 
     if(!iencs->getAxes(&nj))
     {
-        TXLOG(Severity::error)<<"getAxes failed"<<std::endl;
-        addProblem(testrepetition,Severity::error,"getAxes failed");
+        addProblem(testrepetition,Severity::error,"getAxes failed",true);
         return execution::stopexecution;;
     }    
 
@@ -87,7 +83,7 @@ execution ActionSendPwmTrain::execute(const TestRepetitions& testrepetition)
     if(it==jointNames.end())
     {
         TXLOG(Severity::error)<<"Error joint not found:"<<jointname_<<std::endl;
-        addProblem(testrepetition,Severity::critical,"Error joint not found");
+        addProblem(testrepetition,Severity::critical,"Error joint not found",false);
         return execution::stopexecution;;
     }
     

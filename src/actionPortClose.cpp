@@ -45,8 +45,7 @@ execution ActionPortClose::execute(const TestRepetitions& testrepetition)
     if (portIt == YarpActionDepotStart::portDepot_.end())
     {
         logStream << "Unable to find " << portname_<<" in the port depot";
-        TXLOG(Severity::error) << logStream.str() << std::endl;
-        addProblem(testrepetition, Severity::error, logStream.str());
+        addProblem(testrepetition, Severity::error, logStream.str(),true);
         return execution::continueexecution;
     }
     auto port_ptr = portIt->second;
@@ -62,8 +61,7 @@ execution ActionPortClose::execute(const TestRepetitions& testrepetition)
     if (exists)
     {
         logStream << "Unable to close " << portname_;
-        TXLOG(Severity::error) << logStream.str() << std::endl;
-        addProblem(testrepetition, Severity::error, logStream.str());
+        addProblem(testrepetition, Severity::error, logStream.str(),true);
     }
 
 	return execution::continueexecution;

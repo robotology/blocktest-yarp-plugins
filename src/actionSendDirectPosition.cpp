@@ -56,8 +56,7 @@ execution ActionSendDirectPosition::execute(const TestRepetitions& testrepetitio
     out.open("log/targetdirect.log", std::fstream::in | std::fstream::out | std::fstream::app);
 
     if(degree_.empty()) {
-        TXLOG(Severity::error)<<"Missing degree information"<<std::endl;
-        addProblem(testrepetition,Severity::critical,"Missing degree information");
+        addProblem(testrepetition,Severity::error,"Missing degree information",true);
         return execution::stopexecution;
     }
 
@@ -68,8 +67,7 @@ execution ActionSendDirectPosition::execute(const TestRepetitions& testrepetitio
 
     if(degree_.size()!=jointToMove_.size())
     {
-        TXLOG(Severity::error)<<"Joint info not cooerent"<<std::endl;
-        addProblem(testrepetition,Severity::critical,"Joint info not cooerent");
+        addProblem(testrepetition,Severity::error,"Joint info not cooerent",true);
         return execution::stopexecution;
     }
 
@@ -78,15 +76,13 @@ execution ActionSendDirectPosition::execute(const TestRepetitions& testrepetitio
   
     if(!YarpActionDepotStart::polyDriverDepot_[wrapperPrefix_]->view(ipos))
     {
-        TXLOG(Severity::error)<<"Unable to open pos mode interface"<<std::endl;
-        addProblem(testrepetition,Severity::critical,"Unable to open pos mode interface");
+        addProblem(testrepetition,Severity::error,"Unable to open pos mode interface",true);
         return execution::stopexecution;
     }
 
     if(!YarpActionDepotStart::polyDriverDepot_[wrapperPrefix_]->view(icmd))
     {
-        TXLOG(Severity::error)<<"Unable to open control mode interface"<<std::endl;
-        addProblem(testrepetition,Severity::critical,"Unable to open control mode interface");      
+        addProblem(testrepetition,Severity::error,"Unable to open control mode interface",true);      
         return execution::stopexecution;
     }
 
@@ -101,7 +97,7 @@ execution ActionSendDirectPosition::execute(const TestRepetitions& testrepetitio
         if(it==jointNames.end())
         {
             TXLOG(Severity::error)<<"Error joint not found:"<<jointToMove_[index]<<std::endl;
-            addProblem(testrepetition,Severity::critical,"Error joint not found");
+            addProblem(testrepetition,Severity::critical,"Error joint not found",false);
             return execution::stopexecution;
         }
         

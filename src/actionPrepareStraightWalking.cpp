@@ -34,8 +34,7 @@ execution ActionPrepareStraightWalking::execute(const TestRepetitions& testrepet
     bool ok=walkingCommands.prepareStraightWalking();
     if(!ok)
     {
-        TXLOG(Severity::error)<<"Prepare straight walking failed"<<std::endl;
-        addProblem(testrepetition,Severity::error,"Prepare straight walking failed");
+        addProblem(testrepetition,Severity::error,"Prepare straight walking failed",true);
     }
     closeWalking(rpcPortWalking);
     TXLOG(Severity::info)<<"Prepare straight walking OK"<<std::endl;

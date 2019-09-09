@@ -40,8 +40,7 @@ execution ActionPortOpen::execute(const TestRepetitions& testrepetition)
     {
         stringstream logStream;
         logStream << "Unable to open " << portname_;
-        TXLOG(Severity::error) << logStream.str() << std::endl;
-        addProblem(testrepetition, Severity::error, logStream.str());
+        addProblem(testrepetition, Severity::error, logStream.str(),true);
     }
 
     return execution::continueexecution;

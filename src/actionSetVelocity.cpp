@@ -41,8 +41,7 @@ execution ActionSetVelocity::execute(const TestRepetitions& testrepetition)
     TXLOG(Severity::debug)<<"xVelocity:"<<normalizeDouble(xVelocity_,true)<<" yVelocity:"<<normalizeDouble(yVelocity_,true)<<std::endl;
     if(!ok)
     {
-        TXLOG(Severity::critical)<<"send velocity failed"<<std::endl;
-        addProblem(testrepetition,Severity::critical,"send velocity failed");
+        addProblem(testrepetition,Severity::critical,"send velocity failed",true);
     }
 
     closeWalking(rpcPortWalking);    

@@ -38,8 +38,7 @@ execution ActionPortDisconnect::execute(const TestRepetitions& testrepetition)
 	{
 		stringstream logStream;
 		logStream << "Unable to disconnect " << src_ << " -> " << dst_ ;
-		TXLOG(Severity::error) << logStream.str() << std::endl;
-		addProblem(testrepetition, Severity::critical, logStream.str());
+		addProblem(testrepetition, Severity::critical, logStream.str(),true);
 	}
 	return execution::continueexecution;
 }

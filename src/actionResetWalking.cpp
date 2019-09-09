@@ -41,8 +41,7 @@ execution ActionResetWalking::execute(const TestRepetitions& testrepetition)
     bool ok=walkingCommands.stopWalking();
     if(!ok)
     {
-        TXLOG(Severity::error)<<"Reset walking failed"<<std::endl;
-        addProblem(testrepetition,Severity::error,"Reset walking failed");
+        addProblem(testrepetition,Severity::error,"Reset walking failed",true);
     }    
 
     closeWalking(rpcPortWalking);       

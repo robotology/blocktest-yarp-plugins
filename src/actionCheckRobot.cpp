@@ -42,13 +42,11 @@ execution ActionCheckRobot::execute(const TestRepetitions& testrepetition)
 
     if(!YarpActionDepotStart::polyDriverDepot_[wrapperPrefix_]->view(iencs))
     {
-        TXLOG(Severity::critical)<<"Unable to view IEncoder interface"<<std::endl;
-        addProblem(testrepetition,Severity::critical,"Unable to view IEncoder interface");
+        addProblem(testrepetition,Severity::critical,"Unable to view IEncoder interface",true);
     }
     if(!iencs->getAxes(&nj))
     {
-        TXLOG(Severity::critical)<<"getAxes failed"<<std::endl;
-        addProblem(testrepetition,Severity::critical,"getAxes failed");
+        addProblem(testrepetition,Severity::critical,"getAxes failed",true);
     }        
     return execution::continueexecution;;
 }

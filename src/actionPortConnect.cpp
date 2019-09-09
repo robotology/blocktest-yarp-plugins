@@ -38,8 +38,7 @@ execution ActionPortConnect::execute(const TestRepetitions& testrepetition)
 	{
 		stringstream logStream;
 		logStream << "Port not exists " << src_;
-		TXLOG(Severity::error) << logStream.str() << std::endl;
-		addProblem(testrepetition, Severity::critical, logStream.str());
+		addProblem(testrepetition, Severity::error, logStream.str(),true);
 		return execution::continueexecution;
 	}	
 	ok=Network::exists(dst_);
@@ -47,8 +46,7 @@ execution ActionPortConnect::execute(const TestRepetitions& testrepetition)
 	{
 		stringstream logStream;
 		logStream << "Port not exists " << dst_;
-		TXLOG(Severity::error) << logStream.str() << std::endl;
-		addProblem(testrepetition, Severity::critical, logStream.str());
+		addProblem(testrepetition, Severity::error, logStream.str(),true);
 		return execution::continueexecution;
 	}
 	
@@ -58,8 +56,7 @@ execution ActionPortConnect::execute(const TestRepetitions& testrepetition)
 	{
 		stringstream logStream;
 		logStream << "Port not valid " << src_ << " -> " << dst_ << " with "<<crr_<<" carrier";
-		TXLOG(Severity::error) << logStream.str() << std::endl;
-		addProblem(testrepetition, Severity::critical, logStream.str());
+		addProblem(testrepetition, Severity::error, logStream.str(),true);
 		return execution::continueexecution;
 	}
 
@@ -68,8 +65,7 @@ execution ActionPortConnect::execute(const TestRepetitions& testrepetition)
 	{
 		stringstream logStream;
 		logStream << "Unable to connect " << src_ << " -> " << dst_ << " with "<<crr_<<" carrier";
-		TXLOG(Severity::error) << logStream.str() << std::endl;
-		addProblem(testrepetition, Severity::critical, logStream.str());
+		addProblem(testrepetition, Severity::error, logStream.str(),true);
 	}
 	return execution::continueexecution;
 }

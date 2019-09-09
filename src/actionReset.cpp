@@ -47,8 +47,7 @@ execution ActionReset::execute(const TestRepetitions& testrepetition)
         ok &=yarp::os::Network::connect(localRpcPort.c_str(), remoteRpcPort.c_str());
         if(!ok)
         {
-            TXLOG(Severity::error)<<"Unable to open clock/rpc"<<std::endl;
-            addProblem(testrepetition,Severity::critical,"Unable to open clock/rpc");
+            addProblem(testrepetition,Severity::critical,"Unable to open clock/rpc",true);
         }
         clockServer.yarp().attachAsClient(clockClientPort);
     }

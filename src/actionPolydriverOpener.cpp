@@ -59,8 +59,7 @@ namespace YarpAction
         else
         {
             TestRepetitions rep{0,0};
-            addProblem(rep, Severity::critical, "Polydriver failed to open");
-            TXLOG(Severity::error) << "polydriver failed to open" << std::endl;
+            addProblem(rep, Severity::critical, "Polydriver failed to open",true);
         }
     };
     ACTIONREGISTER_DEF_TYPE(ActionPolydriverOpener, "yarpopenpolydriver");

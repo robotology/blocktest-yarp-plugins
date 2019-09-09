@@ -44,14 +44,12 @@ execution ActionCheckPosition::execute(const TestRepetitions& testrepetition)
     bool ok=fbePort.open(localfbePort);
     if(!ok)
     {
-        TXLOG(Severity::critical)<<"Unable to open ports checkposition"<<std::endl;
-        addProblem(testrepetition,Severity::critical,"Unable to open ports checkposition");
+        addProblem(testrepetition,Severity::critical,"Unable to open ports checkposition",true);
     }
     ok=yarp::os::Network::connect(remotefbePort.c_str(), localfbePort.c_str());
     if(!ok)
     {
-        TXLOG(Severity::critical)<<"Unable to connect to fbe port"<<std::endl;
-        addProblem(testrepetition,Severity::critical,"Unable to connect to fbe port");
+        addProblem(testrepetition,Severity::critical,"Unable to connect to fbe port",true);
     }
     yarp::os::Bottle fbeReadings;
     fbePort.read(fbeReadings);
@@ -60,7 +58,7 @@ execution ActionCheckPosition::execute(const TestRepetitions& testrepetition)
     if(coordList->size()<6)
     {
         TXLOG(Severity::critical)<<"FBE readings should have 6 elements current:"<<fbeReadings.size()<<std::endl;
-        addProblem(testrepetition,Severity::critical,"FBE readings should have 6 elements");
+        addProblem(testrepetition,Severity::critical,"FBE readings should have 6 elements",false);
         fbePort.interrupt();
         fbePort.close();  
         return execution::stopexecution;;
@@ -86,7 +84,7 @@ execution ActionCheckPosition::execute(const TestRepetitions& testrepetition)
     }
 
     if(error==execution::stopexecution)
-        addProblem(testrepetition,Severity::error,"FBE not enough");
+        addProblem(testrepetition,Severity::error,"FBE not enough",true);
     
     fbePort.interrupt();
     fbePort.close();  

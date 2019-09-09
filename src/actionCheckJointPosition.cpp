@@ -45,16 +45,14 @@ execution ActionCheckJointPosition::execute(const TestRepetitions& testrepetitio
     
     if(!YarpActionDepotStart::polyDriverDepot_[wrapperPrefix_]->view(iencoders))
     {
-        TXLOG(Severity::error)<<"Unable to open encoder control mode interface 2"<<std::endl;
-        addProblem(testrepetition,Severity::critical,"Unable to open encoder control mode interface 2");        
+        addProblem(testrepetition,Severity::error,"Unable to open encoder control mode interface 2",true);        
         return execution::stopexecution;
     }
 
     int nj{0};
     if(!iencoders->getAxes(&nj))
     {
-        TXLOG(Severity::error)<<"Unable to open encoder control mode interface 3"<<std::endl;
-        addProblem(testrepetition,Severity::critical,"Unable to open encoder control mode interface 3");
+        addProblem(testrepetition,Severity::error,"Unable to open encoder control mode interface 3",true);
         return execution::stopexecution;;    
     }       
          
@@ -65,7 +63,7 @@ execution ActionCheckJointPosition::execute(const TestRepetitions& testrepetitio
     if(it==jointNames.end())
     {
         TXLOG(Severity::error)<<"Joint not found:"<<jointname_<<std::endl;   
-        addProblem(testrepetition,Severity::critical,"Joint not found:");
+        addProblem(testrepetition,Severity::error,"Joint not found:",false);
         return execution::stopexecution;;
     }
 
@@ -81,7 +79,7 @@ execution ActionCheckJointPosition::execute(const TestRepetitions& testrepetitio
     if(expectedValue_>ref+tolerance_ || expectedValue_<ref-tolerance_)
     {
         TXLOG(Severity::error)<<"Joint position check value:"<<ref<<" expected:" <<expectedValue_<<" tolerance:"<<tolerance_ <<" name:"<<jointname_<<std::endl;   
-        addProblem(testrepetition,Severity::error,"Joint position check value");
+        addProblem(testrepetition,Severity::error,"Joint position check value",false);
     }
     else
     {
