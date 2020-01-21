@@ -23,7 +23,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra")
 #Thrift for clock
 set(YARP_MINIMUM_REQUIRED_VERSION 3.0.102)
 find_package(YARP REQUIRED COMPONENTS OS conf dev sig math rosmsg name idl_tools)
-find_package(blocktestcore 2.0.0 REQUIRED)
+find_package(blocktestcore REQUIRED)
 if(${YARP_VERSION} VERSION_LESS ${YARP_MINIMUM_REQUIRED_VERSION})
     message(FATAL_ERROR "YARP version ${YARP_VERSION} not sufficient, at least version ${YARP_MINIMUM_REQUIRED_VERSION} is required.")
 endif()

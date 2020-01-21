@@ -2,13 +2,13 @@
 
 
 - [1. blocktest-yarp-plugins](#1-blocktest-yarp-plugins)
-- [4. Installation](#4-Installation)
-  - [4.1. Prerequisite Linux](#41-Prerequisite-Linux)
-  - [4.2. Prerequisite Windows](#42-Prerequisite-Windows)
-  - [4.3. Installation and compilation](#43-Installation-and-compilation)
-- [2. Available commands](#2-Available-commands)
-  - [1.0.2. Yarp commands](#102-Yarp-commands)
-  - [1.0.2. Yarp walking commands (not tested)](#102-Yarp-walking-commands-not-tested)
+- [4. Installation](#4-installation)
+  - [4.1. Prerequisite Linux](#41-prerequisite-linux)
+  - [4.2. Prerequisite Windows](#42-prerequisite-windows)
+  - [4.3. Installation and compilation](#43-installation-and-compilation)
+- [2. Available commands](#2-available-commands)
+  - [1.0.2. Yarp commands](#102-yarp-commands)
+  - [1.0.2. Yarp walking commands (not tested)](#102-yarp-walking-commands-not-tested)
 
 
 Repository containing the yarp plugins for blocktest.
@@ -51,6 +51,23 @@ cd build
 ccmake ..
 ```
 Make sure your CMAKE_INSTALL_PREFIX in ccmake is \<path to your blocktest build dir\>
+
+Suggested location:
+```
+~\blocktest\build
+```
+
+Make sure your blocktestcore_DIR is \<path to your blocktest build dir\>
+
+Suggested location:
+```
+~\blocktest\build
+```
+
+Make sure your blocktestcore_INCLUDE_DIR is \<path to your blocktest src dir\>
+
+
+
 Then:
 
 ```bash
