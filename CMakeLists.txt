@@ -57,6 +57,7 @@ list(REMOVE_ITEM allSrc "${CMAKE_CURRENT_SOURCE_DIR}/src/actionGenerateTrajector
 add_library(${PROJECT_NAME} MODULE ${allSrc})
 target_include_directories(${PROJECT_NAME} PRIVATE ${YARP_HELPERS_INCLUDE_DIR} ${PROJECT_SOURCE_DIR}/src ${blocktestcore_INCLUDE_DIRS})
 target_link_libraries(${PROJECT_NAME} PRIVATE ${blocktestcore_LIBRARIES} YARP::YARP_OS YARP::YARP_init YARP::YARP_dev YARP::YARP_conf YARP::YARP_sig YARP::YARP_math YARP::YARP_rosmsg ClockRpc)
+target_link_libraries(${PROJECT_NAME} PRIVATE blocktestcore::blocktestcore
 
 #xml template folder
 
