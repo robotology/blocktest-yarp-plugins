@@ -34,6 +34,14 @@ endif()
 
 yarp_add_idl(CLOCK_RPC_FILES thrift/clock_rpc.thrift)
 
+# Enable RPATH support for installed binaries and libraries
+include(AddInstallRPATHSupport)
+add_install_rpath_support(BIN_DIRS "${CMAKE_INSTALL_FULL_BINDIR}"
+                          LIB_DIRS "${CMAKE_INSTALL_FULL_LIBDIR}"
+                          INSTALL_NAME_DIR "${CMAKE_INSTALL_FULL_LIBDIR}"
+                          USE_LINK_PATH)
+
+
 #include_directories(${Boost_INCLUDE_DIRS})
 
 add_library(ClockRpc STATIC ${CLOCK_RPC_FILES} thrift/clock_rpc.thrift)
