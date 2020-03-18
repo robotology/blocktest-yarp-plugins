@@ -16,6 +16,7 @@ project(blocktestyarpplugins
         LANGUAGES C CXX
         VERSION 1.0.0)
 
+
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra")
@@ -25,6 +26,7 @@ set(YARP_MINIMUM_REQUIRED_VERSION 3.0.102)
 
 find_package(YARP 3.3.0 REQUIRED COMPONENTS os conf dev sig math rosmsg name idl_tools)
 find_package(blocktestcore REQUIRED)
+find_package(YCM REQUIRED)
 
 if(${YARP_VERSION} VERSION_LESS ${YARP_MINIMUM_REQUIRED_VERSION})
     message(FATAL_ERROR "YARP version ${YARP_VERSION} not sufficient, at least version ${YARP_MINIMUM_REQUIRED_VERSION} is required.")
