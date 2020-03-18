@@ -22,8 +22,10 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra")
 
 #Thrift for clock
 set(YARP_MINIMUM_REQUIRED_VERSION 3.0.102)
-find_package(YARP REQUIRED COMPONENTS OS conf dev sig math rosmsg name idl_tools)
+
+find_package(YARP 3.3.0 REQUIRED COMPONENTS os conf dev sig math rosmsg name idl_tools)
 find_package(blocktestcore REQUIRED)
+
 if(${YARP_VERSION} VERSION_LESS ${YARP_MINIMUM_REQUIRED_VERSION})
     message(FATAL_ERROR "YARP version ${YARP_VERSION} not sufficient, at least version ${YARP_MINIMUM_REQUIRED_VERSION} is required.")
 endif()
@@ -34,7 +36,7 @@ yarp_add_idl(CLOCK_RPC_FILES thrift/clock_rpc.thrift)
 
 add_library(ClockRpc STATIC ${CLOCK_RPC_FILES} thrift/clock_rpc.thrift)
 set_target_properties(ClockRpc PROPERTIES POSITION_INDEPENDENT_CODE ON)
-target_link_libraries(ClockRpc YARP::YARP_OS)
+target_link_libraries(ClockRpc YARP::YARP_os)
 
 # Extract the include directory from the files names
 foreach(file ${CLOCK_RPC_FILES})
@@ -55,9 +57,16 @@ list(REMOVE_ITEM allSrc "${CMAKE_CURRENT_SOURCE_DIR}/src/actionGenerateTrajector
         "${CMAKE_CURRENT_SOURCE_DIR}/src/actionSetVelocity.cpp" "${CMAKE_CURRENT_SOURCE_DIR}/src/actionStartWalking.cpp")
 
 add_library(${PROJECT_NAME} MODULE ${allSrc})
-target_include_directories(${PROJECT_NAME} PRIVATE ${YARP_HELPERS_INCLUDE_DIR} ${PROJECT_SOURCE_DIR}/src ${blocktestcore_INCLUDE_DIRS})
-target_link_libraries(${PROJECT_NAME} PRIVATE ${blocktestcore_LIBRARIES} YARP::YARP_OS YARP::YARP_init YARP::YARP_dev YARP::YARP_conf YARP::YARP_sig YARP::YARP_math YARP::YARP_rosmsg ClockRpc)
+target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/src)
 target_link_libraries(${PROJECT_NAME} PRIVATE blocktestcore::blocktestcore
+                                              YARP::YARP_os
+                                              YARP::YARP_init
+                                              YARP::YARP_dev
+                                              YARP::YARP_conf
+                                              YARP::YARP_sig
+                                              YARP::YARP_math
+                                              YARP::YARP_rosmsg
+                                              ClockRpc)
 
 #xml template folder
 
