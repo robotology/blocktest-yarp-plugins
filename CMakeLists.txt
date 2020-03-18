@@ -96,3 +96,6 @@ install(DIRECTORY xmltemplate DESTINATION ${CMAKE_INSTALL_BINDIR})
 # Add install target
 set_target_properties(${PROJECT_NAME} PROPERTIES LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/${CMAKE_INSTALL_BINDIR}/")
 install(TARGETS ${PROJECT_NAME} LIBRARY DESTINATION ${CMAKE_INSTALL_BINDIR}/${PROJECT_NAME})
+
+# Add uninstall target
+include(AddUninstallTarget)
