@@ -36,7 +36,7 @@ YARP see https://github.com/robotology/yarp
 
 In bash:
 ```bash
-export blocktest_DIR=<path to your blocktest build dir>
+export blocktestcore_DIR=<path to your blocktest build dir>
 ```
 
 ## 4.3. Installation and compilation
