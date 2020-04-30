@@ -9,8 +9,6 @@
 
 cmake_minimum_required(VERSION 3.5)
 #Module creation
-set(PROJECT_NAME blocktestyarpplugins)
-project(${PROJECT_NAME})
 
 project(blocktestyarpplugins
         LANGUAGES C CXX
@@ -19,7 +17,18 @@ project(blocktestyarpplugins
 
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra")
+if (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /Wall")
+  add_compile_options(-bigobj)
+else ()
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra")
+  set(CMAKE_EXE_LINKER_FLAGS  "-rdynamic")
+endif ()
+
+# To build shared libraries in Windows, we set CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS to TRUE.
+# See https://cmake.org/cmake/help/v3.4/variable/CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS.html
+# See https://blog.kitware.com/create-dlls-on-windows-without-declspec-using-new-cmake-export-all-feature/
+set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
 
 #Thrift for clock
 set(YARP_MINIMUM_REQUIRED_VERSION 3.0.102)
