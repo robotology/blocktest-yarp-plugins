@@ -1,4 +1,4 @@
-# CI
+# CI Status
 ![Continuous Integration](https://github.com/robotology/blocktest-yarp-plugins/workflows/Continuous%20Integration/badge.svg)
 
 # 1. blocktest-yarp-plugins
