@@ -14,19 +14,41 @@
 
 #include <actionYarp.h>
 
+#include <yarp/os/Network.h>
+#include <yarp/dev/ControlBoardInterfaces.h>
+#include <yarp/dev/PolyDriver.h>
+#include <yarp/dev/CanBusInterface.h>
+#include <yarp/os/Time.h>
+#include <yarp/sig/Vector.h>
+
+#include <yarp/os/PeriodicThread.h>
+
+using namespace yarp::dev;
+using namespace yarp::sig;
+using namespace yarp::os;
+using namespace yarp;
+
 namespace YarpActions
 {
 
 class ActionCanWrite : public ActionYarp
 {
+  
+
 public:
     ActionCanWrite(const CommandAttributes& commandAttributes, const std::string& testCode);
     execution execute(const TestRepetitions& testrepetition) override;
     void beforeExecute() override;
 
 protected:
-	std::string messageId_{""};
-  std::string message_{""};
+  PolyDriver driver;
+  ICanBus *iCanBus;
+  ICanBufferFactory *iBufferFactory;
+  std::string device, messageId, data;
+  int cantxtimeout, canrxtimeout, candevicenum, canmyaddress;
+  const int CAN_DRIVER_BUFFER_SIZE=2047;
+  const int localBufferSize=512;
+  CanBuffer          outBuffer;
 
 	ACTIONREGISTER_DEC_TYPE(ActionCanWrite)
 };
