@@ -13,15 +13,10 @@
 #pragma once
 
 #include <actionYarp.h>
-
-#include <yarp/os/Network.h>
-#include <yarp/dev/ControlBoardInterfaces.h>
 #include <yarp/dev/PolyDriver.h>
 #include <yarp/dev/CanBusInterface.h>
-#include <yarp/os/Time.h>
 #include <yarp/sig/Vector.h>
 
-#include <yarp/os/PeriodicThread.h>
 
 using namespace yarp::dev;
 using namespace yarp::sig;
@@ -41,25 +36,14 @@ public:
     void beforeExecute() override;
 
 protected:
-
-	PolyDriver driver;
+  PolyDriver driver;
   ICanBus *iCanBus;
   ICanBufferFactory *iBufferFactory;
-  
-  std::string devname;
-  int port;
-  const int SNIFFER_THREAD_RATE=50;
-const int CAN_DRIVER_BUFFER_SIZE=2047;
-const int localBufferSize=512;
-
-
-    CanBuffer          inBuffer;
-    CanBuffer          outBuffer;
-   
-    std::mutex         mtx;
-
-    unsigned short     boardId;
-    unsigned short     canId;
+  std::string device, messageId, data;
+  int cantxtimeout, canrxtimeout, candevicenum, canmyaddress;
+  const int CAN_DRIVER_BUFFER_SIZE=2047;
+  const int localBufferSize=512;
+  CanBuffer          inBuffer;
 
 	ACTIONREGISTER_DEC_TYPE(ActionCanRead)
 };

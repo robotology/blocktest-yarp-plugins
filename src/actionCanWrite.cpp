@@ -57,12 +57,12 @@ execution ActionCanWrite::execute(const TestRepetitions& testrepetition)
     driver.open(prop);
     if (!driver.isValid())
     {
-        std::cout<<"Error opening PolyDriver check parameters\n"<<std::endl;
+        yError("Error opening PolyDriver check parameters\n");
     }
     driver.view(iCanBus);
     if (!iCanBus)
     {
-        std::cout<<"Error opening can device not available\n"<<std::endl;
+        yError("Error opening can device not available\n");
     }
     driver.view(iBufferFactory);
     

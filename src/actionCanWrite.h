@@ -13,15 +13,10 @@
 #pragma once
 
 #include <actionYarp.h>
-
-#include <yarp/os/Network.h>
-#include <yarp/dev/ControlBoardInterfaces.h>
 #include <yarp/dev/PolyDriver.h>
 #include <yarp/dev/CanBusInterface.h>
-#include <yarp/os/Time.h>
 #include <yarp/sig/Vector.h>
 
-#include <yarp/os/PeriodicThread.h>
 
 using namespace yarp::dev;
 using namespace yarp::sig;
