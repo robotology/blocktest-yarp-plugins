@@ -96,6 +96,8 @@ execution ActionCanWrite::execute(const TestRepetitions& testrepetition)
 
     iCanBus->canWrite(outBuffer, 1, &canMessages);
     
+    std::cout<<"Data sent: " + data<<std::endl;
+
     driver.close();
     
     return execution::continueexecution;

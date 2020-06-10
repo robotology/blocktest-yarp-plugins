@@ -78,16 +78,20 @@ execution ActionCanRead::execute(const TestRepetitions& testrepetition)
     while (read_messages == 0)
     {
        bool b = iCanBus->canRead(inBuffer,max_messages,&read_messages,false);
+
     }
 
-    CanMessage& m= inBuffer[i];
-    unsigned int currId=m.getId();
+    for (unsigned int i=0; i<read_messages; i++)
+    {
+        CanMessage& m= inBuffer[i];
+        unsigned int currId=m.getId();
+        std::cout << currId << std::endl;
+    }
 
-    std::cout << currId << std::endl;
-
-    std::cout << read_messages << std::endl;
+    
     driver.close();
     
     
+
     return execution::continueexecution;
 }
