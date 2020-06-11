@@ -14,6 +14,8 @@
 #include <yarpActionDepotStart.h>
 #include <regex>
 
+
+
 using namespace std;
 using namespace yarp::os;
 using namespace YarpActions;
@@ -38,6 +40,7 @@ void ActionCanWrite::beforeExecute()
 execution ActionCanWrite::execute(const TestRepetitions& testrepetition)
 {
     Property prop;
+    bool openFail = false;
 
     prop.put("device", device);
     prop.put("messageid", messageId);
@@ -50,55 +53,71 @@ execution ActionCanWrite::execute(const TestRepetitions& testrepetition)
     prop.put("CanTxQueueSize", CAN_DRIVER_BUFFER_SIZE);
     prop.put("CanRxQueueSize", CAN_DRIVER_BUFFER_SIZE);
    
-    iCanBus=0;
-    iBufferFactory=0;
+    //iCanBus=0;
+    //iBufferFactory=0;
+        
 
     //open the can driver
     driver.open(prop);
     if (!driver.isValid())
     {
-        yError("Error opening PolyDriver check parameters\n");
+        yError("Error opening PolyDriver check parameters");
+        openFail = true;
     }
     driver.view(iCanBus);
     if (!iCanBus)
     {
-        yError("Error opening can device not available\n");
+        yError("Error opening can device not available");
+        openFail = true;
     }
     driver.view(iBufferFactory);
     
-    outBuffer=iBufferFactory->createBuffer(CAN_DRIVER_BUFFER_SIZE);
-
-    //select the communication speed
-    iCanBus->canSetBaudRate(0); //default 1MB/s
-    
-  
-	std::regex regex(" ");
-
-	std::vector<std::string> out(
-					std::sregex_token_iterator(data.begin(), data.end(), regex, -1),
-					std::sregex_token_iterator()
-					);
-	
-    unsigned int k = out.size();
-    unsigned int canMessages=0;
-   
-    CanMessage &msg=outBuffer[0];
-   
-    for(unsigned int i = 0; i < k; i++)
+    if(!openFail)
     {
-        if(i==8) continue;
-        msg.getData()[i]= std::stoi(out.at(i), 0, 16);
+        outBuffer=iBufferFactory->createBuffer(CAN_DRIVER_BUFFER_SIZE);
+
+        //select the communication speed
+        iCanBus->canSetBaudRate(0); //default 1MB/s
+
+
+        std::regex regex(" ");
+
+        std::vector<std::string> out(
+                        std::sregex_token_iterator(data.begin(), data.end(), regex, -1),
+                        std::sregex_token_iterator()
+                        );
+
+        unsigned int k = out.size();
+        unsigned int canMessages=0;
+
+        CanMessage &msg=outBuffer[0];
+
+        for(unsigned int i = 0; i < k; i++)
+        {
+            if(i==8) continue;
+            msg.getData()[i]= std::stoi(out.at(i), 0, 16);
+        }
+
+        msg.setId(std::stoi(messageId, 0, 16));
+        msg.setLen(k);
+        canMessages=0;
+
+        bool res = iCanBus->canWrite(outBuffer, 1, &canMessages);
+                
+        if (res)
+        {
+            TXLOG(Severity::debug)<< "Data sent over the CAN bus : " + data << std::endl;
+            std::cout << std::endl << "Data sent over the CAN bus : " + data << std::endl << std::endl;
+        }
+        else
+        {
+            TXLOG(Severity::error)<< "Failed to send data over the CAN bus !!" << std::endl;
+            std::cout << std::endl << "Failed to send data over the CAN bus !!" << std::endl << std::endl;
+        }
+            
+        driver.close();
+
     }
-
-    msg.setId(std::stoi(messageId, 0, 16));
-    msg.setLen(k);
-    canMessages=0;
-
-    iCanBus->canWrite(outBuffer, 1, &canMessages);
-    
-    std::cout<<"Data sent: " + data<<std::endl;
-
-    driver.close();
     
     return execution::continueexecution;
 }

@@ -32,7 +32,9 @@ void ActionCanRead::beforeExecute()
     getCommandAttribute("candevicenum", candevicenum);
     getCommandAttribute("canmyaddress", canmyaddress);   
     getCommandAttribute("data", data); 
+    getCommandAttribute("readtimeout", readtimeout); 
 }
+
 
 execution ActionCanRead::execute(const TestRepetitions& testrepetition)
 {
@@ -52,7 +54,6 @@ execution ActionCanRead::execute(const TestRepetitions& testrepetition)
     iCanBus=0;
     iBufferFactory=0;
 
-    
     //open the can driver
     driver.open(prop);
     if (!driver.isValid())
@@ -70,28 +71,45 @@ execution ActionCanRead::execute(const TestRepetitions& testrepetition)
 
     //select the communication speed
     iCanBus->canSetBaudRate(0); //default 1MB/s
-    unsigned int canMessages=0;
-
-    unsigned int max_messages=CAN_DRIVER_BUFFER_SIZE;
-    unsigned int read_messages = 0;
-
-    while (read_messages == 0)
+    
+    timer = 0;
+    
+    while (read_messages == 0 && timer < readtimeout) 
     {
-       bool b = iCanBus->canRead(inBuffer,max_messages,&read_messages,false);
-
+       iCanBus->canRead(inBuffer,max_messages,&read_messages,false);
+       //yarp::os::Time::delay(0.1);
+       std::this_thread::sleep_for(std::chrono::milliseconds(100)); 
+       timer += 100;
     }
 
-    for (unsigned int i=0; i<read_messages; i++)
+    CanMessage &m = inBuffer[0];
+    string s;
+    s= "Message Id: " + std::to_string(m.getId()) + "  Data: ";
+   
+    for(int i = 0; i<8 ; i++)
     {
-        CanMessage& m= inBuffer[i];
-        unsigned int currId=m.getId();
-        std::cout << currId << std::endl;
+        int u = m.getData()[i];
+        std::stringstream stream;
+        stream << std::hex << u;
+        std::string str = stream.str();
+        std::transform(str.begin(), str.end(),str.begin(), ::toupper);
+        if(str.length()<2) str = "0x0" + str;
+        else str = "0x" + str;
+        s += str + " ";
     }
-
+      
+    if(read_messages > 0)
+    {
+        TXLOG(Severity::debug)<< "Data received over the CAN bus : " + s << std::endl;
+        std::cout << std::endl <<  "Data received over the CAN bus : " + s << std::endl << std::endl;
+    }
+    else
+    {
+        TXLOG(Severity::error)<< "Failed to receive data over the CAN bus !!" << std::endl;
+        std::cout << std::endl << "Failed to receive data over the CAN bus !!" << std::endl << std::endl;
+    }
     
     driver.close();
     
-    
-
     return execution::continueexecution;
 }
