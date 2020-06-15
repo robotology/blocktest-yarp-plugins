@@ -25,65 +25,71 @@ ActionCanRead::ActionCanRead(const CommandAttributes& commandAttributes,const st
 
 void ActionCanRead::beforeExecute()
 {
-    getCommandAttribute("device", device);
-    getCommandAttribute("messageid", messageId);
-    getCommandAttribute("cantxtimeout", cantxtimeout);   
-    getCommandAttribute("canrxtimeout", canrxtimeout);
-    getCommandAttribute("candevicenum", candevicenum);
-    getCommandAttribute("canmyaddress", canmyaddress);   
-    getCommandAttribute("data", data); 
-    getCommandAttribute("readtimeout", readtimeout); 
+    getCommandAttribute("device", device_);
+    getCommandAttribute("messageid", messageId_);
+    getCommandAttribute("cantxtimeout", canTxTimeout_);   
+    getCommandAttribute("canrxtimeout", canRxTimeout_);
+    getCommandAttribute("candevicenum", canDeviceNum_);
+    getCommandAttribute("canmyaddress", canMyAddress_);   
+    getCommandAttribute("data", data_);  
+    getCommandAttribute("readtimeout", readTimeout_); 
 }
 
 
 execution ActionCanRead::execute(const TestRepetitions& testrepetition)
 {
     Property prop;
+    unsigned int readMessages=0;
+    int timer=0;
+    bool openFail(false);
 
-    prop.put("device", device);
-    prop.put("messageid", messageId);
+    prop.put("device", device_);
+    prop.put("messageid", messageId_);
 
-    prop.put("CanTxTimeout", cantxtimeout);
-    prop.put("CanRxTimeout", canrxtimeout);
-    prop.put("CanDeviceNum", candevicenum);
-    prop.put("CanMyAddress", canmyaddress);
+    prop.put("CanTxTimeout", canTxTimeout_);
+    prop.put("CanRxTimeout", canRxTimeout_);
+    prop.put("CanDeviceNum", canDeviceNum_);
+    prop.put("CanMyAddress", canMyAddress_);
 
-    prop.put("CanTxQueueSize", CAN_DRIVER_BUFFER_SIZE);
-    prop.put("CanRxQueueSize", CAN_DRIVER_BUFFER_SIZE);
+    prop.put("CanTxQueueSize", CAN_DRIVER_BUFFER_SIZE_);
+    prop.put("CanRxQueueSize", CAN_DRIVER_BUFFER_SIZE_);
    
-    iCanBus=0;
-    iBufferFactory=0;
+    iCanBus_=0;
+    iBufferFactory_=0;
 
     //open the can driver
-    driver.open(prop);
-    if (!driver.isValid())
+    driver_.open(prop);
+    if (!driver_.isValid())
     {
-        yError("Error opening PolyDriver check parameters\n");
+        TXLOG(Severity::error)<<"Error opening PolyDriver check parameters"<<std::endl;
+        openFail = true;
     }
-    driver.view(iCanBus);
-    if (!iCanBus)
+    driver_.view(iCanBus_);
+    if (!iCanBus_)
     {
-        yError("Error opening can device not available\n");
+        TXLOG(Severity::debug)<<"Error opening can device not available";
+        openFail = true;
     }
-    driver.view(iBufferFactory);
+    driver_.view(iBufferFactory_);
     
-    inBuffer=iBufferFactory->createBuffer(CAN_DRIVER_BUFFER_SIZE);
+
+    if(!openFail)
+    {
+        inBuffer_ = iBufferFactory_->createBuffer(CAN_DRIVER_BUFFER_SIZE_);
 
     //select the communication speed
-    iCanBus->canSetBaudRate(0); //default 1MB/s
-    
-    timer = 0;
-    
-    while (read_messages == 0 && timer < readtimeout) 
+    iCanBus_->canSetBaudRate(0); //default 1MB/s
+   
+    while (readMessages == 0 && timer < readTimeout_) 
     {
-       iCanBus->canRead(inBuffer,max_messages,&read_messages,false);
+       iCanBus_->canRead(inBuffer_,CAN_DRIVER_BUFFER_SIZE_,&readMessages,false);
        //yarp::os::Time::delay(0.1);
-       std::this_thread::sleep_for(std::chrono::milliseconds(100)); 
-       timer += 100;
+       std::this_thread::sleep_for(std::chrono::milliseconds(10)); 
+       timer += 10;
     }
 
-    CanMessage &m = inBuffer[0];
-    string s;
+    CanMessage &m = inBuffer_[0];
+    std::string s;
     s= "Message Id: " + std::to_string(m.getId()) + "  Data: ";
    
     for(int i = 0; i<8 ; i++)
@@ -98,7 +104,7 @@ execution ActionCanRead::execute(const TestRepetitions& testrepetition)
         s += str + " ";
     }
       
-    if(read_messages > 0)
+    if(readMessages > 0)
     {
         TXLOG(Severity::debug)<< "Data received over the CAN bus : " + s << std::endl;
         std::cout << std::endl <<  "Data received over the CAN bus : " + s << std::endl << std::endl;
@@ -109,7 +115,9 @@ execution ActionCanRead::execute(const TestRepetitions& testrepetition)
         std::cout << std::endl << "Failed to receive data over the CAN bus !!" << std::endl << std::endl;
     }
     
-    driver.close();
-    
+    driver_.close();
+
+    }
+
     return execution::continueexecution;
 }

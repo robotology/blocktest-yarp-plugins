@@ -36,20 +36,14 @@ public:
     void beforeExecute() override;
 
 protected:
-  PolyDriver driver;
-  ICanBus *iCanBus;
-  ICanBufferFactory *iBufferFactory;
-  std::string device, messageId, data;
-  int cantxtimeout, canrxtimeout, candevicenum, canmyaddress;
-  unsigned int readtimeout;
-  unsigned int timer;
-  const int CAN_DRIVER_BUFFER_SIZE=2047;
-  const int localBufferSize=512;
-  unsigned int canMessages=0;
-  const int max_messages=CAN_DRIVER_BUFFER_SIZE;
-  unsigned int read_messages = 0;
-  bool res;
-  CanBuffer          inBuffer;
+  PolyDriver driver_;
+  ICanBus *iCanBus_;
+  ICanBufferFactory *iBufferFactory_;
+  std::string device_, messageId_, data_;
+  int canTxTimeout_, canRxTimeout_, canDeviceNum_, canMyAddress_, readTimeout_;
+  const int CAN_DRIVER_BUFFER_SIZE_ = 2047;
+  const int localBufferSize_ = 512;
+  CanBuffer inBuffer_;
 
 	ACTIONREGISTER_DEC_TYPE(ActionCanRead)
 };

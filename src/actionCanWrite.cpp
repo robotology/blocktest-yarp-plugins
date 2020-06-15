@@ -28,69 +28,68 @@ ActionCanWrite::ActionCanWrite(const CommandAttributes& commandAttributes,const 
 
 void ActionCanWrite::beforeExecute()
 {
-    getCommandAttribute("device", device);
-    getCommandAttribute("messageid", messageId);
-    getCommandAttribute("cantxtimeout", cantxtimeout);   
-    getCommandAttribute("canrxtimeout", canrxtimeout);
-    getCommandAttribute("candevicenum", candevicenum);
-    getCommandAttribute("canmyaddress", canmyaddress);   
-    getCommandAttribute("data", data);   
+    getCommandAttribute("device", device_);
+    getCommandAttribute("messageid", messageId_);
+    getCommandAttribute("cantxtimeout", canTxTimeout_);   
+    getCommandAttribute("canrxtimeout", canRxTimeout_);
+    getCommandAttribute("candevicenum", canDeviceNum_);
+    getCommandAttribute("canmyaddress", canMyAddress_);   
+    getCommandAttribute("data", data_);   
 }
 
 execution ActionCanWrite::execute(const TestRepetitions& testrepetition)
 {
     Property prop;
-    bool openFail = false;
+    bool openFail(false);
 
-    prop.put("device", device);
-    prop.put("messageid", messageId);
+    prop.put("device", device_);
+    prop.put("messageid", messageId_);
 
-    prop.put("CanTxTimeout", cantxtimeout);
-    prop.put("CanRxTimeout", canrxtimeout);
-    prop.put("CanDeviceNum", candevicenum);
-    prop.put("CanMyAddress", canmyaddress);
+    prop.put("CanTxTimeout", canTxTimeout_);
+    prop.put("CanRxTimeout", canRxTimeout_);
+    prop.put("CanDeviceNum", canDeviceNum_);
+    prop.put("CanMyAddress", canMyAddress_);
 
-    prop.put("CanTxQueueSize", CAN_DRIVER_BUFFER_SIZE);
-    prop.put("CanRxQueueSize", CAN_DRIVER_BUFFER_SIZE);
+    prop.put("CanTxQueueSize", CAN_DRIVER_BUFFER_SIZE_);
+    prop.put("CanRxQueueSize", CAN_DRIVER_BUFFER_SIZE_);
    
-    //iCanBus=0;
-    //iBufferFactory=0;
-        
+    iCanBus_=0;
+    iBufferFactory_=0;
 
     //open the can driver
-    driver.open(prop);
-    if (!driver.isValid())
+    driver_.open(prop);
+    if (!driver_.isValid())
     {
-        yError("Error opening PolyDriver check parameters");
+        TXLOG(Severity::error)<<"Error opening PolyDriver check parameters"<<std::endl;
         openFail = true;
     }
-    driver.view(iCanBus);
-    if (!iCanBus)
+    driver_.view(iCanBus_);
+    if (!iCanBus_)
     {
-        yError("Error opening can device not available");
+        TXLOG(Severity::debug)<<"Error opening can device not available";
         openFail = true;
     }
-    driver.view(iBufferFactory);
+    driver_.view(iBufferFactory_);
     
     if(!openFail)
     {
-        outBuffer=iBufferFactory->createBuffer(CAN_DRIVER_BUFFER_SIZE);
+        outBuffer_ = iBufferFactory_->createBuffer(CAN_DRIVER_BUFFER_SIZE_);
 
         //select the communication speed
-        iCanBus->canSetBaudRate(0); //default 1MB/s
+        iCanBus_->canSetBaudRate(0); //default 1MB/s
 
 
         std::regex regex(" ");
 
         std::vector<std::string> out(
-                        std::sregex_token_iterator(data.begin(), data.end(), regex, -1),
+                        std::sregex_token_iterator(data_.begin(), data_.end(), regex, -1),
                         std::sregex_token_iterator()
                         );
 
         unsigned int k = out.size();
-        unsigned int canMessages=0;
+        unsigned int canMessages = 0;
 
-        CanMessage &msg=outBuffer[0];
+        CanMessage &msg = outBuffer_[0];
 
         for(unsigned int i = 0; i < k; i++)
         {
@@ -98,16 +97,16 @@ execution ActionCanWrite::execute(const TestRepetitions& testrepetition)
             msg.getData()[i]= std::stoi(out.at(i), 0, 16);
         }
 
-        msg.setId(std::stoi(messageId, 0, 16));
+        msg.setId(std::stoi(messageId_, 0, 16));
         msg.setLen(k);
-        canMessages=0;
+        canMessages = 0;
 
-        bool res = iCanBus->canWrite(outBuffer, 1, &canMessages);
+        bool res = iCanBus_->canWrite(outBuffer_, 1, &canMessages);
                 
         if (res)
         {
-            TXLOG(Severity::debug)<< "Data sent over the CAN bus : " + data << std::endl;
-            std::cout << std::endl << "Data sent over the CAN bus : " + data << std::endl << std::endl;
+            TXLOG(Severity::debug)<< "Data sent over the CAN bus : " + data_ << std::endl;
+            std::cout << std::endl << "Data sent over the CAN bus : " + data_ << std::endl << std::endl;
         }
         else
         {
@@ -115,7 +114,7 @@ execution ActionCanWrite::execute(const TestRepetitions& testrepetition)
             std::cout << std::endl << "Failed to send data over the CAN bus !!" << std::endl << std::endl;
         }
             
-        driver.close();
+        driver_.close();
 
     }
     
