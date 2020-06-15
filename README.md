@@ -150,6 +150,20 @@ These action blocks are contained in yarp blocktest plugin.
 
     Apply wrench to the robot.
 
+-   **yarpcanwrite**
+
+    ```xml
+       <command library="yarp" name="yarpcanwrite" device="socketcan" messageid="0x011" data="0x17 0x00 0x00 0x00 0x00 0x00 0x00 0x00" candevicenum="0" canmyaddress="0" cantxtimeout="500" canrxtimeout="500" repetitions="1" wait="0" reporterror="true"></command>
+    ```
+    Sends a CAN message trought ``device`` (socketcan available at the moment) . Sets the parameters for the driver.
+
+-   **yarpcanread**
+
+    ```xml
+       <command library="yarp" name="yarpcanread" device="socketcan" messageid="0x011" checkdata="false" data="0xAA" candevicenum="0" canmyaddress="0" cantxtimeout="500" canrxtimeout="500" readtimeout="1000" repetitions="1" wait="0" reporterror="true"></command>
+    ```
+    Receives a CAN message trought ``device`` (socketcan available at the moment) until ``readtimeout`` is reached (milliseconds) . Sets the parameters for the driver. 
+
 
 ## 1.0.2. Yarp walking commands (not tested)
 

@@ -1,0 +1,1 @@
+<command library="yarp" name="yarpcanwrite" device="socketcan" messageid="0x011" data="0x17 0x00 0x00 0x00 0x00 0x00 0x00 0x00" candevicenum="0" canmyaddress="0" cantxtimeout="500" canrxtimeout="500" repetitions="1" wait="0" reporterror="true"></command>
