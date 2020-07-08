@@ -34,7 +34,7 @@ set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
 set(YARP_MINIMUM_REQUIRED_VERSION 3.0.102)
 
 find_package(YARP 3.3.0 REQUIRED COMPONENTS os conf dev sig math rosmsg name idl_tools)
-find_package(blocktestcore REQUIRED)
+find_package(blocktestcore 2.3.0 REQUIRED)
 find_package(YCM REQUIRED)
 
 if(${YARP_VERSION} VERSION_LESS ${YARP_MINIMUM_REQUIRED_VERSION})
