@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<testbody>
+	<info note="Polydrive test on test_grabber." shortnote="" version="1.0" />
+	<logging loggingtype="" loggingpart="" loggingwrappername="" />
+	<settings wait="0" />
+	
+	<command library="yarp" name="yarpreset" repetitions="0" wait="0" reporterror="true" />
+	<command library="yarp" name="yarpwait" seconds="1" repetitions="1" wait="0" reporterror="true" />
+	<command library="yarp" name="yarpopenpolydrive" polydrivertag="luca" device="test_grabber" repetitions="1" wait="0" reporterror="true"></command>
+	<command library="yarp" name="yarpwait" seconds="60" repetitions="1" wait="0" reporterror="true" />
+
+</testbody>
