@@ -17,7 +17,7 @@ using namespace std;
 using namespace yarp::os;
 using namespace YarpActions;
 
-ACTIONREGISTER_DEF_TYPE(YarpActions::ActionPortWrite, "yarpportwrite");
+ACTIONREGISTER_DEF_TYPE(YarpActions::ActionPortWrite, yarpactions::yarpportwrite);
 
 ActionPortWrite::ActionPortWrite(const CommandAttributes& commandAttributes,const std::string& testCode) : 
                                     ActionYarp(commandAttributes, testCode)

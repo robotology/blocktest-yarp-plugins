@@ -16,7 +16,7 @@
 #include "logger.h"
 #include "report.h"
 
-ACTIONREGISTER_DEF_TYPE(YarpActions::ActionSetVelocity,"setvelocity");
+ACTIONREGISTER_DEF_TYPE(YarpActions::ActionSetVelocity,yarpactions::setvelocity);
 
 namespace YarpActions
 {

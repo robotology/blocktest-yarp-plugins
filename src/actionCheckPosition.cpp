@@ -19,7 +19,7 @@
 #include <yarp/dev/IFrameTransform.h>
 #include <yarp/dev/ControlBoardInterfaces.h>
 
-ACTIONREGISTER_DEF_TYPE(YarpActions::ActionCheckPosition,"checkposition");
+ACTIONREGISTER_DEF_TYPE(YarpActions::ActionCheckPosition,yarpactions::checkposition);
 
 namespace YarpActions
 {

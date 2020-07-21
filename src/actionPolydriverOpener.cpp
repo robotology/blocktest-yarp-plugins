@@ -1,66 +1,43 @@
 /******************************************************************************
  *                                                                            *
- * Copyright (C) 2019 Fondazione Istituto Italiano di Tecnologia (IIT)        *
+ * Copyright (C) 2020 Fondazione Istituto Italiano di Tecnologia (IIT)        *
  * All Rights Reserved.                                                       *
  *                                                                            *
  ******************************************************************************/
 
  /**
-  * @file ActionCheckJointPosition.h
-  * @author Andrea Ruzzenenti <andrea.ruzzenenti@iit.it>
+  * @file ActionPolydriverOpener.cpp
+  * @author Andrea Ruzzenenti <andrea.ruzzenenti@iit.it>, Luca Tricerri
   */
 
 #include "actionYarp.h"
 #include "yarpActionDepotStart.h"
+#include "actionPolydriverOpener.h"
+
 #include <yarp/dev/PolyDriver.h>
 #include <memory>
 
-using namespace YarpActions;
 using namespace yarp::dev;
 using namespace yarp::os;
+
+ACTIONREGISTER_DEF_TYPE(YarpAction::ActionPolydriverOpener, yarpactions::yarpopenpolydriver);
+
 namespace YarpAction
 {
-    class ActionPolydriverOpener : public ActionYarp
+ActionPolydriverOpener::ActionPolydriverOpener(const CommandAttributes& parameters, const std::string& testCode) : ActionYarp(parameters, testCode)
+{  
+    std::string tag = parameters.at(yarpsyntax::polydrivertag);
+    Property property;
+    property.fromString( parameters.at(yarpsyntax::property));
+
+    auto pdr = std::make_shared<PolyDriver>();
+    bool opened = pdr->open(property);
+    if (opened)
+        YarpActionDepotStart::polyDriverDepot_[tag] = pdr;
+    else
     {
-    public:
-        ActionPolydriverOpener(const CommandAttributes& parameters, const std::string& testCode);
-        execution execute(const TestRepetitions&) override { return execution::continueexecution; };
-        void beforeExecute() override{};        
-
-    private:
-        bool        opened_{false};
-        Property    p_;
-        std::string tag_;
-
-        ACTIONREGISTER_DEC_TYPE(ActionPolydriverOpener)
-    };
-
-
-    ActionPolydriverOpener::ActionPolydriverOpener(const CommandAttributes& parameters, const std::string& testCode) : ActionYarp(parameters, testCode)
-    {
-        
-        CommandAttributes myparameters = parameters;
-        tag_                           = parameters.at("polydrivertag");
-        myparameters.erase("polydrivertag");
-
-        for (const auto& kv : parameters)
-        {
-            auto prm = tokenize<std::string>(kv.second);
-            if (prm.size() != 2)
-                continue;
-            p_.put(prm[0], prm[1]);
-        }
-
-        auto pdr = std::make_shared<PolyDriver>();
-        opened_ = pdr->open(p_);
-
-        if (opened_)
-            YarpActionDepotStart::polyDriverDepot_[tag_] = pdr;
-        else
-        {
-            TestRepetitions rep{0,0};
-            addProblem(rep, Severity::critical, "Polydriver failed to open",true);
-        }
-    };
-    ACTIONREGISTER_DEF_TYPE(ActionPolydriverOpener, "yarpopenpolydriver");
+        TestRepetitions rep{0,0};
+        addProblem(rep, Severity::critical, "Polydriver failed to open",true);
+    }
+};
 }

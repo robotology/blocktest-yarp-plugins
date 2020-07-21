@@ -20,7 +20,7 @@
 #include <yarp/dev/IFrameTransform.h>
 #include <yarp/dev/ControlBoardInterfaces.h>
 
-ACTIONREGISTER_DEF_TYPE(YarpActions::ActionCheckRobot,"checkrobot");
+ACTIONREGISTER_DEF_TYPE(YarpActions::ActionCheckRobot,yarpactions::checkrobot);
 
 namespace YarpActions
 {

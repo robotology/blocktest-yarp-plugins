@@ -26,7 +26,7 @@ using namespace yarp::os;
 using namespace yarp::sig;
 using namespace yarp::dev;
 
-ACTIONREGISTER_DEF_TYPE(YarpActions::ActionSendDirectPosition,"yarpsenddirectpos");
+ACTIONREGISTER_DEF_TYPE(YarpActions::ActionSendDirectPosition,yarpactions::yarpsenddirectpos);
 
 namespace YarpActions
 {

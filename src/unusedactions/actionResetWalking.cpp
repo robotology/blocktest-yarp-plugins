@@ -6,37 +6,46 @@
  ******************************************************************************/
 
 /**
- * @file actionPrepareStraightWalking.cpp
+ * @file actionResetWalking.cpp
  * @author Luca Tricerri <luca.tricerri@iit.it>
  */
 
 #include "thrifts/WalkingCommands.h"
-#include "actionPrepareStraightWalking.h"
+#include "actionResetWalking.h"
+
+#include <yarp/dev/all.h>
+#include <yarp/dev/IFrameTransform.h>
+#include <yarp/dev/ControlBoardInterfaces.h>
 
 #include "logger.h"
 #include "report.h"
 
-ACTIONREGISTER_DEF_TYPE(YarpActions::ActionPrepareStraightWalking,"preparestraightwalking");
+ACTIONREGISTER_DEF_TYPE(YarpActions::ActionResetWalking,yarpactions::resetwalking);
 
-ActionPrepareStraightWalking::ActionPrepareStraightWalking(const CommandAttributes& commandAttributes,const std::string& testCode):ActionYarp(commandAttributes,testCode)
+namespace YarpActions
+{
+
+ActionResetWalking::ActionResetWalking(const CommandAttributes& commandAttributes,const std::string& testCode):ActionYarp(commandAttributes,testCode)
 {}     
 
-void ActionPrepareStraightWalking::beforeExecute()
+void ActionResetWalking::beforeExecute()
 {
 }
 
-execution ActionPrepareStraightWalking::execute(const TestRepetitions& testrepetition)
+execution ActionResetWalking::execute(const TestRepetitions& testrepetition)
 {
     yarp::os::Port rpcPortWalking;
     WalkingCommands walkingCommands;
     openWalking(rpcPortWalking,walkingCommands);
 
-    bool ok=walkingCommands.prepareStraightWalking();
+    bool ok=walkingCommands.stopWalking();
     if(!ok)
     {
-        addProblem(testrepetition,Severity::error,"Prepare straight walking failed",true);
-    }
-    closeWalking(rpcPortWalking);
-    TXLOG(Severity::info)<<"Prepare straight walking OK"<<std::endl;
+        addProblem(testrepetition,Severity::error,"Reset walking failed",true);
+    }    
+
+    closeWalking(rpcPortWalking);       
     return execution::continueexecution;;
+}
+
 }

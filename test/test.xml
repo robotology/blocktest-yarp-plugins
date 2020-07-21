@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<testlist repetitions="1">
+	<settings realrobot="false" onlysimcommands="yarpreset" neverexecutecommands="" logseverity="debug" loggingtime="0.001" tablename="tables/main.tab" waitcommand="yarpwait" nowcommand="yarpnow" loggingcommand="infologgeryarp"  relativetime="true" unixtime="false"/>/> 
+	<!-- <settings realrobot="false" onlysimcommands="yarpcheckrobotisvertical checkRobot yarpreset applyForce" neverexecutecommands="" logseverity="debug" loggingtime="0.01" tablename="test/tables/main.tab" waitcommand="wait" nowcommand="now" loggingcommand="InfoLoggerIdjl" relativetime="true" unixtime="false"/>-->
+	
+	<!-- Polydrive -->
+	<test file="1000.xml" repetitions="1" repetitionsfortime="" code="1000" parallel="false" />
+
+	<prerequisite enabled="false" command="roscore" waitafter="5000" param="" prefix="" kill="true" />
+	<prerequisite enabled="false" command="yarpserver" waitafter="5000" param="--silent --write --ros" prefix="" kill="true" />
+	<prerequisite enabled="false" command="gzserver" waitafter="5000" param="--verbose -e ode --profile ode_default -slibgazebo_yarp_clock.so icub.world" prefix="" kill="true" />
+
+	<prerequisite enabled="true"  command="yarpserver" waitafter="5000" param="--silent --write" prefix="" kill="true" />
+	
+	<library enabled="true" path="genericactiondepot/genericactiondepot" name="genericactiondepot" note="System generic actions library" />
+	<library enabled="true" path="blocktestyarpplugins/libblocktestyarpplugins" name="yarpactiondepot" note="Yarp actions library" />
+	<library enabled="false" path="blocktestcustomplugins/libblocktestcustomplugins" name="customactiondepot" note="Custom actions library" />
+	<library enabled="false" path="blocktestkukaplugins/libblocktestidjlplugins" name="idjlactiondepot" note="Idjl actions library" />
+
+	<librarysettings enabled="true" name="genericactiondepot" />
+	<librarysettings enabled="true" name="yarpactiondepot" wrappername="" robotname="icubSim" netclock="false" />
+	<!-- <librarysettings enabled="false" name="yarpactiondepot" wrappername="" robotname="icubSim" netclock="false" />  -->
+	<librarysettings enabled="false" name="customactiondepot" />
+	<librarysettings enabled="false" name="idjlactiondepot" />
+
+</testlist>

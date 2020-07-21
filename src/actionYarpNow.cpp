@@ -12,7 +12,7 @@
 
 #include "actionYarpNow.h"
 
-ACTIONREGISTER_DEF_TYPE(YarpActions::ActionYarpNow,"yarpnow");
+ACTIONREGISTER_DEF_TYPE(YarpActions::ActionYarpNow,yarpactions::yarpnow);
 
 namespace YarpActions
 {

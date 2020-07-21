@@ -15,10 +15,11 @@
 
 using namespace std;
 using namespace yarp::os;
-using namespace YarpActions;
 
-ACTIONREGISTER_DEF_TYPE(YarpActions::ActionCanRead, "yarpcanread");
+ACTIONREGISTER_DEF_TYPE(YarpActions::ActionCanRead, yarpactions::yarpcanread);
 
+namespace YarpActions
+{
 ActionCanRead::ActionCanRead(const CommandAttributes& commandAttributes,const std::string& testCode) : 
                                     ActionYarp(commandAttributes, testCode)
 {}
@@ -36,7 +37,7 @@ void ActionCanRead::beforeExecute()
 }
 
 
-execution ActionCanRead::execute(const TestRepetitions& testrepetition)
+execution ActionCanRead::execute(const TestRepetitions&)
 {
     Property prop;
     unsigned int readMessages=0;
@@ -120,4 +121,5 @@ execution ActionCanRead::execute(const TestRepetitions& testrepetition)
     }
 
     return execution::continueexecution;
+}
 }

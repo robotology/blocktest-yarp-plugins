@@ -18,7 +18,7 @@ using namespace std;
 using namespace yarp::os;
 using namespace YarpActions;
 
-ACTIONREGISTER_DEF_TYPE(YarpActions::ActionPortOpen, "yarpportopen");
+ACTIONREGISTER_DEF_TYPE(YarpActions::ActionPortOpen, yarpactions::yarpportopen);
 
 ActionPortOpen::ActionPortOpen(const CommandAttributes& commandAttributes,
                                const std::string& testCode) : ActionPortClose(commandAttributes, testCode)

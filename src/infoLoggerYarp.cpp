@@ -14,7 +14,7 @@
 #include "actionYarp.h"
 #include "yarpActionDepotStart.h"
 
-LOGGERREGISTER_DEF_TYPE(YarpActions::InfoLoggerYarp, "infologgeryarp");
+LOGGERREGISTER_DEF_TYPE(YarpActions::InfoLoggerYarp, yarpactions::infologgeryarp);
 
 namespace YarpActions
 {
