@@ -17,7 +17,7 @@ using namespace std;
 using namespace yarp::os;
 using namespace YarpActions;
 
-ACTIONREGISTER_DEF_TYPE(YarpActions::ActionPortRead, "yarpportread");
+ACTIONREGISTER_DEF_TYPE(YarpActions::ActionPortRead, yarpactions::yarpportread);
 
 ActionPortRead::ActionPortRead(const CommandAttributes& commandAttributes,const std::string& testCode) : 
                                     ActionYarp(commandAttributes, testCode)

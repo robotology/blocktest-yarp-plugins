@@ -71,9 +71,6 @@ target_include_directories(ClockRpc PUBLIC
     $<BUILD_INTERFACE:${CLOCKRPC_INCLUDE_DIRS}>)
 
 file(GLOB allSrc "src/*.h" "src/*.cpp")
-#temporary removed files
-list(REMOVE_ITEM allSrc "${CMAKE_CURRENT_SOURCE_DIR}/src/actionGenerateTrajectory.cpp" "${CMAKE_CURRENT_SOURCE_DIR}/src/actionPrepareStraightWalking.cpp" "${CMAKE_CURRENT_SOURCE_DIR}/src/actionResetWalking.cpp"
-        "${CMAKE_CURRENT_SOURCE_DIR}/src/actionSetVelocity.cpp" "${CMAKE_CURRENT_SOURCE_DIR}/src/actionStartWalking.cpp")
 
 add_library(${PROJECT_NAME} MODULE ${allSrc})
 target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/src)
@@ -82,13 +79,9 @@ target_link_libraries(${PROJECT_NAME} PRIVATE blocktestcore::blocktestcore
                                               YARP::YARP_init
                                               YARP::YARP_dev
                                               YARP::YARP_conf
-                                              YARP::YARP_sig
-                                              YARP::YARP_math
-                                              YARP::YARP_rosmsg
                                               ClockRpc)
 
 #xml template folder
-
 if(WIN32)
     add_custom_command(TARGET ${PROJECT_NAME}
     POST_BUILD

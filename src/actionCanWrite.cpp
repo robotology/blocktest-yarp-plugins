@@ -18,10 +18,11 @@
 
 using namespace std;
 using namespace yarp::os;
-using namespace YarpActions;
 
-ACTIONREGISTER_DEF_TYPE(YarpActions::ActionCanWrite, "yarpcanwrite");
+ACTIONREGISTER_DEF_TYPE(YarpActions::ActionCanWrite, yarpactions::yarpcanwrite);
 
+namespace YarpActions
+{
 ActionCanWrite::ActionCanWrite(const CommandAttributes& commandAttributes,const std::string& testCode) : 
                                     ActionYarp(commandAttributes, testCode)
 {}
@@ -37,7 +38,7 @@ void ActionCanWrite::beforeExecute()
     getCommandAttribute("data", data_);   
 }
 
-execution ActionCanWrite::execute(const TestRepetitions& testrepetition)
+execution ActionCanWrite::execute(const TestRepetitions&)
 {
     Property prop;
     bool openFail(false);
@@ -119,4 +120,5 @@ execution ActionCanWrite::execute(const TestRepetitions& testrepetition)
     }
     
     return execution::continueexecution;
+}
 }

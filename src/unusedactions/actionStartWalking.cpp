@@ -15,7 +15,7 @@
 #include "logger.h"
 #include "report.h"
 
-ACTIONREGISTER_DEF_TYPE(YarpActions::ActionStartWalking,"startwalking");
+ACTIONREGISTER_DEF_TYPE(YarpActions::ActionStartWalking,yarpactions::startwalking);
 
 namespace YarpActions
 {

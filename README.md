@@ -4,6 +4,7 @@
 # 1. blocktest-yarp-plugins
 
 
+- [CI Status](#ci-status)
 - [1. blocktest-yarp-plugins](#1-blocktest-yarp-plugins)
 - [4. Installation](#4-installation)
   - [4.1. Prerequisite Linux](#41-prerequisite-linux)
@@ -11,7 +12,7 @@
   - [4.3. Installation and compilation](#43-installation-and-compilation)
 - [2. Available commands](#2-available-commands)
   - [1.0.2. Yarp commands](#102-yarp-commands)
-  - [1.0.2. Yarp walking commands (not tested)](#102-yarp-walking-commands-not-tested)
+  - [1.0.2. Yarp walking commands (not tested and not more used)](#102-yarp-walking-commands-not-tested-and-not-more-used)
 
 
 Repository containing the yarp plugins for blocktest.
@@ -99,7 +100,6 @@ These action blocks are contained in yarp blocktest plugin.
         <command name="yarpsendpwm" profile="sin" frequency="1" dutycycle="20" time="20" jointname="L_AK_R" repetitions="1" wait="0" reporterror="true"/>
     ```
 
-
 -   **yarpsendposdirect**
 
     Send the position to a specific jointname
@@ -164,8 +164,16 @@ These action blocks are contained in yarp blocktest plugin.
     ```
     Receives a CAN message trought ``device`` (socketcan available at the moment) until ``readtimeout`` is reached (milliseconds) . Sets the parameters for the driver. 
 
+ -  **yarpopenpolydriver**
 
-## 1.0.2. Yarp walking commands (not tested)
+    ```xml
+       <command library="yarp" name="yarpopenpolydriver" property="" polydrivertag="" repetitions="1" wait="0" reporterror="true"></command>
+    ```
+    Open a polydriver using the property as in xml. The property must be in (key value) yarp format. The parameter polydrivertag is used for tagging the device in others block
+
+
+
+## 1.0.2. Yarp walking commands (not tested and not more used)
 
 
 -   **setvelocity**

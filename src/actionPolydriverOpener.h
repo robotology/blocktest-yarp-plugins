@@ -6,13 +6,13 @@
  ******************************************************************************/
 
  /**
-  * @file ActionCheckJointPosition.h
+  * @file ActionPolydriverOpener.h
   * @author Andrea Ruzzenenti <andrea.ruzzenenti@iit.it>, Luca Tricerri
   */
 
 #include "actionYarp.h"
 #include "yarpActionDepotStart.h"
-#include <yarp/dev/PolyDriver.h>
+
 #include <memory>
 
 using namespace YarpActions;

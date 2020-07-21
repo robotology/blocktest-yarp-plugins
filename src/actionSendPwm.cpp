@@ -27,7 +27,7 @@ using namespace yarp::os;
 using namespace yarp::sig;
 using namespace yarp::dev;
 
-ACTIONREGISTER_DEF_TYPE(YarpActions::ActionSendPwm,"yarpsendpwm");
+ACTIONREGISTER_DEF_TYPE(YarpActions::ActionSendPwm,yarpactions::yarpsendpwm);
 
 namespace YarpActions
 {

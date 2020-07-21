@@ -17,7 +17,7 @@
 #include "report.h"
 #include "yarpActionDepotStart.h"
 
-ACTIONREGISTER_DEF_TYPE(YarpActions::ActionSendPosition,"yarpsendpos");
+ACTIONREGISTER_DEF_TYPE(YarpActions::ActionSendPosition,yarpactions::yarpsendpos);
 
 namespace YarpActions
 {

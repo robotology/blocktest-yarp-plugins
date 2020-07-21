@@ -21,7 +21,7 @@
 #include "logger.h"
 #include "report.h"
 
-ACTIONREGISTER_DEF_TYPE(YarpActions::ActionReset,"yarpreset");
+ACTIONREGISTER_DEF_TYPE(YarpActions::ActionReset,yarpactions::yarpreset);
 
 namespace YarpActions
 {

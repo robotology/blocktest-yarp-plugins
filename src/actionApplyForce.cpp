@@ -22,7 +22,7 @@
 #include "logger.h"
 #include "report.h"
 
-ACTIONREGISTER_DEF_TYPE(YarpActions::ActionApplyForce,"applyforce");
+ACTIONREGISTER_DEF_TYPE(YarpActions::ActionApplyForce,yarpactions::applyforce);
 
 namespace YarpActions
 {

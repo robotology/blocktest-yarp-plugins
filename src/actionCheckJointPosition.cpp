@@ -21,7 +21,7 @@
 #include <yarp/dev/IFrameTransform.h>
 
 
-ACTIONREGISTER_DEF_TYPE(YarpActions::ActionCheckJointPosition,"yarpcheckjointposition");
+ACTIONREGISTER_DEF_TYPE(YarpActions::ActionCheckJointPosition,yarpactions::yarpcheckjointposition);
 
 
 namespace YarpActions

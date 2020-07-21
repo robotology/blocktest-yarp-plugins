@@ -12,7 +12,7 @@
 
 #include "actionYarpWait.h"
 
-ACTIONREGISTER_DEF_TYPE(YarpActions::ActionYarpWait, "yarpwait");
+ACTIONREGISTER_DEF_TYPE(YarpActions::ActionYarpWait, yarpactions::yarpwait);
 
 namespace YarpActions
 {

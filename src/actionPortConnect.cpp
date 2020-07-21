@@ -18,7 +18,7 @@ using namespace std;
 using namespace yarp::os;
 using namespace YarpActions;
 
-ACTIONREGISTER_DEF_TYPE(YarpActions::ActionPortConnect, "yarpconnect");
+ACTIONREGISTER_DEF_TYPE(YarpActions::ActionPortConnect, yarpactions::yarpconnect);
 
 ActionPortConnect::ActionPortConnect(const CommandAttributes& commandAttributes, const std::string& testCode) : ActionPortDisconnect(commandAttributes, testCode)
 {

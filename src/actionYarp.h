@@ -16,6 +16,7 @@
 #include "logger.h"
 #include "action.h"
 #include "type.h"
+#include "syntax.h"
 
 #include <yarp/dev/PolyDriver.h>    
 
@@ -24,7 +25,6 @@ using namespace BlockTestCore;
 namespace YarpActions
 {
 
-class WalkingCommands;
 /**
  * @class ActionYarp
  * @brief ...
@@ -35,11 +35,7 @@ class ActionYarp: public Action
     public:
         ActionYarp(const CommandAttributes& commandAttributes,const std::string& testCode);
         
-        static void getJointNames(yarp::dev::PolyDriver& drive,std::map<std::string,int> &jointNames); 
-    protected:
-        void openWalking(yarp::os::Port &rpcPortWalking,WalkingCommands &walkingCommands);   
-        void closeWalking(yarp::os::Port &rpcPortWalking); 
-        
+        static void getJointNames(yarp::dev::PolyDriver& drive,std::map<std::string,int> &jointNames);        
 };
 
 }

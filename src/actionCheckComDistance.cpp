@@ -20,7 +20,7 @@
 #include <yarp/dev/ControlBoardInterfaces.h>
 
 
-ACTIONREGISTER_DEF_TYPE(YarpActions::ActionCheckComDistance,"checkcomdistance");
+ACTIONREGISTER_DEF_TYPE(YarpActions::ActionCheckComDistance,yarpactions::checkcomdistance);
 
 namespace YarpActions
 {
