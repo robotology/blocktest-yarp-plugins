@@ -19,7 +19,8 @@ namespace yarpsyntax
 
 namespace yarpactions
 {
-    constexpr char const* yarpopenpolydriver{"yarpopenpolydriver"};   
+    constexpr char const* yarpopenpolydriver{"yarpopenpolydriver"};
+    constexpr char const* yarpcanwritepd{"yarpcanwritepd"};   
     constexpr char const* yarpcanwrite{"yarpcanwrite"}; 
     constexpr char const* yarpcanread{"yarpcanread"};
     constexpr char const* yarpportopen{"yarpportopen"};
