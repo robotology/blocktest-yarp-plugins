@@ -14,7 +14,8 @@
 #include <yarpActionDepotStart.h>
 #include <regex>
 
-
+#include <sstream>
+#include <type.h>
 
 using namespace std;
 using namespace yarp::os;
@@ -29,48 +30,45 @@ ActionCanWrite::ActionCanWrite(const CommandAttributes& commandAttributes,const 
 
 void ActionCanWrite::beforeExecute()
 {
-    getCommandAttribute("device", device_);
+    getCommandAttribute("polydrivertag",polydrivertag_);
     getCommandAttribute("messageid", messageId_);
-    getCommandAttribute("cantxtimeout", canTxTimeout_);   
-    getCommandAttribute("canrxtimeout", canRxTimeout_);
-    getCommandAttribute("candevicenum", canDeviceNum_);
-    getCommandAttribute("canmyaddress", canMyAddress_);   
     getCommandAttribute("data", data_);   
 }
 
-execution ActionCanWrite::execute(const TestRepetitions&)
+execution ActionCanWrite::execute(const TestRepetitions& testrepetition)
 {
-    Property prop;
+    auto exists {true};
+    stringstream logStream;
     bool openFail(false);
 
-    prop.put("device", device_);
-    prop.put("messageid", messageId_);
-
-    prop.put("CanTxTimeout", canTxTimeout_);
-    prop.put("CanRxTimeout", canRxTimeout_);
-    prop.put("CanDeviceNum", canDeviceNum_);
-    prop.put("CanMyAddress", canMyAddress_);
-
-    prop.put("CanTxQueueSize", CAN_DRIVER_BUFFER_SIZE_);
-    prop.put("CanRxQueueSize", CAN_DRIVER_BUFFER_SIZE_);
+    auto pdr = YarpActionDepotStart::polyDriverDepot_.find(polydrivertag_);
+    
+    if (pdr == YarpActionDepotStart::polyDriverDepot_.end())
+    {
+        std::cout << std::endl << "Unable to find " << polydrivertag_ << std::endl << std::endl;
+        logStream << "Unable to find " << polydrivertag_ <<" in the depot";
+        addProblem(testrepetition, Severity::error, logStream.str(),true);
+        return execution::continueexecution;
+    }
+    auto pdr_ptr = pdr->second;
    
     iCanBus_=0;
     iBufferFactory_=0;
 
-    //open the can driver
-    driver_.open(prop);
-    if (!driver_.isValid())
+    if (!pdr_ptr->isValid())
     {
+        std::cout << std::endl << "Error opening PolyDriver check parameters" << std::endl << std::endl;
         TXLOG(Severity::error)<<"Error opening PolyDriver check parameters"<<std::endl;
         openFail = true;
     }
-    driver_.view(iCanBus_);
+    pdr_ptr->view(iCanBus_);
     if (!iCanBus_)
     {
+        std::cout << std::endl << "Error opening can device not available" << std::endl << std::endl;
         TXLOG(Severity::debug)<<"Error opening can device not available";
         openFail = true;
     }
-    driver_.view(iBufferFactory_);
+    pdr_ptr->view(iBufferFactory_);
     
     if(!openFail)
     {
@@ -78,7 +76,6 @@ execution ActionCanWrite::execute(const TestRepetitions&)
 
         //select the communication speed
         iCanBus_->canSetBaudRate(0); //default 1MB/s
-
 
         std::regex regex(" ");
 
@@ -101,13 +98,11 @@ execution ActionCanWrite::execute(const TestRepetitions&)
         msg.setId(std::stoi(messageId_, 0, 16));
         msg.setLen(k);
         canMessages = 0;
-
-        bool res = iCanBus_->canWrite(outBuffer_, 1, &canMessages);
                 
-        if (res)
+        if (iCanBus_->canWrite(outBuffer_, 1, &canMessages))
         {
-            TXLOG(Severity::debug)<< "Data sent over the CAN bus : " + data_ << std::endl;
-            std::cout << std::endl << "Data sent over the CAN bus : " + data_ << std::endl << std::endl;
+            TXLOG(Severity::debug)<< "Data sent over the CAN bus : Message Id: " + std::to_string(msg.getId()) + "  Data: " + data_ << std::endl;
+            std::cout << std::endl << "Data sent over the CAN bus : Message Id: " + std::to_string(msg.getId()) + "  Data: " + data_  << std::endl << std::endl;
         }
         else
         {
@@ -115,7 +110,7 @@ execution ActionCanWrite::execute(const TestRepetitions&)
             std::cout << std::endl << "Failed to send data over the CAN bus !!" << std::endl << std::endl;
         }
             
-        driver_.close();
+//        pdr_ptr->close();
 
     }
     

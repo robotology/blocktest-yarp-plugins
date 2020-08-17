@@ -36,11 +36,9 @@ public:
     void beforeExecute() override;
 
 protected:
-  PolyDriver driver_;
   ICanBus *iCanBus_;
   ICanBufferFactory *iBufferFactory_;
-  std::string device_, messageId_, data_;
-  int canTxTimeout_, canRxTimeout_, canDeviceNum_, canMyAddress_;
+  std::string messageId_, data_, polydrivertag_;
   const int CAN_DRIVER_BUFFER_SIZE_ = 2047;
   const int localBufferSize_ = 512;
   CanBuffer outBuffer_;

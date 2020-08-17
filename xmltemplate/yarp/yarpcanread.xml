@@ -1,1 +1,1 @@
-<command library="yarp" name="yarpcanread" device="socketcan" messageid="0x011" checkdata="false" data="0xAA" candevicenum="0" canmyaddress="0" cantxtimeout="500" canrxtimeout="500" readtimeout="1000" repetitions="1" wait="0" reporterror="true"></command>
+<command library="yarp" name="yarpcanread" polydrivertag="can0" messageid="0x012" data="0xFF 0x00 0x00 0x00 0x00 0x00 0x00 0x00" readtimeout="4000" repetitions="1" wait="0" reporterror="true"></command>
