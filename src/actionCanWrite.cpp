@@ -30,7 +30,7 @@ ActionCanWrite::ActionCanWrite(const CommandAttributes& commandAttributes,const 
 
 void ActionCanWrite::beforeExecute()
 {
-    getCommandAttribute("polydrivertag",polydrivertag_);
+    getCommandAttribute("polydrivertag",polyDriverTag_);
     getCommandAttribute("messageid", messageId_);
     getCommandAttribute("data", data_);   
 }
@@ -41,40 +41,36 @@ execution ActionCanWrite::execute(const TestRepetitions& testrepetition)
     stringstream logStream;
     bool openFail(false);
 
-    auto pdr = YarpActionDepotStart::polyDriverDepot_.find(polydrivertag_);
+    auto pdr = YarpActionDepotStart::polyDriverDepot_.find(polyDriverTag_);
     
     if (pdr == YarpActionDepotStart::polyDriverDepot_.end())
     {
-        std::cout << std::endl << "Unable to find " << polydrivertag_ << std::endl << std::endl;
-        logStream << "Unable to find " << polydrivertag_ <<" in the depot";
+        logStream << "Unable to find " << polyDriverTag_ <<" in the depot";
         addProblem(testrepetition, Severity::error, logStream.str(),true);
         return execution::continueexecution;
     }
-    auto pdr_ptr = pdr->second;
+    auto pdrPtr = pdr->second;
    
     iCanBus_=0;
     iBufferFactory_=0;
 
-    if (!pdr_ptr->isValid())
+    if (!pdrPtr->isValid())
     {
-        std::cout << std::endl << "Error opening PolyDriver check parameters" << std::endl << std::endl;
         TXLOG(Severity::error)<<"Error opening PolyDriver check parameters"<<std::endl;
         openFail = true;
     }
-    pdr_ptr->view(iCanBus_);
+    pdrPtr->view(iCanBus_);
     if (!iCanBus_)
     {
-        std::cout << std::endl << "Error opening can device not available" << std::endl << std::endl;
         TXLOG(Severity::debug)<<"Error opening can device not available";
         openFail = true;
     }
-    pdr_ptr->view(iBufferFactory_);
+    pdrPtr->view(iBufferFactory_);
     
     if(!openFail)
     {
         outBuffer_ = iBufferFactory_->createBuffer(CAN_DRIVER_BUFFER_SIZE_);
 
-        //select the communication speed
         iCanBus_->canSetBaudRate(0); //default 1MB/s
 
         std::regex regex(" ");
@@ -102,16 +98,12 @@ execution ActionCanWrite::execute(const TestRepetitions& testrepetition)
         if (iCanBus_->canWrite(outBuffer_, 1, &canMessages))
         {
             TXLOG(Severity::debug)<< "Data sent over the CAN bus : Message Id: " + std::to_string(msg.getId()) + "  Data: " + data_ << std::endl;
-            std::cout << std::endl << "Data sent over the CAN bus : Message Id: " + std::to_string(msg.getId()) + "  Data: " + data_  << std::endl << std::endl;
         }
         else
         {
             TXLOG(Severity::error)<< "Failed to send data over the CAN bus !!" << std::endl;
-            std::cout << std::endl << "Failed to send data over the CAN bus !!" << std::endl << std::endl;
         }
             
-//        pdr_ptr->close();
-
     }
     
     return execution::continueexecution;

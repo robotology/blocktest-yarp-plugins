@@ -29,7 +29,7 @@ ActionCanRead::ActionCanRead(const CommandAttributes& commandAttributes,const st
 
 void ActionCanRead::beforeExecute()
 {
-    getCommandAttribute("polydrivertag",polydrivertag_);
+    getCommandAttribute("polydrivertag",polyDriverTag_);
     getCommandAttribute("messageid", messageId_); 
     getCommandAttribute("data", data_);  
     getCommandAttribute("readtimeout", readTimeout_); 
@@ -44,47 +44,42 @@ execution ActionCanRead::execute(const TestRepetitions& testrepetition)
     stringstream logStream;
 
 
-    auto pdr = YarpActionDepotStart::polyDriverDepot_.find(polydrivertag_);
+    auto pdr = YarpActionDepotStart::polyDriverDepot_.find(polyDriverTag_);
     
     if (pdr == YarpActionDepotStart::polyDriverDepot_.end())
     {
-        std::cout << std::endl << "Unable to find " << polydrivertag_ << std::endl << std::endl;
-        logStream << "Unable to find " << polydrivertag_ <<" in the depot";
+        logStream << "Unable to find " << polyDriverTag_ <<" in the depot";
         addProblem(testrepetition, Severity::error, logStream.str(),true);
         return execution::continueexecution;
     }
-    auto pdr_ptr = pdr->second;
+    auto pdrPtr = pdr->second;
     
     iCanBus_=0;
     iBufferFactory_=0;
 
-    if (!pdr_ptr->isValid())
+    if (!pdrPtr->isValid())
     {
-        std::cout << std::endl << "Error opening PolyDriver check parameters" << std::endl << std::endl;
         TXLOG(Severity::error)<<"Error opening PolyDriver check parameters"<<std::endl;
         openFail = true;
     }
-    pdr_ptr->view(iCanBus_);
+    pdrPtr->view(iCanBus_);
     if (!iCanBus_)
     {
-        std::cout << std::endl << "Error opening can device not available" << std::endl << std::endl;
         TXLOG(Severity::debug)<<"Error opening can device not available";
         openFail = true;
     }
-    pdr_ptr->view(iBufferFactory_);
+    pdrPtr->view(iBufferFactory_);
 
     
     if(!openFail)
     {
         inBuffer_ = iBufferFactory_->createBuffer(CAN_DRIVER_BUFFER_SIZE_);
 
-    //select the communication speed
     iCanBus_->canSetBaudRate(0); //default 1MB/s
    
     while (readMessages == 0 && timer < readTimeout_) 
     {
        iCanBus_->canRead(inBuffer_,CAN_DRIVER_BUFFER_SIZE_,&readMessages,false);
-       //yarp::os::Time::delay(0.1);
        std::this_thread::sleep_for(std::chrono::milliseconds(10)); 
        timer += 10;
     }
@@ -93,6 +88,7 @@ execution ActionCanRead::execute(const TestRepetitions& testrepetition)
     std::string s;
     s= "Message Id: " + std::to_string(m.getId()) + "  Data: ";
     unsigned int x = std::stoi(messageId_, 0, 16);
+
     if(m.getId() == x)
     {
         for(int i = 0; i<8 ; i++)
@@ -112,16 +108,12 @@ execution ActionCanRead::execute(const TestRepetitions& testrepetition)
     if(readMessages > 0)
     {
         TXLOG(Severity::debug)<< "Data received over the CAN bus : " + s << std::endl;
-        std::cout << std::endl <<  "Data received over the CAN bus : " + s << std::endl << std::endl;
     }
     else
     {
         TXLOG(Severity::error)<< "Failed to receive data over the CAN bus !!" << std::endl;
-        std::cout << std::endl << "Failed to receive data over the CAN bus !!" << std::endl << std::endl;
     }
     
- //   pdr_ptr->close();
-
     }
 
     return execution::continueexecution;

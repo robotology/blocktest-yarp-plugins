@@ -38,7 +38,7 @@ public:
 protected:
   ICanBus *iCanBus_;
   ICanBufferFactory *iBufferFactory_;
-  std::string messageId_, data_, polydrivertag_;
+  std::string messageId_, data_, polyDriverTag_;
   const int CAN_DRIVER_BUFFER_SIZE_ = 2047;
   const int localBufferSize_ = 512;
   CanBuffer outBuffer_;
