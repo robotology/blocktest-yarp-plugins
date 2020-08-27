@@ -1,1 +1,4 @@
-<command library="yarp" name="yarpopenpolydriver" polydrivertag="" property="" repetitions="1" wait="0" reporterror="true"></command>
+<!-- socketcan grabberDual template-->>
+<command library="yarp" name="yarpopenpolydriver" polydrivertag="grab1" property="(device grabberDual) (subdevice test_grabber)" repetitions="1" wait="0" reporterror="true"></command>
+<!-- socketcan device template-->>
+<command library="yarp" name="yarpopenpolydriver" polydrivertag="can0"  property="(device socketcan) (CanMyAddress 0) (CanDeviceNum 0) (CanTxTimeout 500) (CanRxTimeout 500)" repetitions="1" wait="0" reporterror="true"></command>
