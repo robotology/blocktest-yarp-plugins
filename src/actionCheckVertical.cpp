@@ -21,6 +21,8 @@
 #include <yarp/dev/PolyDriver.h>
 #include <yarp/dev/ControlBoardInterfaces.h>
 
+#include <cmath>
+
 ACTIONREGISTER_DEF_TYPE(YarpActions::ActionCheckVertical,yarpactions::yarpcheckrobotisvertical);
 
 namespace YarpActions
