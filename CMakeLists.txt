@@ -25,7 +25,7 @@ if (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
   add_compile_options(-bigobj)
 else ()
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra")
-  set(CMAKE_EXE_LINKER_FLAGS  "-rdynamic")
+  set(CMAKE_EXE_LINKER_FLAGS  "${CMAKE_EXE_LINKER_FLAGS} -rdynamic")
 endif ()
 
 # To build shared libraries in Windows, we set CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS to TRUE.
