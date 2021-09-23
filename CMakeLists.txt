@@ -12,17 +12,20 @@ cmake_minimum_required(VERSION 3.5)
 
 project(blocktestyarpplugins
         LANGUAGES C CXX
-        VERSION 1.1.0)
+        VERSION 1.1.2)
 
+option(ENABLE_MSVC_WARNINGS "Enable the compilation warnings in windows" ON)
 
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 if (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
-  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /Wall")
+  if (ENABLE_MSVC_WARNINGS)
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /W4")
+  endif()
   add_compile_options(-bigobj)
 else ()
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra")
-  set(CMAKE_EXE_LINKER_FLAGS  "-rdynamic")
+  set(CMAKE_EXE_LINKER_FLAGS  "${CMAKE_EXE_LINKER_FLAGS} -rdynamic")
 endif ()
 
 # To build shared libraries in Windows, we set CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS to TRUE.
