@@ -60,13 +60,19 @@ void YarpActionDepotStart::configure(const std::map<std::string,std::string>& co
         yarp::os::Property options;
         options.put("device", "remote_controlboard");
         options.put("local",current+"xx");
-        options.put("remote", "/"+ robotName_+current);
+        std::string wrapperPort="/"+ robotName_+current;
+        options.put("remote", wrapperPort);
         PolyDriver_sptr toAdd=std::make_shared<yarp::dev::PolyDriver>();
         if(!toAdd->open(options))
         {
-            TXLOG(Severity::error)<<"Unable to open PolyDrive for wrapper name:"<<current<<std::endl;
+            TXLOG(Severity::error)<<"Unable to open PolyDrive for wrapper name:"<<wrapperPort<<std::endl;
             continue;  
         }
+        else
+        {                
+            TXLOG(Severity::info)<<"Opened PolyDrive for wrapper name:"<<wrapperPort<<" Polydrive name:"<<current<<std::endl;
+        }
+
         polyDriverDepot_[current]=toAdd;
     }    
 }

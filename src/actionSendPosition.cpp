@@ -70,6 +70,12 @@ execution ActionSendPosition::execute(const TestRepetitions& testrepetition)
     yarp::dev::IPositionControl *ipos{nullptr};
     yarp::dev::IControlMode *icmd{nullptr};
    
+    if(YarpActionDepotStart::polyDriverDepot_.find(wrapperPrefix_)==YarpActionDepotStart::polyDriverDepot_.end())
+    {
+        addProblem(testrepetition,Severity::error,"Unable to find Polydrive:"+wrapperPrefix_,true);
+        return execution::stopexecution;
+    }
+
     bool ok=YarpActionDepotStart::polyDriverDepot_[wrapperPrefix_]->view(ipos);
     if(!ok)
     {

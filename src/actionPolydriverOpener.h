@@ -5,10 +5,10 @@
  *                                                                            *
  ******************************************************************************/
 
- /**
-  * @file ActionPolydriverOpener.h
-  * @author Andrea Ruzzenenti <andrea.ruzzenenti@iit.it>, Luca Tricerri
-  */
+/**
+ * @file ActionPolydriverOpener.h
+ * @author Andrea Ruzzenenti <andrea.ruzzenenti@iit.it>, Luca Tricerri
+ */
 
 #include "actionYarp.h"
 #include "yarpActionDepotStart.h"
@@ -18,17 +18,21 @@
 using namespace YarpActions;
 using namespace yarp::dev;
 using namespace yarp::os;
-namespace YarpAction
-{
-    class ActionPolydriverOpener : public ActionYarp
-    {
-    public:
-        ActionPolydriverOpener(const CommandAttributes& parameters, const std::string& testCode);
-        execution execute(const TestRepetitions&) override { return execution::continueexecution; };
-        void beforeExecute() override{};        
 
-    private:
+namespace YarpAction {
 
-        ACTIONREGISTER_DEC_TYPE(ActionPolydriverOpener)
-    };
-}
+class ActionPolydriverOpener : public ActionYarp {
+public:
+  ActionPolydriverOpener(const CommandAttributes &parameters,
+                         const std::string &testCode);
+  execution execute(const TestRepetitions &) override;
+  void beforeExecute() override{};
+
+private:
+  std::string tag_;
+  Property property_;
+
+  ACTIONREGISTER_DEC_TYPE(ActionPolydriverOpener)
+};
+
+} // namespace YarpAction

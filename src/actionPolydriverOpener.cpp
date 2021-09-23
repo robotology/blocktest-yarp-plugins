@@ -24,20 +24,29 @@ ACTIONREGISTER_DEF_TYPE(YarpAction::ActionPolydriverOpener, yarpactions::yarpope
 
 namespace YarpAction
 {
+
 ActionPolydriverOpener::ActionPolydriverOpener(const CommandAttributes& parameters, const std::string& testCode) : ActionYarp(parameters, testCode)
 {  
-    std::string tag = parameters.at(yarpsyntax::polydrivertag);
-    Property property;
-    property.fromString( parameters.at(yarpsyntax::property));
+    tag_ = parameters.at(yarpsyntax::polydrivertag);
+    property_.fromString( parameters.at(yarpsyntax::property));
+};
 
+execution ActionPolydriverOpener::execute(const TestRepetitions&)
+{
     auto pdr = std::make_shared<PolyDriver>();
-    bool opened = pdr->open(property);
+    bool opened = pdr->open(property_);
     if (opened)
-        YarpActionDepotStart::polyDriverDepot_[tag] = pdr;
+    {
+        YarpActionDepotStart::polyDriverDepot_[tag_] = pdr;
+        TXLOG(Severity::info)<<"Open PolyDrive tag:"<<tag_<<std::endl;
+    }
     else
     {
         TestRepetitions rep{0,0};
-        addProblem(rep, Severity::critical, "Polydriver failed to open",true);
+        addProblem(rep, Severity::critical, "Polydriver failed to open tag:"+tag_,true);
     }
-};
+    return execution::continueexecution;
+}
+
+
 }

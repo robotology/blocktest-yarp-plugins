@@ -55,6 +55,12 @@ execution ActionSendPwmTrain::execute(const TestRepetitions& testrepetition)
     yarp::dev::IEncoders *iencs=nullptr;
     int nj=0;
 
+    if(YarpActionDepotStart::polyDriverDepot_.find(wrapperPrefix_)==YarpActionDepotStart::polyDriverDepot_.end())
+    {
+        addProblem(testrepetition,Severity::error,"Unable to find Polydrive:"+wrapperPrefix_,true);
+        return execution::stopexecution;
+    }
+
     if(!YarpActionDepotStart::polyDriverDepot_[wrapperPrefix_]->view(ipwm))
     {
         addProblem(testrepetition,Severity::critical,"Unable to open pwm mode interface",true);

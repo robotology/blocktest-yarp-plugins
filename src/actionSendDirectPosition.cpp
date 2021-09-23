@@ -76,6 +76,12 @@ execution ActionSendDirectPosition::execute(const TestRepetitions& testrepetitio
     yarp::dev::IPositionDirect *ipos=nullptr;
     yarp::dev::IControlMode *icmd=nullptr;
   
+    if(YarpActionDepotStart::polyDriverDepot_.find(wrapperPrefix_)==YarpActionDepotStart::polyDriverDepot_.end())
+    {
+        addProblem(testrepetition,Severity::error,"Unable to find Polydrive:"+wrapperPrefix_,true);
+        return execution::stopexecution;
+    }
+
     if(!YarpActionDepotStart::polyDriverDepot_[wrapperPrefix_]->view(ipos))
     {
         addProblem(testrepetition,Severity::error,"Unable to open pos mode interface",true);

@@ -55,6 +55,12 @@ execution ActionSendPwm::execute(const TestRepetitions& testrepetition)
         TXLOG(Severity::debug)<<"Using profile:"<<profile_<<std::endl;
     }
 
+    if(YarpActionDepotStart::polyDriverDepot_.find(wrapperPrefix_)==YarpActionDepotStart::polyDriverDepot_.end())
+    {
+        addProblem(testrepetition,Severity::error,"Unable to find Polydrive:"+wrapperPrefix_,true);
+        return execution::stopexecution;
+    }
+
     yarp::dev::IPWMControl *ipwm=nullptr;
     yarp::dev::IControlMode *icmd=nullptr;
 

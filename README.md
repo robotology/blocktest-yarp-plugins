@@ -31,6 +31,16 @@ sudo apt-get install -y cmake libboost-all-dev
 ```
 YARP see https://github.com/robotology/yarp
 
+Add in your bashrc:
+
+```
+export CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/<build/install_dir_of_yarp>
+```
+Instead if you use robotology_superbuild in .bashrc:
+```
+export CMAKE_PREFIX_PATH=:${ROBOTOLOGY_SUPERBUILD_BUILD_DIR}/src/YARP
+```
+
 ## 4.2. Prerequisite Windows
 
 ```bash
