@@ -119,12 +119,8 @@ execution ActionSendDirectPosition::execute(const TestRepetitions& testrepetitio
         }
 
         desiredJointPosInDegrees.push_back(currentDegree);
-        static bool flag{true};
-        if(flag)
-        {
-            icmd->setControlMode(it->second, VOCAB_CM_POSITION_DIRECT);
-            flag=false;
-        }
+        icmd->setControlMode(it->second, VOCAB_CM_POSITION_DIRECT);
+  
     }
 
     ipos->setPositions(jointToMove_.size(),desiredJoint.data(),desiredJointPosInDegrees.data());
