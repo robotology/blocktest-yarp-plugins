@@ -47,7 +47,7 @@ void ActionSendDirectPosition::beforeExecute()
     Action::tokenize<double>(degreeStr,degree_);
     Action::tokenize<std::string>(jointnameStr,jointToMove_);
 
-    getCommandAttribute("wrappername",wrapperPrefix_);
+    getCommandAttribute(yarpsyntax::wrappername,wrapperPrefix_);
 }
 
 execution ActionSendDirectPosition::execute(const TestRepetitions& testrepetition)

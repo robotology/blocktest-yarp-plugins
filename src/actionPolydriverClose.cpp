@@ -27,7 +27,7 @@ namespace YarpAction
 
 ActionPolydriverClose::ActionPolydriverClose(const CommandAttributes& parameters, const std::string& testCode) : ActionYarp(parameters, testCode)
 {  
-    tag_ = parameters.at(yarpsyntax::polydrivertag);
+    tag_ = parameters.at(yarpsyntax::wrappername);
 };
 
 execution ActionPolydriverClose::execute(const TestRepetitions&)

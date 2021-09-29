@@ -1,2 +1,2 @@
-<command library="yarp" name="yarpclosepolydriver" polydrivertag="" repetitions="1" wait="0" reporterror="true"></command>
+<command library="yarp" name="yarpclosepolydriver" wrappername="" repetitions="1" wait="0" reporterror="true"></command>
 

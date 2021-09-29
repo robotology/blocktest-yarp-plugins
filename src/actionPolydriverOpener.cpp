@@ -11,6 +11,7 @@
   */
 
 #include "actionYarp.h"
+#include "syntax.h"
 #include "yarpActionDepotStart.h"
 #include "actionPolydriverOpener.h"
 
@@ -27,7 +28,7 @@ namespace YarpAction
 
 ActionPolydriverOpener::ActionPolydriverOpener(const CommandAttributes& parameters, const std::string& testCode) : ActionYarp(parameters, testCode)
 {  
-    tag_ = parameters.at(yarpsyntax::polydrivertag);
+    tag_ = parameters.at(yarpsyntax::wrappername);
     property_.fromString( parameters.at(yarpsyntax::property));
 };
 

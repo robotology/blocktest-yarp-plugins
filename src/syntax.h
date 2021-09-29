@@ -13,7 +13,8 @@
 #pragma once
 namespace yarpsyntax
 {
-    constexpr char const* polydrivertag{"polydrivertag"};
+    constexpr char const* wrappername{"wrappername"};
+    
     constexpr char const* property{"property"};
 };
 

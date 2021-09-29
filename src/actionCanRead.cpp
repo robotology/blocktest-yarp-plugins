@@ -10,6 +10,7 @@
   * @author Davide Tomé <davide.tome@iit.it>
   */
 
+#include "syntax.h"
 #include <actionCanRead.h>
 #include <yarpActionDepotStart.h>
 
@@ -29,7 +30,7 @@ ActionCanRead::ActionCanRead(const CommandAttributes& commandAttributes,const st
 
 void ActionCanRead::beforeExecute()
 {
-    getCommandAttribute("polydrivertag",polyDriverTag_);
+    getCommandAttribute(yarpsyntax::wrappername,polyDriverTag_);
     getCommandAttribute("messageid", messageId_); 
     getCommandAttribute("data", data_);  
     getCommandAttribute("readtimeout", readTimeout_); 

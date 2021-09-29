@@ -64,11 +64,11 @@ mkdir build
 cd build
 ccmake ..
 ```
-Make sure your CMAKE_INSTALL_PREFIX in ccmake is \<path to your blocktest build dir\>
+Make sure your CMAKE_INSTALL_PREFIX in ccmake is \<path to your blocktest install dir\>
 
 Suggested location:
 ```
-~\blocktest\build
+~\blocktest\install
 ```
 
 Make sure your blocktestcore_DIR is \<path to your blocktest build dir\>
@@ -181,6 +181,12 @@ These action blocks are contained in yarp blocktest plugin.
     ```
     Open a polydriver using the property as in xml. The property must be in (key value) yarp format. The parameter polydrivertag is used for tagging the device in others block
 
+ -  **yarpclosepolydriver**
+
+    ```xml
+       <command library="yarp" name="yarpclosepolydriver" property="" polydrivertag="" repetitions="1" wait="0" reporterror="true"></command>
+    ```
+    Close a polydriver using the property as in xml. The property must be in (key value) yarp format. The parameter polydrivertag is used for tagging the device in others block
 
 
 ## 1.0.2. Yarp walking commands (not tested and not more used)

@@ -10,6 +10,7 @@
   * @author Davide Tomé <davide.tome@iit.it>
   */
 
+#include "syntax.h"
 #include <actionCanWrite.h>
 #include <yarpActionDepotStart.h>
 #include <regex>
@@ -30,7 +31,7 @@ ActionCanWrite::ActionCanWrite(const CommandAttributes& commandAttributes,const 
 
 void ActionCanWrite::beforeExecute()
 {
-    getCommandAttribute("polydrivertag",polyDriverTag_);
+    getCommandAttribute(yarpsyntax::wrappername,polyDriverTag_);
     getCommandAttribute("messageid", messageId_);
     getCommandAttribute("data", data_);   
 }
