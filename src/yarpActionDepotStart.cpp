@@ -59,8 +59,8 @@ void YarpActionDepotStart::configure(const std::map<std::string,std::string>& co
     {
         yarp::os::Property options;
         options.put("device", "remote_controlboard");
-        options.put("local",current+"xx");
-        std::string wrapperPort="/"+ robotName_+current;
+        options.put("local","/"+current+"xx");
+        std::string wrapperPort="/"+ robotName_+"/"+current;
         options.put("remote", wrapperPort);
         PolyDriver_sptr toAdd=std::make_shared<yarp::dev::PolyDriver>();
         if(!toAdd->open(options))
