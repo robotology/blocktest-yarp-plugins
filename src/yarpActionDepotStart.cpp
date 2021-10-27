@@ -17,6 +17,9 @@
 #include "yarpActionDepotStart.h"
 #include <yarp/os/Network.h>
 
+#include <string>
+#include <map>
+
 ACTIONDEPOTSTART(YarpActionDepotStart)
 
 std::string YarpActionDepotStart::robotName_{""};

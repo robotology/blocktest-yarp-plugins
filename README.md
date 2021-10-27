@@ -39,6 +39,10 @@ export CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/<build/install_dir_of_yarp>
 Instead if you use robotology_superbuild in .bashrc:
 ```
 export CMAKE_PREFIX_PATH=:${ROBOTOLOGY_SUPERBUILD_BUILD_DIR}/src/YARP
+
+export ROBOTOLOGY_SUPERBUILD_INSTALL_DIR=<path to your robotology install dir>
+source ${ROBOTOLOGY_SUPERBUILD_INSTALL_DIR}/share/robotology-superbuild/setup.sh
+
 ```
 
 ## 4.2. Prerequisite Windows
@@ -75,7 +79,7 @@ Make sure your blocktestcore_DIR is \<path to your blocktest build dir\>
 
 Suggested location:
 ```
-~\blocktest\build
+~\blocktest\install
 ```
 
 Make sure your blocktestcore_INCLUDE_DIR is \<path to your blocktest src dir\>
