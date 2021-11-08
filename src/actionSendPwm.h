@@ -33,7 +33,7 @@ class ActionSendPwm : public ActionYarp
         int sign(double value);
         std::string wrapperPrefix_;
 
-        static constexpr int securityLimits_{60};
+        static constexpr int securityLimits_{80};
 
     ACTIONREGISTER_DEC_TYPE(ActionSendPwm)        
 };
