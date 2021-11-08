@@ -5,12 +5,6 @@
  *                                                                            *
  ******************************************************************************/
 
-/**
- * @file actionSendPwm.cpp
- * @author Luca Tricerri <luca.tricerri@iit.it>
- */
-
-
 #include "actionSendPwm.h"
 
 #include <yarp/dev/all.h>
@@ -85,14 +79,14 @@ execution ActionSendPwm::execute(const TestRepetitions& testrepetition)
     }
 
     icmd->setControlMode(it->second, VOCAB_CM_PWM);
-    if(dutycycle_>30)
+    if(dutycycle_>securityLimits_)
     {
-        dutycycle_=30;
+        dutycycle_=securityLimits_;
         TXLOG(Severity::error)<<"Pwm to hight:"<<dutycycle_<<std::endl;
     }
-    if(dutycycle_<-30)
+    if(dutycycle_<-securityLimits_)
     {
-        dutycycle_=-30;
+        dutycycle_=-securityLimits_;
         TXLOG(Severity::error)<<"Pwm to low:"<<dutycycle_<<std::endl;
     }
 

@@ -17,11 +17,6 @@
 namespace YarpActions
 {
 
-/**
- * @class ActionSendPwm
- * @brief ...
- * @todo missing brief and detailed description
- */
 class ActionSendPwm : public ActionYarp
 {
     public:
@@ -37,6 +32,8 @@ class ActionSendPwm : public ActionYarp
         double frequency_{1};
         int sign(double value);
         std::string wrapperPrefix_;
+
+        static constexpr int securityLimits_{60};
 
     ACTIONREGISTER_DEC_TYPE(ActionSendPwm)        
 };

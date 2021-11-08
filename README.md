@@ -108,7 +108,9 @@ These action blocks are contained in yarp blocktest plugin.
 
 -   **yarpsendpwm**
 
-    Send the pwm value to a specific jointname. The pwm profile can be: sin/const/stepwave
+    Send the pwm value to a specific jointname. The pwm profile can be: ```sin/const/stepwave```  
+    If profile is ```const``` dutycycle is between -60 and +60, frequency is not used.  
+    If profile is ```sin``` frequency is the sin frequency. 
 
     ```xml
         <command name="yarpsendpwm" profile="sin" frequency="1" dutycycle="20" time="20" jointname="L_AK_R" repetitions="1" wait="0" reporterror="true"/>
