@@ -79,7 +79,7 @@ Make sure your blocktestcore_DIR is \<path to your blocktest build dir\>
 
 Suggested location:
 ```
-~\blocktest\install
+~\blocktest\build
 ```
 
 Make sure your blocktestcore_INCLUDE_DIR is \<path to your blocktest src dir\>
