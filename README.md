@@ -82,9 +82,6 @@ Suggested location:
 ~\blocktest\build
 ```
 
-Make sure your blocktestcore_INCLUDE_DIR is \<path to your blocktest src dir\>
-
-
 
 Then:
 
@@ -108,9 +105,9 @@ These action blocks are contained in yarp blocktest plugin.
 
 -   **yarpsendpwm**
 
-    Send the pwm value to a specific jointname. The pwm profile can be: ```sin/const/stepwave```  
-    If profile is ```const``` dutycycle is between -60 and +60, frequency is not used.  
-    If profile is ```sin``` frequency is the sin frequency. 
+    Send the pwm value to a specific jointname. Available options for pwm profile are: `sin`,`const` or `stepwave`.  
+    If profile is `const` dutycycle is between -60 and +60 and frequency is not used. In this case, the pwm is provided as a constant value.   
+    If profile is `sin` frequency is the sinusoid frequency. 
 
     ```xml
         <command name="yarpsendpwm" profile="sin" frequency="1" dutycycle="20" time="20" jointname="L_AK_R" repetitions="1" wait="0" reporterror="true"/>

@@ -60,13 +60,13 @@ execution ActionApplyForce::execute(const TestRepetitions& testrepetition)
 
     yarp::os::Bottle cmd;
     cmd.addString(tokenized[0]);
-    cmd.addDouble(std::atof(tokenized[1].c_str()));
-    cmd.addDouble(std::atof(tokenized[2].c_str()));
-    cmd.addDouble(std::atof(tokenized[3].c_str()));
-    cmd.addDouble(std::atof(tokenized[4].c_str()));
-    cmd.addDouble(std::atof(tokenized[5].c_str()));
-    cmd.addDouble(std::atof(tokenized[6].c_str()));
-    cmd.addDouble(std::atof(tokenized[7].c_str()));
+    cmd.addFloat64(std::atof(tokenized[1].c_str()));
+    cmd.addFloat64(std::atof(tokenized[2].c_str()));
+    cmd.addFloat64(std::atof(tokenized[3].c_str()));
+    cmd.addFloat64(std::atof(tokenized[4].c_str()));
+    cmd.addFloat64(std::atof(tokenized[5].c_str()));
+    cmd.addFloat64(std::atof(tokenized[6].c_str()));
+    cmd.addFloat64(std::atof(tokenized[7].c_str()));
 
     yarp::os::Bottle response;
     extWrenchPort.write(cmd,response);
