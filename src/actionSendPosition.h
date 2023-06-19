@@ -19,9 +19,6 @@
 #include <yarp/dev/PolyDriver.h>
 #include <yarp/dev/ControlBoardInterfaces.h>
 
-using namespace yarp::os;
-using namespace yarp::sig;
-using namespace yarp::dev;
 
 namespace YarpActions
 {

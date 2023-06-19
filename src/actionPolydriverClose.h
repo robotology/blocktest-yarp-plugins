@@ -15,13 +15,9 @@
 
 #include <memory>
 
-using namespace YarpActions;
-using namespace yarp::dev;
-using namespace yarp::os;
-
 namespace YarpAction {
 
-class ActionPolydriverClose : public ActionYarp {
+class ActionPolydriverClose : public YarpActions::ActionYarp {
 public:
   ActionPolydriverClose(const CommandAttributes &parameters,
                          const std::string &testCode);
@@ -30,7 +26,7 @@ public:
 
 private:
   std::string tag_;
-  Property property_;
+  yarp::os::Property property_;
 
   ACTIONREGISTER_DEC_TYPE(ActionPolydriverClose)
 };
