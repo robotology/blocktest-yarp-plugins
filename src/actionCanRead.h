@@ -18,11 +18,6 @@
 #include <yarp/sig/Vector.h>
 
 
-using namespace yarp::dev;
-using namespace yarp::sig;
-using namespace yarp::os;
-using namespace yarp;
-
 namespace YarpActions
 {
 
@@ -35,13 +30,13 @@ public:
     void beforeExecute() override;
 
 protected:
-  ICanBus *iCanBus_;
-  ICanBufferFactory *iBufferFactory_;
+  yarp::dev::ICanBus *iCanBus_;
+  yarp::dev::ICanBufferFactory *iBufferFactory_;
   std::string messageId_, data_, polyDriverTag_;
   int readTimeout_;
   const int CAN_DRIVER_BUFFER_SIZE_ = 2047;
   const int localBufferSize_ = 512;
-  CanBuffer inBuffer_;
+  yarp::dev::CanBuffer inBuffer_;
 
 	ACTIONREGISTER_DEC_TYPE(ActionCanRead)
 };

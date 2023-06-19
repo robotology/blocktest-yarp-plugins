@@ -19,6 +19,7 @@
 
 using namespace std;
 using namespace yarp::os;
+using namespace yarp::dev;
 
 ACTIONREGISTER_DEF_TYPE(YarpActions::ActionCanRead, yarpactions::yarpcanread);
 
