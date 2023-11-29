@@ -36,7 +36,7 @@ set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
 #Thrift for clock
 set(YARP_MINIMUM_REQUIRED_VERSION 3.0.102)
 
-find_package(YARP 3.3.0 REQUIRED COMPONENTS os conf dev sig math rosmsg name idl_tools)
+find_package(YARP 3.3.0 REQUIRED COMPONENTS os conf dev sig math name idl_tools)
 find_package(blocktestcore 2.3.0 REQUIRED)
 find_package(YCM REQUIRED)
 
