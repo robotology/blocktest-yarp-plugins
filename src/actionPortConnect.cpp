@@ -30,7 +30,7 @@ void ActionPortConnect::beforeExecute()
 	getCommandAttribute("carrier", crr_);	
 }
 
-execution ActionPortConnect::execute(const TestRepetitions& testrepetition)
+BlockTestCore::execution ActionPortConnect::execute(const TestRepetitions& testrepetition)
 {
 	bool ok{ true };
 	ok=Network::exists(src_);

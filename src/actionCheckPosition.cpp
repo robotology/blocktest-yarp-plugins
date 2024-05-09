@@ -36,7 +36,7 @@ void ActionCheckPosition::beforeExecute()
 }
 
 
-execution ActionCheckPosition::execute(const TestRepetitions& testrepetition)
+BlockTestCore::execution ActionCheckPosition::execute(const TestRepetitions& testrepetition)
 {
     yarp::os::Port fbePort;
     std::string localfbePort  = "/myrobot/odometry:i";
@@ -66,7 +66,7 @@ execution ActionCheckPosition::execute(const TestRepetitions& testrepetition)
 
     TXLOG(Severity::debug)<<"FBE x:"<<coordList->get(0).asFloat64()<<" y:"<<coordList->get(1).asFloat64()<<" z:"<<coordList->get(2).asFloat64()<<std::endl;
     
-    execution error=BlockTestCore::execution::stopexecution;;
+    BlockTestCore::execution error=BlockTestCore::execution::stopexecution;;
     if(xminposition_&& std::abs(xminposition_)>std::abs(coordList->get(0).asFloat64()))
     {
         TXLOG(Severity::error)<<"FBE x not enough:"<<coordList->get(0).asFloat64()<<" desidered at least:"<<xminposition_<<std::endl;

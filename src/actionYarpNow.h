@@ -25,7 +25,7 @@ class ActionYarpNow : public ActionYarp
 {
     public:
         ActionYarpNow(const CommandAttributes& commandAttributes,const std::string& testCode);    
-        execution execute(const TestRepetitions& testrepetition) override;
+        BlockTestCore::execution execute(const TestRepetitions& testrepetition) override;
         void beforeExecute() override;        
         double getDouble() override;    
     private:        

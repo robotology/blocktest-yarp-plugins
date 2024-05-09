@@ -38,7 +38,7 @@ void ActionCanRead::beforeExecute()
 }
 
 
-execution ActionCanRead::execute(const TestRepetitions& testrepetition)
+BlockTestCore::execution ActionCanRead::execute(const TestRepetitions& testrepetition)
 {
     unsigned int readMessages=0;
     int timer=0;

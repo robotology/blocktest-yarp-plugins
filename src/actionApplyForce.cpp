@@ -35,7 +35,7 @@ void ActionApplyForce::beforeExecute()
     getCommandAttribute("force",force_);    
 }
 
-execution ActionApplyForce::execute(const TestRepetitions& testrepetition)
+BlockTestCore::execution ActionApplyForce::execute(const TestRepetitions& testrepetition)
 {
     std::string localExtWrenchPort = "/myPortForExternalWrench:o";
     std::string remoteExtWrenchPort = "/icab/applyExternalWrench/rpc:i";

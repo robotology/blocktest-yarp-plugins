@@ -30,7 +30,7 @@ void ActionPortDisconnect::beforeExecute()
 	getCommandAttribute("destination", dst_);	
 }
 
-execution ActionPortDisconnect::execute(const TestRepetitions& testrepetition)
+BlockTestCore::execution ActionPortDisconnect::execute(const TestRepetitions& testrepetition)
 {
 	auto ok{ true };
 	ok &= Network::disconnect(src_, dst_);

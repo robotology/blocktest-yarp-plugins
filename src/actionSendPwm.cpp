@@ -40,7 +40,7 @@ void ActionSendPwm::beforeExecute()
     getCommandAttribute("wrappername",wrapperPrefix_);    
 }
 
-execution ActionSendPwm::execute(const TestRepetitions& testrepetition)
+BlockTestCore::execution ActionSendPwm::execute(const TestRepetitions& testrepetition)
 {
     if(!profile_.empty())
     {

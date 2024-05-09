@@ -46,7 +46,7 @@ void ActionSendPwmTrain::beforeExecute()
     getCommandAttribute("wrappername",wrapperPrefix_);        
 }
 
-execution ActionSendPwmTrain::execute(const TestRepetitions& testrepetition)
+BlockTestCore::execution ActionSendPwmTrain::execute(const TestRepetitions& testrepetition)
 {
 
     yarp::dev::IPWMControl *ipwm=nullptr;

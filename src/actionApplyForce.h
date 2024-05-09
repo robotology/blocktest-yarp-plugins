@@ -25,7 +25,7 @@ class ActionApplyForce : public ActionYarp
 {
     public:
         ActionApplyForce(const CommandAttributes& commandAttributes,const std::string& testCode);
-        execution execute(const TestRepetitions& testrepetition) override;        
+        BlockTestCore::execution execute(const TestRepetitions& testrepetition) override;        
         void beforeExecute() override;
 
     private:

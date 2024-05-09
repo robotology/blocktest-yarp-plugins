@@ -32,7 +32,7 @@ void ActionGenerateTrajectory::beforeExecute()
 }
 
 
-execution ActionGenerateTrajectory::execute(const TestRepetitions& testrepetition)
+BlockTestCore::execution ActionGenerateTrajectory::execute(const TestRepetitions& testrepetition)
 {
     yarp::os::Port rpcPortWalking;
     WalkingCommands walkingCommands;

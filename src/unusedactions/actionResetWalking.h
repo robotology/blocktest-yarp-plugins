@@ -26,7 +26,7 @@ class ActionResetWalking : public ActionYarp
 {
     public:
         ActionResetWalking(const CommandAttributes& commandAttributes,,const std::string& testCode);
-        execution execute(const TestRepetitions& testrepetition) override;
+        BlockTestCore::execution execute(const TestRepetitions& testrepetition) override;
         void beforeExecute() override;        
 
     ACTIONREGISTER_DEC_TYPE(ActionResetWalking)        

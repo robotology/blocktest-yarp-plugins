@@ -49,7 +49,7 @@ void ActionSendDirectPosition::beforeExecute()
     getCommandAttribute(yarpsyntax::wrappername,wrapperPrefix_);
 }
 
-execution ActionSendDirectPosition::execute(const TestRepetitions& testrepetition)
+BlockTestCore::execution ActionSendDirectPosition::execute(const TestRepetitions& testrepetition)
 {
     //TO REMOVE
 

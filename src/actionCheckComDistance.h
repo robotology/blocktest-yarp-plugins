@@ -22,7 +22,7 @@ class ActionCheckComDistance : public ActionYarp
 {
     public:
         ActionCheckComDistance(const CommandAttributes& commandAttributes,const std::string& testCode);
-        execution execute(const TestRepetitions& testrepetition) override;
+        BlockTestCore::execution execute(const TestRepetitions& testrepetition) override;
         void beforeExecute() override;
     
     private:

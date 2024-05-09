@@ -37,7 +37,7 @@ void ActionCanWrite::beforeExecute()
     getCommandAttribute("data", data_);   
 }
 
-execution ActionCanWrite::execute(const TestRepetitions& testrepetition)
+BlockTestCore::execution ActionCanWrite::execute(const TestRepetitions& testrepetition)
 {
     auto exists {true};
     stringstream logStream;

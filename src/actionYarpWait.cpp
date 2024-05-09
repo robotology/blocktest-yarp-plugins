@@ -27,7 +27,7 @@ void ActionYarpWait::beforeExecute()
     getCommandAttribute("seconds", seconds_);
 }
 
-execution ActionYarpWait::execute(const TestRepetitions&)
+BlockTestCore::execution ActionYarpWait::execute(const TestRepetitions&)
 {
     //yarp::os::yarpClockType clockType=yarp::os::Time::getClockType();
     //TXLOG(Severity::debug)<<"Using clock type config:"<<yarp::os::Time::clockTypeToString(clockType)<<" Wait value:"<<seconds_<<std::endl;

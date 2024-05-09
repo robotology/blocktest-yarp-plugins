@@ -36,7 +36,7 @@ void ActionCheckComDistance::beforeExecute()
 }
 
 
-execution ActionCheckComDistance::execute(const TestRepetitions&)
+BlockTestCore::execution ActionCheckComDistance::execute(const TestRepetitions&)
 {
    /* bool error{false};
     if(test_->comDistance_<commindistance_)
