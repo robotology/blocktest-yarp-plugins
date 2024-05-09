@@ -52,7 +52,7 @@ execution ActionCanRead::execute(const TestRepetitions& testrepetition)
     {
         logStream << "Unable to find " << polyDriverTag_ <<" in the depot";
         addProblem(testrepetition, Severity::error, logStream.str(),true);
-        return execution::continueexecution;
+        return BlockTestCore::execution::continueexecution;
     }
     auto pdrPtr = pdr->second;
     
@@ -118,6 +118,6 @@ execution ActionCanRead::execute(const TestRepetitions& testrepetition)
     
     }
 
-    return execution::continueexecution;
+    return BlockTestCore::execution::continueexecution;
 }
 }

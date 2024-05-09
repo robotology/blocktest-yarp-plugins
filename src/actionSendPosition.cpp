@@ -58,13 +58,13 @@ execution ActionSendPosition::execute(const TestRepetitions& testrepetition)
     if(degree_.size()!=velocity_.size())
     {
         addProblem(testrepetition,Severity::error,"Joint info not cooerent",true);
-        return execution::stopexecution;;      
+        return BlockTestCore::execution::stopexecution;;      
     }
 
     if(degree_.size()!=jointToMove_.size())
     {
         addProblem(testrepetition,Severity::error,"Joint info not cooerent",true);
-        return execution::stopexecution;;      
+        return BlockTestCore::execution::stopexecution;;      
     }
 
     yarp::dev::IPositionControl *ipos{nullptr};
@@ -73,20 +73,20 @@ execution ActionSendPosition::execute(const TestRepetitions& testrepetition)
     if(YarpActionDepotStart::polyDriverDepot_.find(wrapperPrefix_)==YarpActionDepotStart::polyDriverDepot_.end())
     {
         addProblem(testrepetition,Severity::error,"Unable to find Polydrive:"+wrapperPrefix_,true);
-        return execution::stopexecution;
+        return BlockTestCore::execution::stopexecution;
     }
 
     bool ok=YarpActionDepotStart::polyDriverDepot_[wrapperPrefix_]->view(ipos);
     if(!ok)
     {
         addProblem(testrepetition,Severity::error,"Unable to open pos mode interface",true);
-        return execution::stopexecution;;
+        return BlockTestCore::execution::stopexecution;;
     }
     ok=YarpActionDepotStart::polyDriverDepot_[wrapperPrefix_]->view(icmd);
     if(!ok)
     {
         addProblem(testrepetition,Severity::error,"Unable to open control mode interface",true);
-        return execution::stopexecution;;
+        return BlockTestCore::execution::stopexecution;;
     }
  
     std::map<std::string,int> jointNames;
@@ -101,7 +101,7 @@ execution ActionSendPosition::execute(const TestRepetitions& testrepetition)
         {
             TXLOG(Severity::error)<<"Error joint not found:"<<jointToMove_[index]<<std::endl;
             addProblem(testrepetition,Severity::error,"Error joint not found",false);
-            return execution::stopexecution;;
+            return BlockTestCore::execution::stopexecution;;
         }
         desiredJoint.push_back(it->second);
         desiredJointPosInDegrees.push_back(degree_[index]);
@@ -110,7 +110,7 @@ execution ActionSendPosition::execute(const TestRepetitions& testrepetition)
     }
 
     ipos->positionMove(jointToMove_.size(),desiredJoint.data(),desiredJointPosInDegrees.data());
-    return execution::continueexecution;;
+    return BlockTestCore::execution::continueexecution;;
 }
 
 }

@@ -46,14 +46,14 @@ execution ActionCheckJointPosition::execute(const TestRepetitions& testrepetitio
     if(!YarpActionDepotStart::polyDriverDepot_[wrapperPrefix_]->view(iencoders))
     {
         addProblem(testrepetition,Severity::error,"Unable to open encoder control mode interface 2",true);        
-        return execution::stopexecution;
+        return BlockTestCore::execution::stopexecution;
     }
 
     int nj{0};
     if(!iencoders->getAxes(&nj))
     {
         addProblem(testrepetition,Severity::error,"Unable to open encoder control mode interface 3",true);
-        return execution::stopexecution;;    
+        return BlockTestCore::execution::stopexecution;;    
     }       
          
     std::map<std::string, int> jointNames;
@@ -64,7 +64,7 @@ execution ActionCheckJointPosition::execute(const TestRepetitions& testrepetitio
     {
         TXLOG(Severity::error)<<"Joint not found:"<<jointname_<<std::endl;   
         addProblem(testrepetition,Severity::error,"Joint not found:",false);
-        return execution::stopexecution;;
+        return BlockTestCore::execution::stopexecution;;
     }
 
     std::this_thread::sleep_for(std::chrono::milliseconds(100)); 
@@ -85,7 +85,7 @@ execution ActionCheckJointPosition::execute(const TestRepetitions& testrepetitio
     {
         TXLOG(Severity::debug)<<"Joint position check value ok:"<<ref<<" expected:" <<expectedValue_<<" tolerance:"<<tolerance_ <<" name:"<<jointname_<<std::endl;   
     }
-    return execution::continueexecution;;
+    return BlockTestCore::execution::continueexecution;;
 }
 
 }

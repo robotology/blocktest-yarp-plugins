@@ -44,7 +44,7 @@ execution ActionApplyForce::execute(const TestRepetitions& testrepetition)
    if(!ok)
     {
         addProblem(testrepetition,Severity::critical,"Unable to open ports applyforce",true);
-        return execution::stopexecution;
+        return BlockTestCore::execution::stopexecution;
     }
 
     yarp::os::Network::connect(localExtWrenchPort,remoteExtWrenchPort);
@@ -55,7 +55,7 @@ execution ActionApplyForce::execute(const TestRepetitions& testrepetition)
     if(tokenized.size()!=8)
     {
         addProblem(testrepetition,Severity::error,"Error in parameter number for applyForce",true);
-        return execution::stopexecution;
+        return BlockTestCore::execution::stopexecution;
     }
 
     yarp::os::Bottle cmd;
@@ -78,6 +78,6 @@ execution ActionApplyForce::execute(const TestRepetitions& testrepetition)
       
     extWrenchPort.interrupt();
     extWrenchPort.close();    
-    return execution::continueexecution;
+    return BlockTestCore::execution::continueexecution;
 }
 }

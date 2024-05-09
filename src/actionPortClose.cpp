@@ -46,7 +46,7 @@ execution ActionPortClose::execute(const TestRepetitions& testrepetition)
     {
         logStream << "Unable to find " << portname_<<" in the port depot";
         addProblem(testrepetition, Severity::error, logStream.str(),true);
-        return execution::continueexecution;
+        return BlockTestCore::execution::continueexecution;
     }
     auto port_ptr = portIt->second;
 
@@ -64,5 +64,5 @@ execution ActionPortClose::execute(const TestRepetitions& testrepetition)
         addProblem(testrepetition, Severity::error, logStream.str(),true);
     }
 
-	return execution::continueexecution;
+	return BlockTestCore::execution::continueexecution;
 }

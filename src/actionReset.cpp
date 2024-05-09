@@ -56,7 +56,7 @@ execution ActionReset::execute(const TestRepetitions& testrepetition)
     yarp::os::SystemClock systemClock;
     systemClock.delay(1.0);
     clockClientPort.close();
-    return execution::continueexecution;;
+    return BlockTestCore::execution::continueexecution;;
 }
 
 }

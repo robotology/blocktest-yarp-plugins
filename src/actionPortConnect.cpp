@@ -39,7 +39,7 @@ execution ActionPortConnect::execute(const TestRepetitions& testrepetition)
 		stringstream logStream;
 		logStream << "Port not exists " << src_;
 		addProblem(testrepetition, Severity::error, logStream.str(),true);
-		return execution::continueexecution;
+		return BlockTestCore::execution::continueexecution;
 	}	
 	ok=Network::exists(dst_);
 	if(!ok)
@@ -47,7 +47,7 @@ execution ActionPortConnect::execute(const TestRepetitions& testrepetition)
 		stringstream logStream;
 		logStream << "Port not exists " << dst_;
 		addProblem(testrepetition, Severity::error, logStream.str(),true);
-		return execution::continueexecution;
+		return BlockTestCore::execution::continueexecution;
 	}
 	
 	ok=Network::isValidPortName(src_);
@@ -57,7 +57,7 @@ execution ActionPortConnect::execute(const TestRepetitions& testrepetition)
 		stringstream logStream;
 		logStream << "Port not valid " << src_ << " -> " << dst_ << " with "<<crr_<<" carrier";
 		addProblem(testrepetition, Severity::error, logStream.str(),true);
-		return execution::continueexecution;
+		return BlockTestCore::execution::continueexecution;
 	}
 
 	ok &= Network::connect(src_, dst_, crr_);
@@ -67,5 +67,5 @@ execution ActionPortConnect::execute(const TestRepetitions& testrepetition)
 		logStream << "Unable to connect " << src_ << " -> " << dst_ << " with "<<crr_<<" carrier";
 		addProblem(testrepetition, Severity::error, logStream.str(),true);
 	}
-	return execution::continueexecution;
+	return BlockTestCore::execution::continueexecution;
 }

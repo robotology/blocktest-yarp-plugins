@@ -38,7 +38,7 @@ execution ActionPortRead::execute(const TestRepetitions& testrepetition)
         stringstream logStream;
         logStream << "Unable to find " << portname_;
         addProblem(testrepetition, Severity::error, logStream.str(),true);
-        return execution::continueexecution;   
+        return BlockTestCore::execution::continueexecution;   
     }
 
     auto port=it;
@@ -49,7 +49,7 @@ execution ActionPortRead::execute(const TestRepetitions& testrepetition)
         stringstream logStream;
         logStream << "Unable to read " << portname_;
         addProblem(testrepetition, Severity::error, logStream.str(),true);
-        return execution::continueexecution;          
+        return BlockTestCore::execution::continueexecution;          
     }
 
     if(input.toString()!=value_)
@@ -57,8 +57,8 @@ execution ActionPortRead::execute(const TestRepetitions& testrepetition)
         stringstream logStream;
         logStream << "Read unexpected value " << portname_;
         addProblem(testrepetition, Severity::error, logStream.str(),true);
-        return execution::continueexecution;                  
+        return BlockTestCore::execution::continueexecution;                  
     }
 
-    return execution::continueexecution;
+    return BlockTestCore::execution::continueexecution;
 }

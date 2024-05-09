@@ -27,7 +27,7 @@ void ActionYarpNow::beforeExecute()
 
 execution ActionYarpNow::execute(const TestRepetitions&)
 {
-    return execution::continueexecution;;
+    return BlockTestCore::execution::continueexecution;;
 }
 
 double ActionYarpNow::getDouble()

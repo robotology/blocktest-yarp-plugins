@@ -58,7 +58,7 @@ execution ActionSendDirectPosition::execute(const TestRepetitions& testrepetitio
 
     if(degree_.empty()) {
         addProblem(testrepetition,Severity::error,"Missing degree information",true);
-        return execution::stopexecution;
+        return BlockTestCore::execution::stopexecution;
     }
 
 
@@ -69,7 +69,7 @@ execution ActionSendDirectPosition::execute(const TestRepetitions& testrepetitio
     if(degree_.size()!=jointToMove_.size())
     {
         addProblem(testrepetition,Severity::error,"Joint info not cooerent",true);
-        return execution::stopexecution;
+        return BlockTestCore::execution::stopexecution;
     }
 
     yarp::dev::IPositionDirect *ipos=nullptr;
@@ -78,19 +78,19 @@ execution ActionSendDirectPosition::execute(const TestRepetitions& testrepetitio
     if(YarpActionDepotStart::polyDriverDepot_.find(wrapperPrefix_)==YarpActionDepotStart::polyDriverDepot_.end())
     {
         addProblem(testrepetition,Severity::error,"Unable to find Polydrive:"+wrapperPrefix_,true);
-        return execution::stopexecution;
+        return BlockTestCore::execution::stopexecution;
     }
 
     if(!YarpActionDepotStart::polyDriverDepot_[wrapperPrefix_]->view(ipos))
     {
         addProblem(testrepetition,Severity::error,"Unable to open pos mode interface",true);
-        return execution::stopexecution;
+        return BlockTestCore::execution::stopexecution;
     }
 
     if(!YarpActionDepotStart::polyDriverDepot_[wrapperPrefix_]->view(icmd))
     {
         addProblem(testrepetition,Severity::error,"Unable to open control mode interface",true);      
-        return execution::stopexecution;
+        return BlockTestCore::execution::stopexecution;
     }
 
     std::map<std::string,int> jointNames;
@@ -105,7 +105,7 @@ execution ActionSendDirectPosition::execute(const TestRepetitions& testrepetitio
         {
             TXLOG(Severity::error)<<"Error joint not found:"<<jointToMove_[index]<<std::endl;
             addProblem(testrepetition,Severity::critical,"Error joint not found",false);
-            return execution::stopexecution;
+            return BlockTestCore::execution::stopexecution;
         }
         
         desiredJoint.push_back(it->second);
@@ -114,7 +114,7 @@ execution ActionSendDirectPosition::execute(const TestRepetitions& testrepetitio
         if (std::isnan(currentDegree))
         {
             TXLOG(Severity::error)<<"Empty number from table"<<std::endl;
-            return execution::continueexecution;
+            return BlockTestCore::execution::continueexecution;
         }
 
         desiredJointPosInDegrees.push_back(currentDegree);
@@ -125,7 +125,7 @@ execution ActionSendDirectPosition::execute(const TestRepetitions& testrepetitio
     ipos->setPositions(jointToMove_.size(),desiredJoint.data(),desiredJointPosInDegrees.data());
     //TXLOG(Severity::debug)<<"---------:"<<desiredJointPosInDegrees[0]<<std::endl;
 
-    return execution::continueexecution;
+    return BlockTestCore::execution::continueexecution;
 }
 
 }

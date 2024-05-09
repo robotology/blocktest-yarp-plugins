@@ -48,7 +48,7 @@ execution ActionCheckRobot::execute(const TestRepetitions& testrepetition)
     {
         addProblem(testrepetition,Severity::critical,"getAxes failed",true);
     }        
-    return execution::continueexecution;;
+    return BlockTestCore::execution::continueexecution;;
 }
 
 }

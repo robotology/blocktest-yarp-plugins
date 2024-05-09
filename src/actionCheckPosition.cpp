@@ -61,34 +61,34 @@ execution ActionCheckPosition::execute(const TestRepetitions& testrepetition)
         addProblem(testrepetition,Severity::critical,"FBE readings should have 6 elements",false);
         fbePort.interrupt();
         fbePort.close();  
-        return execution::stopexecution;;
+        return BlockTestCore::execution::stopexecution;;
     }   
 
     TXLOG(Severity::debug)<<"FBE x:"<<coordList->get(0).asFloat64()<<" y:"<<coordList->get(1).asFloat64()<<" z:"<<coordList->get(2).asFloat64()<<std::endl;
     
-    execution error=execution::stopexecution;;
+    execution error=BlockTestCore::execution::stopexecution;;
     if(xminposition_&& std::abs(xminposition_)>std::abs(coordList->get(0).asFloat64()))
     {
         TXLOG(Severity::error)<<"FBE x not enough:"<<coordList->get(0).asFloat64()<<" desidered at least:"<<xminposition_<<std::endl;
-        error=execution::continueexecution;;
+        error=BlockTestCore::execution::continueexecution;;
     }
     if(yminposition_ &&  std::abs(yminposition_)>std::abs(coordList->get(1).asFloat64()))
     {
         TXLOG(Severity::error)<<"FBE y not enough:"<<coordList->get(1).asFloat64()<<" desidered at least:"<<yminposition_<<std::endl;
-        error=execution::continueexecution;;        
+        error=BlockTestCore::execution::continueexecution;;        
     }
     if(zminposition_ &&  std::abs(zminposition_)>std::abs(coordList->get(2).asFloat64()))
     {
         TXLOG(Severity::error)<<"FBE z not enough:"<<coordList->get(2).asFloat64()<<" desidered at least:"<<zminposition_<<std::endl;
-        error=execution::continueexecution;;        
+        error=BlockTestCore::execution::continueexecution;;        
     }
 
-    if(error==execution::stopexecution)
+    if(error==BlockTestCore::execution::stopexecution)
         addProblem(testrepetition,Severity::error,"FBE not enough",true);
     
     fbePort.interrupt();
     fbePort.close();  
-    return execution::continueexecution;;
+    return BlockTestCore::execution::continueexecution;;
 }
 
 }

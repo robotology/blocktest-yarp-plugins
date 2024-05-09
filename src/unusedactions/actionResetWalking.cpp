@@ -45,7 +45,7 @@ execution ActionResetWalking::execute(const TestRepetitions& testrepetition)
     }    
 
     closeWalking(rpcPortWalking);       
-    return execution::continueexecution;;
+    return BlockTestCore::execution::continueexecution;;
 }
 
 }
