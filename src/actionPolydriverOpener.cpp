@@ -32,7 +32,7 @@ ActionPolydriverOpener::ActionPolydriverOpener(const CommandAttributes& paramete
     property_.fromString( parameters.at(yarpsyntax::property));
 };
 
-execution ActionPolydriverOpener::execute(const TestRepetitions&)
+BlockTestCore::execution ActionPolydriverOpener::execute(const TestRepetitions&)
 {
     auto pdr = std::make_shared<PolyDriver>();
     bool opened = pdr->open(property_);

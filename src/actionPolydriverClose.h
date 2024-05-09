@@ -21,7 +21,7 @@ class ActionPolydriverClose : public YarpActions::ActionYarp {
 public:
   ActionPolydriverClose(const CommandAttributes &parameters,
                          const std::string &testCode);
-  execution execute(const TestRepetitions &) override;
+  BlockTestCore::execution execute(const TestRepetitions &) override;
   void beforeExecute() override{};
 
 private:

@@ -31,7 +31,7 @@ void ActionSetVelocity::beforeExecute()
     getCommandAttribute("yvelocity",yVelocity_);          
 }
 
-execution ActionSetVelocity::execute(const TestRepetitions& testrepetition)
+BlockTestCore::execution ActionSetVelocity::execute(const TestRepetitions& testrepetition)
 {
     yarp::os::Port rpcPortWalking;
     WalkingCommands walkingCommands;

@@ -30,7 +30,7 @@ ActionPolydriverClose::ActionPolydriverClose(const CommandAttributes& parameters
     tag_ = parameters.at(yarpsyntax::wrappername);
 };
 
-execution ActionPolydriverClose::execute(const TestRepetitions&)
+BlockTestCore::execution ActionPolydriverClose::execute(const TestRepetitions&)
 {
 
     auto it=YarpActionDepotStart::polyDriverDepot_.find(tag_);

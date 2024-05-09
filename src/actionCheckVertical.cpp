@@ -34,7 +34,7 @@ void ActionCheckVertical::beforeExecute()
 {
 }
 
-execution ActionCheckVertical::execute(const TestRepetitions& testrepetition)
+BlockTestCore::execution ActionCheckVertical::execute(const TestRepetitions& testrepetition)
 {
     yarp::os::BufferedPort<yarp::sig::Vector> imuPort;
     std::string localImuPort  = "/myrobot/imu:i";
@@ -71,7 +71,7 @@ execution ActionCheckVertical::execute(const TestRepetitions& testrepetition)
     double gravityOnY = std::fabs((*imuReadings)[4]);
     double gravityOnZ = std::fabs((*imuReadings)[5]);
 
-    execution error{BlockTestCore::execution::stopexecution};
+    BlockTestCore::execution error{BlockTestCore::execution::stopexecution};
     if(!(gravityOnX < gravityOnZ))
     {
         TXLOG(Severity::error)<<"Absolute gravity on x:"<<gravityOnX<< " is greater then on z:"<<gravityOnZ<<std::endl;

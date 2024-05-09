@@ -39,7 +39,7 @@ void ActionCheckJointPosition::beforeExecute()
     getCommandAttribute("tolerance",tolerance_);    
 }
 
-execution ActionCheckJointPosition::execute(const TestRepetitions& testrepetition)
+BlockTestCore::execution ActionCheckJointPosition::execute(const TestRepetitions& testrepetition)
 {
     yarp::dev::IEncoders *iencoders=nullptr;
     

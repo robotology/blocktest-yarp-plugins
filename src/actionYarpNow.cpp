@@ -25,7 +25,7 @@ void ActionYarpNow::beforeExecute()
 {
 }
 
-execution ActionYarpNow::execute(const TestRepetitions&)
+BlockTestCore::execution ActionYarpNow::execute(const TestRepetitions&)
 {
     return BlockTestCore::execution::continueexecution;;
 }
