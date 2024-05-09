@@ -45,6 +45,6 @@ execution ActionGenerateTrajectory::execute(const TestRepetitions& testrepetitio
     }
 
     closeWalking(rpcPortWalking);
-    return execution::continueexecution;;
+    return BlockTestCore::execution::continueexecution;;
 }
 }

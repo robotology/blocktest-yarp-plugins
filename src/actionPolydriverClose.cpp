@@ -39,13 +39,13 @@ execution ActionPolydriverClose::execute(const TestRepetitions&)
         TXLOG(Severity::info)<<"Close PolyDrive tag:"<<tag_<<std::endl;
         TestRepetitions rep{0,0};
         addProblem(rep, Severity::critical, "Polydriver failed to close tag:"+tag_,true);
-        return execution::continueexecution;
+        return BlockTestCore::execution::continueexecution;
     }
     
     it->second->close();
     YarpActionDepotStart::polyDriverDepot_.erase(it);
     TXLOG(Severity::info)<<"Close PolyDrive tag:"<<tag_<<std::endl;
-    return execution::continueexecution;
+    return BlockTestCore::execution::continueexecution;
 }
 
 

@@ -43,5 +43,5 @@ execution ActionPortOpen::execute(const TestRepetitions& testrepetition)
         addProblem(testrepetition, Severity::error, logStream.str(),true);
     }
 
-    return execution::continueexecution;
+    return BlockTestCore::execution::continueexecution;
 }

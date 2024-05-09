@@ -46,7 +46,7 @@ execution ActionPolydriverOpener::execute(const TestRepetitions&)
         TestRepetitions rep{0,0};
         addProblem(rep, Severity::critical, "Polydriver failed to open tag:"+tag_,true);
     }
-    return execution::continueexecution;
+    return BlockTestCore::execution::continueexecution;
 }
 
 

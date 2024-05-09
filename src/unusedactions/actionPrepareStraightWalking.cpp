@@ -38,5 +38,5 @@ execution ActionPrepareStraightWalking::execute(const TestRepetitions& testrepet
     }
     closeWalking(rpcPortWalking);
     TXLOG(Severity::info)<<"Prepare straight walking OK"<<std::endl;
-    return execution::continueexecution;;
+    return BlockTestCore::execution::continueexecution;;
 }

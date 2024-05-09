@@ -40,5 +40,5 @@ execution ActionPortDisconnect::execute(const TestRepetitions& testrepetition)
 		logStream << "Unable to disconnect " << src_ << " -> " << dst_ ;
 		addProblem(testrepetition, Severity::critical, logStream.str(),true);
 	}
-	return execution::continueexecution;
+	return BlockTestCore::execution::continueexecution;
 }

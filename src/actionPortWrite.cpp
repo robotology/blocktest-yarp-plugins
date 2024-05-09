@@ -38,7 +38,7 @@ execution ActionPortWrite::execute(const TestRepetitions& testrepetition)
         stringstream logStream;
         logStream << "Unable to find " << portname_;
         addProblem(testrepetition, Severity::error, logStream.str(),true);
-        return execution::continueexecution;   
+        return BlockTestCore::execution::continueexecution;   
     }
 
     auto port=it;
@@ -49,8 +49,8 @@ execution ActionPortWrite::execute(const TestRepetitions& testrepetition)
         stringstream logStream;
         logStream << "Unable to write " << portname_;
         addProblem(testrepetition, Severity::error, logStream.str(),true);
-        return execution::continueexecution;          
+        return BlockTestCore::execution::continueexecution;          
     }
 
-    return execution::continueexecution;
+    return BlockTestCore::execution::continueexecution;
 }

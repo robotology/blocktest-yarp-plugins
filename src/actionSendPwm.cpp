@@ -50,7 +50,7 @@ execution ActionSendPwm::execute(const TestRepetitions& testrepetition)
     if(YarpActionDepotStart::polyDriverDepot_.find(wrapperPrefix_)==YarpActionDepotStart::polyDriverDepot_.end())
     {
         addProblem(testrepetition,Severity::error,"Unable to find Polydrive:"+wrapperPrefix_,true);
-        return execution::stopexecution;
+        return BlockTestCore::execution::stopexecution;
     }
 
     yarp::dev::IPWMControl *ipwm=nullptr;
@@ -73,7 +73,7 @@ execution ActionSendPwm::execute(const TestRepetitions& testrepetition)
     {
         TXLOG(Severity::error)<<"Error joint not found:"<<jointname_<<std::endl;
         addProblem(testrepetition,Severity::critical,"Error joint not found",false);
-        return  execution::stopexecution;
+        return  BlockTestCore::execution::stopexecution;
     }
 
     icmd->setControlMode(it->second, VOCAB_CM_PWM);
@@ -134,7 +134,7 @@ execution ActionSendPwm::execute(const TestRepetitions& testrepetition)
 
     ipwm->setRefDutyCycle(it->second, 0);
     yarp::os::Time::delay(time_);
-    return execution::continueexecution;
+    return BlockTestCore::execution::continueexecution;
 }
 
 int ActionSendPwm::sign(double value)

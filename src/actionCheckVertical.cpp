@@ -43,13 +43,13 @@ execution ActionCheckVertical::execute(const TestRepetitions& testrepetition)
     if(!ok)
     {
         addProblem(testrepetition,Severity::critical,"Unable to open ports checkvertical",true);
-        return execution::stopexecution;;
+        return BlockTestCore::execution::stopexecution;;
     }
     ok=yarp::os::Network::connect(remoteImuPort.c_str(), localImuPort.c_str());
     if(!ok)
     {
         addProblem(testrepetition,Severity::critical,"Unable to connect to imu port",true);
-        return execution::stopexecution;;
+        return BlockTestCore::execution::stopexecution;;
     }
 
     // To check the robot is vertical, we do a simple test: we check if the z component of the
@@ -58,36 +58,36 @@ execution ActionCheckVertical::execute(const TestRepetitions& testrepetition)
     if(!imuReadings)
     {
         addProblem(testrepetition,Severity::critical,"Impossible to read accelerometer measurements",true);
-        return execution::stopexecution;;
+        return BlockTestCore::execution::stopexecution;;
     }
     if(imuReadings->size()<12)
     {
         TXLOG(Severity::critical)<<"IMU readings should have at least 12 elements current:"<<imuReadings->size()<<std::endl;
         addProblem(testrepetition,Severity::critical,"IMU readings should have at least 12 elements",false);
-        return execution::stopexecution;;        
+        return BlockTestCore::execution::stopexecution;;        
     }
 
     double gravityOnX = std::fabs((*imuReadings)[3]);
     double gravityOnY = std::fabs((*imuReadings)[4]);
     double gravityOnZ = std::fabs((*imuReadings)[5]);
 
-    execution error{execution::stopexecution};
+    execution error{BlockTestCore::execution::stopexecution};
     if(!(gravityOnX < gravityOnZ))
     {
         TXLOG(Severity::error)<<"Absolute gravity on x:"<<gravityOnX<< " is greater then on z:"<<gravityOnZ<<std::endl;
-        error=execution::continueexecution;;
+        error=BlockTestCore::execution::continueexecution;;
     }
     if(!(gravityOnY < gravityOnZ))
     {
         TXLOG(Severity::error)<<"Absolute gravity on y:"<<gravityOnY<< " is greater then on z:"<<gravityOnZ<<std::endl;
-        error=execution::continueexecution;
+        error=BlockTestCore::execution::continueexecution;
     }
 
-    if(error==execution::stopexecution)
+    if(error==BlockTestCore::execution::stopexecution)
         addProblem(testrepetition,Severity::error,"Absolute gravity",true);
 
     imuPort.interrupt();
     imuPort.close();
-    return execution::continueexecution;;
+    return BlockTestCore::execution::continueexecution;;
 }
 }

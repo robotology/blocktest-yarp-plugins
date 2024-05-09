@@ -57,7 +57,7 @@ execution ActionSendPwmTrain::execute(const TestRepetitions& testrepetition)
     if(YarpActionDepotStart::polyDriverDepot_.find(wrapperPrefix_)==YarpActionDepotStart::polyDriverDepot_.end())
     {
         addProblem(testrepetition,Severity::error,"Unable to find Polydrive:"+wrapperPrefix_,true);
-        return execution::stopexecution;
+        return BlockTestCore::execution::stopexecution;
     }
 
     if(!YarpActionDepotStart::polyDriverDepot_[wrapperPrefix_]->view(ipwm))
@@ -73,13 +73,13 @@ execution ActionSendPwmTrain::execute(const TestRepetitions& testrepetition)
     if(!YarpActionDepotStart::polyDriverDepot_[wrapperPrefix_]->view(iencs))
     {
         addProblem(testrepetition,Severity::error,"Unable to view IEncoder interface",true);
-        return execution::stopexecution;;
+        return BlockTestCore::execution::stopexecution;;
     }
 
     if(!iencs->getAxes(&nj))
     {
         addProblem(testrepetition,Severity::error,"getAxes failed",true);
-        return execution::stopexecution;;
+        return BlockTestCore::execution::stopexecution;;
     }    
 
     std::map<std::string,int> jointNames;
@@ -89,7 +89,7 @@ execution ActionSendPwmTrain::execute(const TestRepetitions& testrepetition)
     {
         TXLOG(Severity::error)<<"Error joint not found:"<<jointname_<<std::endl;
         addProblem(testrepetition,Severity::critical,"Error joint not found",false);
-        return execution::stopexecution;;
+        return BlockTestCore::execution::stopexecution;;
     }
     
 
@@ -126,7 +126,7 @@ execution ActionSendPwmTrain::execute(const TestRepetitions& testrepetition)
     }
 
     ipwm->setRefDutyCycle(it->second, 0);
-    return execution::continueexecution;;
+    return BlockTestCore::execution::continueexecution;;
 }
 
 

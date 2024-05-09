@@ -55,7 +55,7 @@ execution ActionCheckComDistance::execute(const TestRepetitions&)
     if(error)
         addProblem(testrepetition,Severity::error);
 */
-    return execution::stopexecution;
+    return BlockTestCore::execution::stopexecution;
 }
 
 }
