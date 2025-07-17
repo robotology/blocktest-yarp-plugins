@@ -39,7 +39,6 @@ void ActionCanWrite::beforeExecute()
 
 BlockTestCore::execution ActionCanWrite::execute(const TestRepetitions& testrepetition)
 {
-    auto exists {true};
     stringstream logStream;
     bool openFail(false);
 
